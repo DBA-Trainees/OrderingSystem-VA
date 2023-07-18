@@ -26,7 +26,6 @@ export class CreateDivisionModalComponent extends AppComponentBase implements On
 
   ngOnInit(): void {
     
-    
   }
 
   save(): void {

@@ -1,6 +1,7 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 using OrderingSystemVA.Divisions.Dto;
 using OrderingSystemVA.Entities;
 using System;
@@ -47,6 +48,15 @@ namespace OrderingSystemVA.Divisions
         protected override Task<Division> GetEntityByIdAsync(int id)
         {
             return base.GetEntityByIdAsync(id);
+        }
+
+        public async Task<List<DivisionDto>> GetAllDivisions()
+        {
+            var query = await _repository.GetAll()
+                .Select(x => ObjectMapper.Map<DivisionDto>(x))
+                .ToListAsync();
+
+            return query;
         }
     }
 }

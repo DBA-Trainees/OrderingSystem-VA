@@ -10,5 +10,6 @@ namespace OrderingSystemVA.Divisions
 {
     public interface IDivisionAppService : IAsyncCrudAppService<DivisionDto, int, PagedDivisionResultRequestDto, CreateDivisionDto, DivisionDto>
     {
+        Task<List<DivisionDto>> GetAllDivisions();
     }
 }

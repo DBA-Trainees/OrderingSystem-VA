@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderingSystemVA.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using OrderingSystemVA.EntityFrameworkCore;
 namespace OrderingSystemVA.Migrations
 {
     [DbContext(typeof(OrderingSystemVADbContext))]
-    partial class OrderingSystemVADbContextModelSnapshot : ModelSnapshot
+    [Migration("20230718015655_Drop_Customer")]
+    partial class Drop_Customer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1573,48 +1576,6 @@ namespace OrderingSystemVA.Migrations
                     b.ToTable("AbpUsers");
                 });
 
-            modelBuilder.Entity("OrderingSystemVA.Entities.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatorUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("DeleterUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("DivisionId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastModifierUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DivisionId");
-
-                    b.ToTable("Customers");
-                });
-
             modelBuilder.Entity("OrderingSystemVA.Entities.Division", b =>
                 {
                     b.Property<int>("Id")
@@ -1932,15 +1893,6 @@ namespace OrderingSystemVA.Migrations
                     b.Navigation("DeleterUser");
 
                     b.Navigation("LastModifierUser");
-                });
-
-            modelBuilder.Entity("OrderingSystemVA.Entities.Customer", b =>
-                {
-                    b.HasOne("OrderingSystemVA.Entities.Division", "Division")
-                        .WithMany()
-                        .HasForeignKey("DivisionId");
-
-                    b.Navigation("Division");
                 });
 
             modelBuilder.Entity("OrderingSystemVA.MultiTenancy.Tenant", b =>

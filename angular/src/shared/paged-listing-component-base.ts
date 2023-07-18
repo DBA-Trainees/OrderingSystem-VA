@@ -13,6 +13,8 @@ export class EntityDto {
 export class PagedRequestDto {
     skipCount: number;
     maxResultCount: number;
+    keyword: string;
+    isActive: boolean;
 }
 
 @Component({

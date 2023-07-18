@@ -6,7 +6,7 @@
                     <h1>{{ "Divisions" | localize }}</h1>
                 </div>
                 <div class="col-6 text-right">
-                    <a href="javascript:;" class="btn bg-blue" (click)="createDivision()">
+                    <a href="javascript:;" class="btn bg-blue" (click)="createCustomer()">
                         <i class="fa fa-plus-square"></i>
                         {{ "Create" | localize }}
                     </a>
@@ -49,23 +49,25 @@
                             <thead class="bg-light">
                                 <tr>
                                     <th>{{ "Name" | localize }}</th>
+                                    <th>{{ "Division" | localize }}</th>
                                     <th style="width: 310px;">{{ "Actions" | localize }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let division of divisions | paginate
+                                <tr *ngFor="let customer of customers | paginate
                                     : {
                                         id: 'server',
                                         itemsPerPage: pageSize,
                                         currentPage: pageNumber,
                                         totalItems: totalItems
                                     }">
-                                    <td>{{ division.name }}</td>
+                                    <td>{{ customer.name }}</td>
+                                    <td>{{ customer.division?.name }}</td>
                                     <td>
                                         <button
                                                 type="button"
                                                 class="btn btn-sm bg-secondary"
-                                                (click)="editDivision(division)"
+                                                (click)="editCustomer(customer)"
                                         >
                                             <i class="fas fa-pencil-alt"></i>
                                             {{ "Edit" | localize }}
@@ -73,7 +75,7 @@
                                         <button
                                                 type="button"
                                                 class="btn btn-sm bg-danger mx-2"
-                                                (click)="delete(division)"
+                                                (click)="delete(customer)"
                                         >
                                             <i class="fas fa-trash"></i>
                                             {{ "Delete" | localize }}

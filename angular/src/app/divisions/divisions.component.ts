@@ -39,11 +39,11 @@ export class DivisionsComponent extends PagedListingComponentBase<DivisionDto> {
     super(injector);
   }
 
-  createUser(): void {
+  createDivision(): void {
     this.showCreateOrEditDivisionModal();
   }
 
-  editUser(division: DivisionDto): void {
+  editDivision(division: DivisionDto): void {
     this.showCreateOrEditDivisionModal(division.id);
   }
 

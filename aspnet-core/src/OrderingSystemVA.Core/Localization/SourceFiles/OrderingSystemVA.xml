@@ -117,5 +117,20 @@
     <text name="ResetPasswordStepOneInfo">1. Enter your administrator password</text>
     <text name="ResetPasswordStepTwoInfo">2. Copy this random password so you can send it to the user</text>
     <text name="UsersActivation">Users activation</text>
+	  
+	//Division
+	<text name="Divisions">Divisions</text>
+	<text name="DivisionDeleteWarningMessage">Division {0} will be deleted.</text>
+	<text name="CreateNewDivision">Create New Division</text>
+	<text name="EditDivision">Edit Division</text>
+	  
+	//Customer
+	<text name="Customers">Customers</text>
+	<text name="CustomerDeleteWarningMessage">Customer {0} will be deleted.</text>
+	<text name="CreateNewCustomer">Create New Customer</text>
+	<text name="EditCustomer">Edit Customer</text>
+
+
+	  
   </texts>
 </localizationDictionary>
