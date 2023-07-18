@@ -26,25 +26,18 @@ export class EditCustomerModalComponent extends AppComponentBase implements OnIn
         super(injector)
     }
 
-    ngOnInit() : void { 
-        if (this.id != null)
-        {
-            this._divisionService.getAllDivisions().subscribe(
-                (result) => {
-                    this.divisions = result;
-                }
-            )
-        } else {
-            this._divisionService.get(this.customer.divisionId).subscribe(
-                (result) => {
-                    this.division = result;
-                }
-            )
+    ngOnInit() : void {      
+        if(this.id){
+            this._customerService.get(this.id).subscribe((result) => {
+                this.customer = result;
+                this.selectedDivisionId = result.divisionId;
+            });
         }
-        
-        this._customerService.get(this.id).subscribe((result) => {
-            this.customer = result;
-        }) 
+        this._divisionService.getAllDivisions().subscribe(
+            (result) => {
+                this.divisions = result;
+            }
+        )
     }
 
     save() : void {
