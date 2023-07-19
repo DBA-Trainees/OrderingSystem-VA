@@ -10,6 +10,7 @@ import { RolesComponent } from 'app/roles/roles.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { DivisionsComponent } from './divisions/divisions.component';
 import { CustomersComponent } from './customers/customers.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import { CustomersComponent } from './customers/customers.component';
                     { path: 'about', component: AboutComponent, canActivate: [AppRouteGuard] },
                     { path: 'update-password', component: ChangePasswordComponent, canActivate: [AppRouteGuard] },
                     { path: 'divisions', component: DivisionsComponent, canActivate: [AppRouteGuard] },
-                    { path: 'customers', component: CustomersComponent, canActivate: [AppRouteGuard] }
+                    { path: 'customers', component: CustomersComponent, canActivate: [AppRouteGuard] },
+                    { path: 'categories', component: CategoriesComponent, canActivate: [AppRouteGuard] }
                 ]
             }
         ])

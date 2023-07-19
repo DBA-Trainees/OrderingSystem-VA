@@ -15,6 +15,7 @@ namespace OrderingSystemVA.Divisions
     public class DivisionAppService : AsyncCrudAppService<Division, DivisionDto, int, PagedDivisionResultRequestDto, CreateDivisionDto, DivisionDto>, IDivisionAppService
     {
         private readonly IRepository<Division, int> _repository; 
+
         public DivisionAppService(IRepository<Division, int> repository) : base(repository)
         {
             _repository = repository;

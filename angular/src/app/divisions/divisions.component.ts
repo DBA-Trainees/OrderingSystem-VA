@@ -25,7 +25,7 @@ class PagedDivisionRequestDto extends PagedRequestDto {
   templateUrl: './divisions.component.html',
   animations: [appModuleAnimation()]
 })
-export class DivisionsComponent extends PagedListingComponentBase<DivisionDto> {
+export class DivisionsComponent extends PagedListingComponentBase<DivisionDto>  {
   divisions : DivisionDto[] = [];
   keyword = '';
   isActive : boolean | null;
@@ -95,16 +95,16 @@ export class DivisionsComponent extends PagedListingComponentBase<DivisionDto> {
   }
 
   private showCreateOrEditDivisionModal(id?: number): void {
-    let createOrEditUserModal: BsModalRef;
+    let createOrEditDivisionModal: BsModalRef;
     if (!id) {
-      createOrEditUserModal = this._divisionModalService.show(
+      createOrEditDivisionModal = this._divisionModalService.show(
         CreateDivisionModalComponent,
         {
           class: 'modal-lg',
         }
       );
     } else {
-      createOrEditUserModal = this._divisionModalService.show(
+      createOrEditDivisionModal = this._divisionModalService.show(
         EditDivisionModalComponent,
         {
           class: 'modal-lg',
@@ -115,7 +115,7 @@ export class DivisionsComponent extends PagedListingComponentBase<DivisionDto> {
       );
     }
 
-    createOrEditUserModal.content.onSave.subscribe(() => {
+    createOrEditDivisionModal.content.onSave.subscribe(() => {
       this.refresh();
     });
   }
