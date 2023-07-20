@@ -1,6 +1,8 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.Domain.Repositories;
+using OrderingSystemVA.Authorization;
 using OrderingSystemVA.Types.Dto;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemVA.Types
 {
+    [AbpAuthorize(PermissionNames.Pages_Types)]
     public class TypeAppService : AsyncCrudAppService<Entities.Type, TypeDto, int, PagedTypeResultRequestDto, CreateTypeDto, TypeDto>, ITypeAppService
     {
         public TypeAppService(IRepository<Entities.Type, int> repository) : base(repository)

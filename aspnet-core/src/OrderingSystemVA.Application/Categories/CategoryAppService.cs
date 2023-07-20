@@ -1,6 +1,8 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.Domain.Repositories;
+using OrderingSystemVA.Authorization;
 using OrderingSystemVA.Categories.Dto;
 using OrderingSystemVA.Entities;
 using System;
@@ -11,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemVA.Categories
 {
+    [AbpAuthorize(PermissionNames.Pages_Categories)]
     public class CategoryAppService : AsyncCrudAppService<Category, CategoryDto, int, PagedCategoryResultRequestDto, CreateCategoryDto, CategoryDto>, ICategoryAppService
     {
 

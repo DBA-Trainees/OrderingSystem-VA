@@ -1,7 +1,9 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
+using OrderingSystemVA.Authorization;
 using OrderingSystemVA.Divisions.Dto;
 using OrderingSystemVA.Entities;
 using System;
@@ -12,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemVA.Divisions
 {
+    [AbpAuthorize(PermissionNames.Pages_Divisions)]
     public class DivisionAppService : AsyncCrudAppService<Division, DivisionDto, int, PagedDivisionResultRequestDto, CreateDivisionDto, DivisionDto>, IDivisionAppService
     {
         private readonly IRepository<Division, int> _repository; 

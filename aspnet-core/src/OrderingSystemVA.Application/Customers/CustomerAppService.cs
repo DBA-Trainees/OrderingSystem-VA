@@ -1,9 +1,15 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using Abp.Authorization;
+using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
+using Abp.Extensions;
 using Microsoft.EntityFrameworkCore;
+using OrderingSystemVA.Authorization;
+using OrderingSystemVA.Authorization.Users;
 using OrderingSystemVA.Customers.Dto;
 using OrderingSystemVA.Entities;
+using OrderingSystemVA.Users.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +18,7 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemVA.Customers
 {
+    [AbpAuthorize(PermissionNames.Pages_Customers)]
     public class CustomerAppService : AsyncCrudAppService<Customer, CustomerDto, int, PagedCustomerResultRequestDto, CreateCustomerDto, CustomerDto>, ICustomerAppService
     {
         private readonly IRepository <Customer, int> _repository;
@@ -61,5 +68,10 @@ namespace OrderingSystemVA.Customers
             return new PagedResultDto<CustomerDto>(query.Count, query);
         }
 
+        //protected override IQueryable<Customer> CreateFilteredQuery(PagedCustomerResultRequestDto input)
+        //{
+        //    return Repository.GetAll()
+        //        .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Keyword));
+        //}
     }
 }
