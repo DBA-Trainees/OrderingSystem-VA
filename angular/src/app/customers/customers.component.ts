@@ -22,7 +22,7 @@ class PagedCustomerRequestDto extends PagedRequestDto {
 export class CustomersComponent extends PagedListingComponentBase<CustomerDto> {
     
     customers : CustomerDto[] = [];
-    divisions : DivisionDto[] = [];
+    //divisions : DivisionDto[] = [];
     keyword = '';
     isActive : boolean | null;    
 

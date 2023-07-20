@@ -10,7 +10,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 export class EditCustomerModalComponent extends AppComponentBase implements OnInit {
     saving = false;
     customer = new CustomerDto;
-    division = new DivisionDto;
+    //division = new DivisionDto;
     divisions : DivisionDto[] = [];
     id : number;
     selectedDivisionId : number = null;

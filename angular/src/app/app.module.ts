@@ -17,6 +17,7 @@ import { AboutComponent } from '@app/about/about.component';
 import { DivisionsComponent } from './divisions/divisions.component';
 import { CustomersComponent } from './customers/customers.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { TypeComponent } from './types/types.component';
 // tenants
 import { TenantsComponent } from '@app/tenants/tenants.component';
 import { CreateTenantDialogComponent } from './tenants/create-tenant/create-tenant-dialog.component';
@@ -41,7 +42,7 @@ import { SidebarComponent } from './layout/sidebar.component';
 import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
-import { CategoryServiceProxy, DivisionServiceProxy } from '@shared/service-proxies/service-proxies';
+import { CategoryServiceProxy, DivisionServiceProxy, TypeServiceProxy } from '@shared/service-proxies/service-proxies';
 import { CreateDivisionModalComponent } from './divisions/create-division-modal/create-division-modal.component';
 import { EditDivisionModalComponent } from './divisions/edit-division-modal/edit-division-modal.component';
 import { CustomerServiceProxy } from '@shared/service-proxies/service-proxies';
@@ -49,6 +50,7 @@ import { CreateCustomerModalComponent }from './customers/create-customer-modal/c
 import { EditCustomerModalComponent } from './customers/edit-customer-modal/edit-customer-modal.component';
 import { CreateCategoryModalComponent } from './categories/create-category-modal/create-category-modal.component';
 import { EditCategoryModalComponent } from './categories/edit-category-modal/edit-category-modal.component';
+import { CreateOrEditTypeModalComponent } from './types/createOrEdit-type-modal/createOrEdit-type-modal.component';
 
 @NgModule({
     declarations: [	
@@ -87,7 +89,9 @@ import { EditCategoryModalComponent } from './categories/edit-category-modal/edi
         EditCustomerModalComponent,
         CategoriesComponent,
         CreateCategoryModalComponent,
-        EditCategoryModalComponent
+        EditCategoryModalComponent,
+        TypeComponent,
+        CreateOrEditTypeModalComponent
    ],
     imports: [
         CommonModule,
@@ -107,7 +111,8 @@ import { EditCategoryModalComponent } from './categories/edit-category-modal/edi
     providers: [
         DivisionServiceProxy,
         CustomerServiceProxy,
-        CategoryServiceProxy
+        CategoryServiceProxy,
+        TypeServiceProxy
     ]
 })
 export class AppModule {}

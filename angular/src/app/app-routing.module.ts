@@ -11,6 +11,7 @@ import { ChangePasswordComponent } from './users/change-password/change-password
 import { DivisionsComponent } from './divisions/divisions.component';
 import { CustomersComponent } from './customers/customers.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { TypeComponent } from './types/types.component';
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import { CategoriesComponent } from './categories/categories.component';
                     { path: 'update-password', component: ChangePasswordComponent, canActivate: [AppRouteGuard] },
                     { path: 'divisions', component: DivisionsComponent, canActivate: [AppRouteGuard] },
                     { path: 'customers', component: CustomersComponent, canActivate: [AppRouteGuard] },
-                    { path: 'categories', component: CategoriesComponent, canActivate: [AppRouteGuard] }
+                    { path: 'categories', component: CategoriesComponent, canActivate: [AppRouteGuard] },
+                    { path: 'types', component: TypeComponent, canActivate: [AppRouteGuard] }
                 ]
             }
         ])
