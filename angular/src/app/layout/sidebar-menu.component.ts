@@ -86,6 +86,11 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 '/app/types',
                 'fas fa-mobile-alt',
                 'Pages.Types'
+            ),
+            new MenuItem(
+                this.l('Foods'),
+                '/app/foods',
+                'fa fa-cutlery'
             )
             // new MenuItem(this.l('MultiLevelMenu'), '', 'fas fa-circle', '', [
             //     new MenuItem('ASP.NET Boilerplate', '', 'fas fa-dot-circle', '', [

@@ -68,10 +68,5 @@ namespace OrderingSystemVA.Customers
             return new PagedResultDto<CustomerDto>(query.Count, query);
         }
 
-        //protected override IQueryable<Customer> CreateFilteredQuery(PagedCustomerResultRequestDto input)
-        //{
-        //    return Repository.GetAll()
-        //        .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Keyword));
-        //}
     }
 }

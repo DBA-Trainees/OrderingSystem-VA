@@ -1,7 +1,9 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
+using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
+using Abp.Extensions;
 using Microsoft.EntityFrameworkCore;
 using OrderingSystemVA.Authorization;
 using OrderingSystemVA.Divisions.Dto;
@@ -62,5 +64,10 @@ namespace OrderingSystemVA.Divisions
 
             return query;
         }
+        //protected override IQueryable<Division> CreateFilteredQuery(PagedDivisionResultRequestDto input)
+        //{
+        //    return Repository.GetAllIncluding(x => x.Id)
+        //        .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Keyword));
+        //}
     }
 }

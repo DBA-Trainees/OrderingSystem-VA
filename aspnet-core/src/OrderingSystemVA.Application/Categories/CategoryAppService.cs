@@ -2,6 +2,7 @@
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 using OrderingSystemVA.Authorization;
 using OrderingSystemVA.Categories.Dto;
 using OrderingSystemVA.Entities;
@@ -52,6 +53,15 @@ namespace OrderingSystemVA.Categories
         protected override Task<Category> GetEntityByIdAsync(int id)
         {
             return base.GetEntityByIdAsync(id);
+        }
+
+        public async Task<List<CategoryDto>> GetAllCategories()
+        {
+            var query = await _repository.GetAll()
+                .Select(x => ObjectMapper.Map<CategoryDto>(x))
+                .ToListAsync();
+
+            return query;
         }
     }
 }

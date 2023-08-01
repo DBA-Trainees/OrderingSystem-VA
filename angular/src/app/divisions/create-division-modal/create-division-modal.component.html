@@ -1,3 +1,17 @@
+<style>
+* {
+    box-sizing: border-box;   
+}
+
+input {
+    width: 100%;
+    height: 100%;
+    padding: .5em 1em;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+</style>
+
 <form class="form-horizontal"
     autocomplete="off" 
     #createDivisionModal="ngForm"
@@ -9,30 +23,26 @@
 </abp-modal-header>
 
 <div class="modal-body">
+
+    <!-- NAME -->
     <div class="form-group row required">
-        <label class="col-md-3 col-form-label" for="name">
+        <label class="col-md-3 col-form-label" for="divisionName">
             {{ "Name" | localize }}
         </label>
         <div class="col-md-9">
-            <input type="text"
-                class="form-control"
-                name="name"
-                id="name"
-                required
-                maxlength="32"
-                [(ngModel)]="division.name"
-                #nameModel="ngModel"
-                #nameEl/>
+            <input type="text" class="form-control" name="divisionName" id="divisionName" required
+                maxlength="32" [(ngModel)]="division.name" #divisionNameModel="ngModel" #divisionNameEl/>
             <abp-validation-summary
-                [control]="nameModel"
-                [controlEl]="nameEl">
+                [control]="divisionNameModel"
+                [controlEl]="divisionNameEl">
             </abp-validation-summary>
         </div>
     </div>
+
 </div>
 <abp-modal-footer
     [cancelDisabled]="saving"
     [saveDisabled]="!createDivisionModal.form.valid || saving"
-    (onCancelClick)="bsModalRef.hide()"
-  ></abp-modal-footer>
+    (onCancelClick)="bsModalRef.hide()">
+</abp-modal-footer>
 </form>

@@ -10,5 +10,6 @@ namespace OrderingSystemVA.Types
 {
     public interface ITypeAppService : IAsyncCrudAppService<TypeDto, int, PagedTypeResultRequestDto, CreateTypeDto, TypeDto>
     {
+        Task<List<TypeDto>> GetAllTypes();
     }
 }

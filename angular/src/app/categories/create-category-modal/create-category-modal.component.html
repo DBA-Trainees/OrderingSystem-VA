@@ -1,3 +1,17 @@
+<style>
+* {
+    box-sizing: border-box;   
+}
+
+input {
+    width: 100%;
+    height: 100%;
+    padding: .5em 1em;
+    border: 1px solid black;
+    border-radius: 3px;
+}  
+</style>
+
 <form class="form-horizontal"
     autocomplete="off"
     #createCategoryModal="ngForm"
@@ -9,31 +23,26 @@
 </abp-modal-header>
 
 <div class="modal-body">
+
+    <!-- NAME -->
     <div class="form-group row required">
-        <label class="col-md-3 col-form-label" for="name">
+        <label class="col-md-3 col-form-label" for="categoryName">
             {{ "Name" | localize }}
         </label>
         <div class="col-md-9">
-            <input text="text"
-                class="form-control"
-                name="name"
-                id="name"
-                required
-                maxlength="32"
-                [(ngModel)]="category.name"
-                #nameModel="ngModel"
-                #nameEl/>
+            <input text="text" class="form-control" name="categoryName" id="categoryName" required
+                maxlength="32" [(ngModel)]="category.name" #categoryNameModel="ngModel" #categoryNameEl/>
             <abp-validation-summary
-                [control]="nameModel"
-                [controlEl]="nameEl">
+                [control]="categoryNameModel"
+                [controlEl]="categoryNameEl">
             </abp-validation-summary>
         </div>
     </div>
+
 </div>
 <abp-modal-footer
     [cancelDisabled]="saving"
     [saveDisabled]="!createCategoryModal.form.valid || saving"
-    (onCancelClick)="bsModalRef.hide()"
->
+    (onCancelClick)="bsModalRef.hide()">
 </abp-modal-footer>
 </form>

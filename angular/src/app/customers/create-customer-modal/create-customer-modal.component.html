@@ -1,4 +1,18 @@
-    <form class="form-horizontal"
+<style>
+* {
+ box-sizing: border-box;   
+}
+
+input, select {
+    width: 100%;
+    height: 100%;
+    padding: .5em 1em;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+</style>
+
+<form class="form-horizontal"
     autocomplete="off" 
     #createCustomerModal="ngForm"
     (ngSubmit)="save()">
@@ -9,36 +23,24 @@
 </abp-modal-header>
 
 <div class="modal-body">
+    <!-- NAME -->
     <div class="form-group row required">
-        <label class="col-md-3 col-form-label" for="name">
-            {{ "Name" | localize }}
-        </label>
+        <label class="col-md-3 col-form-label" for="customerName">{{ "Name" | localize }}</label>
         <div class="col-md-9">
-            <input type="text"
-                class="form-control"
-                name="name"
-                id="name"
-                required
-                maxlength="32"
-                [(ngModel)]="customer.name"
-                #nameModel="ngModel"
-                #nameEl/>            
+            <input type="text" class="form-control" name="customerName" id="customerName" required
+                maxlength="32" [(ngModel)]="customer.name" #customerNameModel="ngModel" #customerNameEl/>            
             <abp-validation-summary
-                [control]="nameModel"
-                [controlEl]="nameEl">
-            </abp-validation-summary>            
-        </div>        
+                [control]="customerNameModel"
+                [controlEl]="customerNameEl">
+            </abp-validation-summary>
+        </div>
     </div>
-    <!-- Division -->
+    <!-- DIVISION -->
     <div class="form-group row required">
-        <label class="col-md-3 col-form-label" for="divisionName">
-            {{ "Division" | localize }}
-        </label>
+        <label class="col-md-3 col-form-label" for="divisionName">{{ "Division" | localize }}</label>
         <div class="col-md-9">
-            <select 
-            [ngModel]="selectDivisionId" 
-            (ngModelChange)="selectDivisionId=$event"
-            name="name" id="name" required style="width: 570px; height: 40px; border-radius:5px;">
+            <select name="divisionName" id="divisionName" required [ngModel]="selectDivisionId" 
+            (ngModelChange)="selectDivisionId=$event">
                 <option *ngFor="let division of divisions" [ngValue]="division.id">
                     {{ division.name }}
                 </option>
@@ -49,6 +51,7 @@
 <abp-modal-footer
     [cancelDisabled]="saving"
     [saveDisabled]="!createCustomerModal.form.valid || saving"
-    (onCancelClick)="bsModalRef.hide()"
-  ></abp-modal-footer>
+    (onCancelClick)="bsModalRef.hide()">
+</abp-modal-footer>
 </form>
+

@@ -12,6 +12,7 @@ import { DivisionsComponent } from './divisions/divisions.component';
 import { CustomersComponent } from './customers/customers.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { TypeComponent } from './types/types.component';
+import { FoodComponent } from './foods/foods.component';
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import { TypeComponent } from './types/types.component';
                     { path: 'divisions', component: DivisionsComponent, data: { permission: 'Pages.Divisions' }, canActivate: [AppRouteGuard] },
                     { path: 'customers', component: CustomersComponent, data: { permission: 'Pages.Customers' }, canActivate: [AppRouteGuard] },
                     { path: 'categories', component: CategoriesComponent, data: { permission: 'Pages.Categories' }, canActivate: [AppRouteGuard] },
-                    { path: 'types', component: TypeComponent, data: { permission: 'Pages.Types' }, canActivate: [AppRouteGuard] }
+                    { path: 'types', component: TypeComponent, data: { permission: 'Pages.Types' }, canActivate: [AppRouteGuard] },
+                    { path: 'foods', component: FoodComponent, canActivate: [AppRouteGuard] }
                 ]
             }
         ])

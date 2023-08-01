@@ -2,6 +2,7 @@
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 using OrderingSystemVA.Authorization;
 using OrderingSystemVA.Types.Dto;
 using System;
@@ -15,8 +16,10 @@ namespace OrderingSystemVA.Types
     [AbpAuthorize(PermissionNames.Pages_Types)]
     public class TypeAppService : AsyncCrudAppService<Entities.Type, TypeDto, int, PagedTypeResultRequestDto, CreateTypeDto, TypeDto>, ITypeAppService
     {
+        private readonly IRepository<Entities.Type, int> _repository;
         public TypeAppService(IRepository<Entities.Type, int> repository) : base(repository)
         {
+            _repository = repository;
         }
 
         public override Task<TypeDto> CreateAsync(CreateTypeDto input)
@@ -47,6 +50,15 @@ namespace OrderingSystemVA.Types
         protected override Task<Entities.Type> GetEntityByIdAsync(int id)
         {
             return base.GetEntityByIdAsync(id);
+        }
+
+        public async Task<List<TypeDto>> GetAllTypes()
+        {
+            var query = await _repository.GetAll()
+                .Select(x => ObjectMapper.Map<TypeDto>(x))
+                .ToListAsync();
+
+            return query;
         }
     }
 }

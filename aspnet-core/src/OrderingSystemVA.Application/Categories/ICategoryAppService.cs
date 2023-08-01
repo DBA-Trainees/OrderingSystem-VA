@@ -10,5 +10,6 @@ namespace OrderingSystemVA.Categories
 {
     public interface ICategoryAppService : IAsyncCrudAppService<CategoryDto, int, PagedCategoryResultRequestDto, CreateCategoryDto, CategoryDto>
     {
+        Task<List<CategoryDto>> GetAllCategories();
     }
 }

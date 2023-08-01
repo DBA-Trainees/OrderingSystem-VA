@@ -141,6 +141,17 @@
 	<text name="Types">Types</text>
 	<text name="CreateOrEditType">Create Or Edit Type</text>
 	  
+    //Food
+	<text name="FoodDeleteWarningMessage">{0} will be deleted.</text>
+	<text name="Image">Image</text>
+	<text name="ImageName">Image Name</text>
+	<text name="Availability">Availability</text>
+	<text name="Quantity">Quantity</text>
+	<text name="Category">Category</text>
+	<text name="Type">Type</text>
+	<text name="UploadImage">Upload Image</text>
+	<text name="CreateOrEditFood">Create Or Edit Food</text>
+	  
 
   </texts>
 </localizationDictionary>

@@ -1,14 +1,13 @@
-﻿using Abp.Application.Services.Dto;
-using OrderingSystemVA.Roles.Dto;
+﻿using OrderingSystemVA.Roles.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderingSystemVA.Divisions.Dto
+namespace OrderingSystemVA.Foods.Dto
 {
-    public class PagedDivisionResultRequestDto: PagedResultRequestDto
+    public class PagedFoodResultRequestDto : PagedRoleResultRequestDto
     {
         public string Keyword { get; set; }
         public bool? IsActive { get; set; }

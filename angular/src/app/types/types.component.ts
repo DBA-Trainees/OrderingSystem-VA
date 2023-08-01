@@ -117,6 +117,5 @@ export class TypeComponent extends PagedListingComponentBase<TypeDto> {
         createOrEditTypeModal.content.onSave.subscribe(() => {
             this.refresh();
         });
-    }
-    
+    }   
 }
