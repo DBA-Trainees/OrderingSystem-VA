@@ -50,7 +50,7 @@ export class TypeComponent extends PagedListingComponentBase<TypeDto> {
         this.keyword = '';
         this.isActive = undefined;
         this.getDataPage(1);
-      }
+    }
 
     protected list(
         request: PagedTypeRequestDto, 
@@ -117,5 +117,5 @@ export class TypeComponent extends PagedListingComponentBase<TypeDto> {
         createOrEditTypeModal.content.onSave.subscribe(() => {
             this.refresh();
         });
-    }   
+    }
 }

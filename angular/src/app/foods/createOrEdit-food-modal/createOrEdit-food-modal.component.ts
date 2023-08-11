@@ -12,6 +12,7 @@ enum foodSize {
 
 @Component({    
     templateUrl: './createOrEdit-food-modal.component.html',
+    styleUrls: ['./createOrEdit-food-modal.component.css']
 })
 export class CreateOrEditFoodModalComponent extends AppComponentBase implements OnInit {
     
@@ -53,6 +54,8 @@ export class CreateOrEditFoodModalComponent extends AppComponentBase implements 
                 this.selectedTypeId = result.typeId;
                 this.selectedSize = result.size;
                 this.base64textString = result.image;
+                this.imgFileName = result.imageName;
+                this.imgFileType = result.imageFileType;
             }))
         }       
         this._categoryService.getAllCategories().subscribe(

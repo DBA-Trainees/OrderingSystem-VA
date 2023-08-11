@@ -21,5 +21,6 @@ namespace OrderingSystemVA.EntityFrameworkCore
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Type> Types { get; set; }
         public virtual DbSet<Food> Foods { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
     }
 }

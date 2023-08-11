@@ -11,12 +11,10 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 export class CreateCustomerModalComponent extends AppComponentBase implements OnInit {    
     saving = false;
     customer = new CreateCustomerDto();
-    // division = new DivisionDto();
     divisions: DivisionDto[] =[];
     selectDivisionId: number = null;
 
     @Output() onSave = new EventEmitter<any>();
-    // router: any;
 
     constructor(
         injector : Injector,

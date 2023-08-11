@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderingSystemVA.Categories.Dto
+namespace OrderingSystemVA.Orders.Dto
 {
-    public class PagedCategoryResultRequestDto : PagedResultRequestDto
+    public class PagedOrderResultRequestDto : PagedResultRequestDto
     {
         public string Keyword { get; set; }
         public bool? IsActive { get; set; }

@@ -19,6 +19,7 @@ import { CustomersComponent } from './customers/customers.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { TypeComponent } from './types/types.component';
 import { FoodComponent } from './foods/foods.component';
+import { OrderComponent } from './orders/orders.component';
 // tenants
 import { TenantsComponent } from '@app/tenants/tenants.component';
 import { CreateTenantDialogComponent } from './tenants/create-tenant/create-tenant-dialog.component';
@@ -43,7 +44,7 @@ import { SidebarComponent } from './layout/sidebar.component';
 import { SidebarLogoComponent } from './layout/sidebar-logo.component';
 import { SidebarUserPanelComponent } from './layout/sidebar-user-panel.component';
 import { SidebarMenuComponent } from './layout/sidebar-menu.component';
-import { CategoryServiceProxy, DivisionServiceProxy, FoodServiceProxy, TypeServiceProxy } from '@shared/service-proxies/service-proxies';
+import { CategoryServiceProxy, DivisionServiceProxy, FoodServiceProxy, OrderServiceProxy, TypeServiceProxy } from '@shared/service-proxies/service-proxies';
 import { CreateDivisionModalComponent } from './divisions/create-division-modal/create-division-modal.component';
 import { EditDivisionModalComponent } from './divisions/edit-division-modal/edit-division-modal.component';
 import { CustomerServiceProxy } from '@shared/service-proxies/service-proxies';
@@ -53,7 +54,7 @@ import { CreateCategoryModalComponent } from './categories/create-category-modal
 import { EditCategoryModalComponent } from './categories/edit-category-modal/edit-category-modal.component';
 import { CreateOrEditTypeModalComponent } from './types/createOrEdit-type-modal/createOrEdit-type-modal.component';
 import { CreateOrEditFoodModalComponent } from './foods/createOrEdit-food-modal/createOrEdit-food-modal.component';
-
+import { AddToCartOrderDialogComponent } from './orders/addtoCart-order-dialog/addtoCart-order-dialog.component';
 
 @NgModule({
     declarations: [		
@@ -96,7 +97,9 @@ import { CreateOrEditFoodModalComponent } from './foods/createOrEdit-food-modal/
         TypeComponent,
         CreateOrEditTypeModalComponent,
         FoodComponent,
-        CreateOrEditFoodModalComponent
+        CreateOrEditFoodModalComponent,
+        OrderComponent,
+        AddToCartOrderDialogComponent
    ],
     imports: [
         CommonModule,
@@ -111,14 +114,15 @@ import { CreateOrEditFoodModalComponent } from './foods/createOrEdit-food-modal/
         AppRoutingModule,
         ServiceProxyModule,
         SharedModule,
-        NgxPaginationModule,
+        NgxPaginationModule
     ],
     providers: [
         DivisionServiceProxy,
         CustomerServiceProxy,
         CategoryServiceProxy,
         TypeServiceProxy,
-        FoodServiceProxy
+        FoodServiceProxy,
+        OrderServiceProxy
     ]
 })
 export class AppModule {}

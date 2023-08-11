@@ -72,7 +72,7 @@
                                     <td style="text-align:center">{{ food.category?.name }}</td>
                                     <td style="text-align:center">{{ food.type?.name }}</td>
                                     <td style="text-align:center">{{ food.size }}</td>
-                                    <td style="text-align:right">{{ food.price | number:'1.2-2' }}</td>
+                                    <td style="text-align:right"><span class="currency-code">&#8369;</span>{{ food.price | number:'1.2-2' }}</td>
                                     <td style="text-align:center">
                                         <button
                                                 type="button"
@@ -89,7 +89,7 @@
                                         >
                                             <i class="fas fa-trash"></i>
                                             {{ "Delete" | localize }}
-                                        </button>                                        
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>

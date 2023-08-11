@@ -149,8 +149,22 @@
 	<text name="Quantity">Quantity</text>
 	<text name="Category">Category</text>
 	<text name="Type">Type</text>
+	<text name="Size">Size</text>
+	<text name="Price">Price</text>
 	<text name="UploadImage">Upload Image</text>
 	<text name="CreateOrEditFood">Create Or Edit Food</text>
+	  
+	//Order
+	<text name="OrderDeleteWarningMessage">Order {0} will be deleted.</text>
+	<text name="Orders">Orders</text>
+	<text name="FoodName">Food Name</text>
+	<text name="CreateOrEditOrder">Create Or Edit Order</text>
+	<text name="Addtocart">Add to Cart</text>
+	<text name="ProceedToOrder">Proceed to Order</text>
+	<text name="ReviewOrders">Review Orders</text>
+	  
+	  
+	
 	  
 
   </texts>
