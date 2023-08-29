@@ -1,7 +1,9 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
+using OrderingSystemVA.Authorization;
 using OrderingSystemVA.Entities;
 using OrderingSystemVA.Enums;
 using OrderingSystemVA.Foods.Dto;
@@ -14,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemVA.Foods
 {
+    //[AbpAuthorize(PermissionNames.Pages_Foods)]
     public class FoodAppService : AsyncCrudAppService<Food, FoodDto, int, PagedFoodResultRequestDto, CreateFoodDto, FoodDto>, IFoodAppService
     {
 

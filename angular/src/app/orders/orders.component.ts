@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core';
 import { PagedListingComponentBase, PagedRequestDto } from '@shared/paged-listing-component-base';
-import { CreateOrderDto, FoodDto, FoodDtoPagedResultDto, FoodServiceProxy, OrderDto, OrderServiceProxy } from '@shared/service-proxies/service-proxies';
+import { CreateOrderDto, FoodDto, FoodDtoPagedResultDto, FoodServiceProxy, OrderDto, OrderDtoPagedResultDto, OrderServiceProxy } from '@shared/service-proxies/service-proxies';
 import { finalize } from 'rxjs/operators';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { Router } from '@angular/router';
@@ -20,30 +20,31 @@ class PagedOrderRequestDto extends PagedRequestDto {
     templateUrl: './orders.component.html',
     styleUrls: ['./orders.component.css'],
     animations: [appModuleAnimation()]
-   
 })
 
-export class OrderComponent extends PagedListingComponentBase<OrderDto> implements OnInit{
+export class OrderComponent extends PagedListingComponentBase<OrderDto>{
     
     orders : OrderDto[] = [];
-    order = new CreateOrderDto();
+    order = new OrderDto();
     foods : FoodDto[] = [];
-    foodDetails = new FoodDto;
+    foodDetails = new FoodDto();
+    
     keyword = '';
     isActive : boolean | null;
     saving = false;
     selectFoodId : number = null;
     defaultQty = 1;    
     defaultSize = 'Small';
-    value : number = 1;
-    // renderedValue : string;
-    minimumValue = 1;
-    selectedSize : string;
+    id : number;
     foodLabels = [
         foodSize.Small,
         foodSize.Medium,
         foodSize.Large
     ]
+    value : number = 1;     
+    // minimumValue = 1;
+     selectedSize : string;
+    // orderQty : number[]; 
     
     @Output() onSave = new EventEmitter<any>();
 
@@ -53,7 +54,16 @@ export class OrderComponent extends PagedListingComponentBase<OrderDto> implemen
         private _orderService : OrderServiceProxy,
         private router : Router
     ) { 
-        super(injector)
+        super(injector);
+        // this.orders = this.orders.map(order => {
+        //     order['quantity'] = 0;
+        //     return order
+        // });
+    }
+
+    CheckOrderDetails(food : FoodDto) : void {
+        sessionStorage.setItem('id', food.id.toString())
+        this.ViewOrderDetails();
     }
 
     protected list(
@@ -97,51 +107,48 @@ export class OrderComponent extends PagedListingComponentBase<OrderDto> implemen
         );
     }
 
-    saveOrder(foodId : number) : void {
-        this.saving = true;
-        this.order.foodId = foodId;
-        this.order.quantity = this.defaultQty;
-        this.order.size = this.defaultSize;
+    ViewOrderDetails() : void {
+        this.router.navigate(["./app/orders/viewOrderDetails-dialog"]);
+    }    
 
-        this._orderService.create(this.order).subscribe(
-            () => {
-                this.notify.info(this.l('SavedSuccessfully'));
-                this.onSave.emit();
-                this.router.navigate(["./app/orders/addToCart-order-dialog"]);
-            },
-            () => {
-                this.saving = false;
-            }
-        );
-    }
+    // AddQty(food:FoodDto, foodId : number, i : number) : void {    
+    //     // console.log(food.quantity += 1);    , foodId :number
+    //     foodId = food.id;
+    //     if(foodId){
+    //         if(this.value[i] <= food.quantity){
+    //             this.value[i]++;
+    //         }
+    //     }
+    //         // if (this.value <= food.quantity) {
+    //         //     this.value += 1;
+    //         // }
 
-    AddQty() : void {
-            this.value += 1;
-        
-        // this.renderedValue = this.value.toString();
-        // console.log(this.value);
-    }
+    // }
 
-    LessQty() : void {
-        if (this.value > 1) {
-            this.value -= 1;
-            // this.renderedValue = this.value.toString();
-        }
-        
-    }
+    // LessQty(food : FoodDto) : void {
+    //     if (this.value > 1) {
+    //         this.value -= 1;
+    //     } else {
+    //         abp.message.error(this.l('You have reached the minimum quantity.'));
+    //     }
+    // }
 
-    // toggleAdd = () => {
-    //     console.log(this.foodDetails.quantity);
-    //     // this.value = this.value + this.order.quantity;
-    //     // this.renderedValue = this.value.toString();
-    //     // console.log(this.renderedValue);
-    // };
+    // AddQty(food : FoodDto) : void {
+    //         this.value += 1;
+    //         this._orderService.update(this.order).subscribe(
+    //             () => {
+    //                 this.notify.info(this.l('SavedSuccessfully'));
+    //                 this.onSave.emit();
+    //             },
+    //             () => {
+    //                 this.saving = false;
+    //             }
+    //         )
+    // }
 
-    // toggleLess = () => {
-    //     if (this.value - this.order.quantity >= this.minimumValue ) {
-    //         this.value = this.value - this.defaultQty;
-    //         this.renderedValue = this.value.toString();
-    //         console.log(this.renderedValue);
+    // LessQty(food : FoodDto) : void {
+    //     if (this.value > 1) {
+    //         this.value -= 1;
     //     }        
-    // };
+    // }
 }

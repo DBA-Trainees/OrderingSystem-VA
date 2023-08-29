@@ -16,6 +16,8 @@ namespace OrderingSystemVA.Authorization
             context.CreatePermission(PermissionNames.Pages_Divisions, L("Divisions"));
             context.CreatePermission(PermissionNames.Pages_Categories, L("Categories"));
             context.CreatePermission(PermissionNames.Pages_Types, L("Types"));
+            context.CreatePermission(PermissionNames.Pages_Foods, L("Foods"));
+            context.CreatePermission(PermissionNames.Pages_Orders, L("Orders"));
         }
 
         private static ILocalizableString L(string name)

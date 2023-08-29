@@ -17,7 +17,7 @@ namespace OrderingSystemVA.Foods.Dto
 
     public class FoodDto : EntityDto<int>
     {
-        public int? Id { get; set; }
+        //public int Id { get; set; }
         public byte[] Image { get; set; }
         public string ImageName { get; set; }
         public string ImageFileType { get; set; }

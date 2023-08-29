@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Injector, OnInit, Output } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { AppComponentBase } from "@shared/app-component-base";
-import { CategoryDto, CategoryServiceProxy, FoodDto, FoodServiceProxy, FoodSizeEnum, TypeDto, TypeServiceProxy } from "@shared/service-proxies/service-proxies";
+import { CategoryDto, CategoryServiceProxy, FoodDto, FoodServiceProxy, TypeDto, TypeServiceProxy } from "@shared/service-proxies/service-proxies";
 import { BsModalRef } from "ngx-bootstrap/modal";
 
 enum foodSize {
@@ -56,6 +56,7 @@ export class CreateOrEditFoodModalComponent extends AppComponentBase implements 
                 this.base64textString = result.image;
                 this.imgFileName = result.imageName;
                 this.imgFileType = result.imageFileType;
+                // this.amountCtrl = result.price;
             }))
         }       
         this._categoryService.getAllCategories().subscribe(
@@ -93,6 +94,7 @@ export class CreateOrEditFoodModalComponent extends AppComponentBase implements 
         if(this.id > 0) {
             this._foodService.update(this.foods).subscribe(
                 () => {
+                    console.log(this.foods.id);
                     this.notify.info(this.l('SavedSuccessfully'));
                     this.bsModalRef.hide();
                     this.onSave.emit();

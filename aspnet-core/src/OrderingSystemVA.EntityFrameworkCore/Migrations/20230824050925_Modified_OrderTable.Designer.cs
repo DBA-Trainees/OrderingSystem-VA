@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderingSystemVA.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using OrderingSystemVA.EntityFrameworkCore;
 namespace OrderingSystemVA.Migrations
 {
     [DbContext(typeof(OrderingSystemVADbContext))]
-    partial class OrderingSystemVADbContextModelSnapshot : ModelSnapshot
+    [Migration("20230824050925_Modified_OrderTable")]
+    partial class Modified_OrderTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1788,9 +1791,6 @@ namespace OrderingSystemVA.Migrations
 
                     b.Property<long?>("LastModifierUserId")
                         .HasColumnType("bigint");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");

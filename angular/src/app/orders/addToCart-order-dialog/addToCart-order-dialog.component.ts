@@ -5,6 +5,7 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase, PagedRequestDto } from '@shared/paged-listing-component-base';
 import { finalize, reduce } from 'rxjs/operators';
 import { result } from 'lodash-es';
+import { FormArray } from '@angular/forms';
 
 
 class PagedOrderRequestDto extends PagedRequestDto {
@@ -22,6 +23,7 @@ export class AddToCartOrderDialogComponent extends PagedListingComponentBase<Ord
     keyword = '';
     isActive : boolean | null;
     orders : OrderDto[] = [];
+    order = new OrderDto;
     firstTableData = [];
     itemRow : any[];
     priceTotal : number = 0;
@@ -80,8 +82,14 @@ export class AddToCartOrderDialogComponent extends PagedListingComponentBase<Ord
         );
     }
 
-    // getTotalPriceSum(orders : OrderDto) : number {
-    //    return reduce((total, order) => total + order.priceTotal, 0);
+    // getTotalPrice() : number {
+            
+    //   return this.orders.reduce((sum,amount) => sum + this.order.amount,0);
     // }
+          //   return orders.controls.
+    //     map((order) => order.get('quantity').value * order.get('price').value).
+    //         reduce((sum, amount) => sum + amount,0);
+      
+
     
 }

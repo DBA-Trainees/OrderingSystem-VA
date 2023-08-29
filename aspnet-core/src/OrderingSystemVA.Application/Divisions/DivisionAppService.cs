@@ -64,6 +64,7 @@ namespace OrderingSystemVA.Divisions
 
             return query;
         }
+
         //protected override IQueryable<Division> CreateFilteredQuery(PagedDivisionResultRequestDto input)
         //{
         //    return Repository.GetAllIncluding(x => x.Id)

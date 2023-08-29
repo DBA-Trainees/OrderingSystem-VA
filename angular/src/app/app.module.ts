@@ -55,6 +55,7 @@ import { EditCategoryModalComponent } from './categories/edit-category-modal/edi
 import { CreateOrEditTypeModalComponent } from './types/createOrEdit-type-modal/createOrEdit-type-modal.component';
 import { CreateOrEditFoodModalComponent } from './foods/createOrEdit-food-modal/createOrEdit-food-modal.component';
 import { AddToCartOrderDialogComponent } from './orders/addtoCart-order-dialog/addtoCart-order-dialog.component';
+import { OrderDetailsComponent } from './orders/viewOrderDetails-dialog/viewOrderDetails.component';
 
 @NgModule({
     declarations: [		
@@ -99,7 +100,8 @@ import { AddToCartOrderDialogComponent } from './orders/addtoCart-order-dialog/a
         FoodComponent,
         CreateOrEditFoodModalComponent,
         OrderComponent,
-        AddToCartOrderDialogComponent
+        AddToCartOrderDialogComponent,
+        OrderDetailsComponent
    ],
     imports: [
         CommonModule,

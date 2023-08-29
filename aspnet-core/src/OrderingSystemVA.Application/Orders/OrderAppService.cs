@@ -1,7 +1,9 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
+using OrderingSystemVA.Authorization;
 using OrderingSystemVA.Entities;
 using OrderingSystemVA.Foods.Dto;
 using OrderingSystemVA.Orders.Dto;
@@ -13,6 +15,8 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemVA.Orders
 {
+
+    //[AbpAuthorize(PermissionNames.Pages_Orders)]
     public class OrderAppService : AsyncCrudAppService<Order, OrderDto, int, PagedOrderResultRequestDto, CreateOrderDto, OrderDto>, IOrderAppService
     {
         private readonly IRepository<Order, int> _repository;
@@ -24,6 +28,14 @@ namespace OrderingSystemVA.Orders
 
         public override Task<OrderDto> CreateAsync(CreateOrderDto input)
         {
+            var order = ObjectMapper.Map<Order>(input);
+
+            if (order.FoodId == input.FoodId)
+            {
+                
+            }
+
+            //return base.MapToEntityDto(order);
             return base.CreateAsync(input);
         }
 
@@ -54,13 +66,20 @@ namespace OrderingSystemVA.Orders
 
         public async Task<PagedResultDto<OrderDto>> GetAllOrderWithFood(PagedOrderResultRequestDto input)
         {
-            var query = await _repository.GetAll()
-                .Include(x => x.Food)
+            var query = await _repository.GetAllIncluding(x => x.Food)
                 .Select(x => ObjectMapper.Map<OrderDto>(x))
                 .ToListAsync();
 
-            return new PagedResultDto<OrderDto>(query.Count, query);
+            return new PagedResultDto<OrderDto>(query.Count(), query);
 
+
+    //        var query = _repository.GetAll()
+    //        .Include(x => x.Food);
+    //        var food = new OrderDto()
+    //        {
+    //            Food = query
+    //        };
+    //        return new PagedResultDto<OrderDto>(query.Count, query);
         }
 
     }

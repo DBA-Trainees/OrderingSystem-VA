@@ -4819,9 +4819,10 @@ export interface ICreateFoodDto {
 export class CreateOrderDto implements ICreateOrderDto {
     id: number;
     foodId: number | undefined;
-    food: Food;
     quantity: number;
     size: string | undefined;
+    totalPrice: number;
+    notes: string | undefined;
 
     constructor(data?: ICreateOrderDto) {
         if (data) {
@@ -4836,9 +4837,10 @@ export class CreateOrderDto implements ICreateOrderDto {
         if (_data) {
             this.id = _data["id"];
             this.foodId = _data["foodId"];
-            this.food = _data["food"] ? Food.fromJS(_data["food"]) : <any>undefined;
             this.quantity = _data["quantity"];
             this.size = _data["size"];
+            this.totalPrice = _data["totalPrice"];
+            this.notes = _data["notes"];
         }
     }
 
@@ -4853,9 +4855,10 @@ export class CreateOrderDto implements ICreateOrderDto {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["foodId"] = this.foodId;
-        data["food"] = this.food ? this.food.toJSON() : <any>undefined;
         data["quantity"] = this.quantity;
         data["size"] = this.size;
+        data["totalPrice"] = this.totalPrice;
+        data["notes"] = this.notes;
         return data;
     }
 
@@ -4870,9 +4873,10 @@ export class CreateOrderDto implements ICreateOrderDto {
 export interface ICreateOrderDto {
     id: number;
     foodId: number | undefined;
-    food: Food;
     quantity: number;
     size: string | undefined;
+    totalPrice: number;
+    notes: string | undefined;
 }
 
 export class CreateRoleDto implements ICreateRoleDto {
@@ -5539,127 +5543,8 @@ export interface IFlatPermissionDto {
     description: string | undefined;
 }
 
-export class Food implements IFood {
-    id: number;
-    creationTime: moment.Moment;
-    creatorUserId: number | undefined;
-    lastModificationTime: moment.Moment | undefined;
-    lastModifierUserId: number | undefined;
-    isDeleted: boolean;
-    deleterUserId: number | undefined;
-    deletionTime: moment.Moment | undefined;
-    image: string | undefined;
-    imageName: string | undefined;
-    imageFileType: string | undefined;
-    name: string | undefined;
-    availability: boolean;
-    quantity: number;
-    categoryId: number | undefined;
-    category: Category;
-    typeId: number | undefined;
-    type: Type;
-    size: string | undefined;
-    price: number;
-
-    constructor(data?: IFood) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.id = _data["id"];
-            this.creationTime = _data["creationTime"] ? moment(_data["creationTime"].toString()) : <any>undefined;
-            this.creatorUserId = _data["creatorUserId"];
-            this.lastModificationTime = _data["lastModificationTime"] ? moment(_data["lastModificationTime"].toString()) : <any>undefined;
-            this.lastModifierUserId = _data["lastModifierUserId"];
-            this.isDeleted = _data["isDeleted"];
-            this.deleterUserId = _data["deleterUserId"];
-            this.deletionTime = _data["deletionTime"] ? moment(_data["deletionTime"].toString()) : <any>undefined;
-            this.image = _data["image"];
-            this.imageName = _data["imageName"];
-            this.imageFileType = _data["imageFileType"];
-            this.name = _data["name"];
-            this.availability = _data["availability"];
-            this.quantity = _data["quantity"];
-            this.categoryId = _data["categoryId"];
-            this.category = _data["category"] ? Category.fromJS(_data["category"]) : <any>undefined;
-            this.typeId = _data["typeId"];
-            this.type = _data["type"] ? Type.fromJS(_data["type"]) : <any>undefined;
-            this.size = _data["size"];
-            this.price = _data["price"];
-        }
-    }
-
-    static fromJS(data: any): Food {
-        data = typeof data === 'object' ? data : {};
-        let result = new Food();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
-        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
-        data["creatorUserId"] = this.creatorUserId;
-        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
-        data["lastModifierUserId"] = this.lastModifierUserId;
-        data["isDeleted"] = this.isDeleted;
-        data["deleterUserId"] = this.deleterUserId;
-        data["deletionTime"] = this.deletionTime ? this.deletionTime.toISOString() : <any>undefined;
-        data["image"] = this.image;
-        data["imageName"] = this.imageName;
-        data["imageFileType"] = this.imageFileType;
-        data["name"] = this.name;
-        data["availability"] = this.availability;
-        data["quantity"] = this.quantity;
-        data["categoryId"] = this.categoryId;
-        data["category"] = this.category ? this.category.toJSON() : <any>undefined;
-        data["typeId"] = this.typeId;
-        data["type"] = this.type ? this.type.toJSON() : <any>undefined;
-        data["size"] = this.size;
-        data["price"] = this.price;
-        return data;
-    }
-
-    clone(): Food {
-        const json = this.toJSON();
-        let result = new Food();
-        result.init(json);
-        return result;
-    }
-}
-
-export interface IFood {
-    id: number;
-    creationTime: moment.Moment;
-    creatorUserId: number | undefined;
-    lastModificationTime: moment.Moment | undefined;
-    lastModifierUserId: number | undefined;
-    isDeleted: boolean;
-    deleterUserId: number | undefined;
-    deletionTime: moment.Moment | undefined;
-    image: string | undefined;
-    imageName: string | undefined;
-    imageFileType: string | undefined;
-    name: string | undefined;
-    availability: boolean;
-    quantity: number;
-    categoryId: number | undefined;
-    category: Category;
-    typeId: number | undefined;
-    type: Type;
-    size: string | undefined;
-    price: number;
-}
-
 export class FoodDto implements IFoodDto {
-    id: number | undefined;
+    id: number;
     image: string | undefined;
     imageName: string | undefined;
     imageFileType: string | undefined;
@@ -5734,7 +5619,7 @@ export class FoodDto implements IFoodDto {
 }
 
 export interface IFoodDto {
-    id: number | undefined;
+    id: number;
     image: string | undefined;
     imageName: string | undefined;
     imageFileType: string | undefined;
@@ -6064,9 +5949,11 @@ export interface IIsTenantAvailableOutput {
 export class OrderDto implements IOrderDto {
     id: number;
     foodId: number | undefined;
-    food: Food;
+    food: FoodDto;
     quantity: number;
     size: string | undefined;
+    totalPrice: number;
+    notes: string | undefined;
 
     constructor(data?: IOrderDto) {
         if (data) {
@@ -6081,9 +5968,11 @@ export class OrderDto implements IOrderDto {
         if (_data) {
             this.id = _data["id"];
             this.foodId = _data["foodId"];
-            this.food = _data["food"] ? Food.fromJS(_data["food"]) : <any>undefined;
+            this.food = _data["food"] ? FoodDto.fromJS(_data["food"]) : <any>undefined;
             this.quantity = _data["quantity"];
             this.size = _data["size"];
+            this.totalPrice = _data["totalPrice"];
+            this.notes = _data["notes"];
         }
     }
 
@@ -6101,6 +5990,8 @@ export class OrderDto implements IOrderDto {
         data["food"] = this.food ? this.food.toJSON() : <any>undefined;
         data["quantity"] = this.quantity;
         data["size"] = this.size;
+        data["totalPrice"] = this.totalPrice;
+        data["notes"] = this.notes;
         return data;
     }
 
@@ -6115,9 +6006,11 @@ export class OrderDto implements IOrderDto {
 export interface IOrderDto {
     id: number;
     foodId: number | undefined;
-    food: Food;
+    food: FoodDto;
     quantity: number;
     size: string | undefined;
+    totalPrice: number;
+    notes: string | undefined;
 }
 
 export class OrderDtoPagedResultDto implements IOrderDtoPagedResultDto {

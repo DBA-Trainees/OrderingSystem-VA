@@ -1,9 +1,8 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { PagedListingComponentBase, PagedRequestDto } from '@shared/paged-listing-component-base';
 import { FoodDto, FoodDtoPagedResultDto, FoodServiceProxy } from '@shared/service-proxies/service-proxies';
-import { result } from 'lodash-es';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { finalize } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { CreateOrEditFoodModalComponent } from './createOrEdit-food-modal/createOrEdit-food-modal.component';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 

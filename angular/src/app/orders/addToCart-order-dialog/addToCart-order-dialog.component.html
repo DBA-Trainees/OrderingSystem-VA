@@ -27,13 +27,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let order of orders | paginate
-                                    : {
-                                        id: 'server',
-                                        itemsPerPage: pageSize,
-                                        currentPage: pageNumber,
-                                        totalItems : totalItems
-                                    }">
+                                    <tr *ngFor="let order of orders">
                                                                          
                                         <td>
                                             <figure class="align-items-center">
@@ -93,21 +87,6 @@
                 </aside>
 
                 <aside class="col-lg-3">
-                    <!-- <div class="card mb-3">
-                        <div class="card-body">
-                            <form>
-                                <div class="form-group"> <label>Have coupon?</label>
-                                    <div class="input-group"> 
-                                        <input type="text" class="form-control coupon" name="" placeholder="Coupon code"> 
-                                        <span class="input-group-append"> 
-                                            <button class="btn btn-primary btn-apply coupon">Apply</button> 
-                                        </span> 
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div> -->
-
                     <div class="card">
                         <div class="card-body">
                             <dl class="dlist-align">
@@ -117,16 +96,8 @@
 
                             <dl class="dlist-align">
                                 <dt>Total Amount to Pay:</dt>
-                                <dd class="text-right ml-3">{{ priceTotal }}</dd>
+                                <dd class="text-right ml-3"></dd>
                             </dl>
-                            <!-- <dl class="dlist-align">
-                                <dt>Discount:</dt>
-                                <dd class="text-right text-danger ml-3">- $10.00</dd>
-                            </dl> -->
-                            <!-- <dl class="dlist-align">
-                                <dt>Total:</dt>
-                                <dd class="text-right text-dark b ml-3"><strong>$59.97</strong></dd>
-                            </dl> -->
                             <hr> 
                             <a href="#" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Place Order </a>
                         </div>

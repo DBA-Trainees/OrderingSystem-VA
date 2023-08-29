@@ -15,6 +15,7 @@ import { TypeComponent } from './types/types.component';
 import { FoodComponent } from './foods/foods.component';
 import { OrderComponent } from './orders/orders.component';
 import { AddToCartOrderDialogComponent } from './orders/addtoCart-order-dialog/addtoCart-order-dialog.component';
+import { OrderDetailsComponent } from './orders/viewOrderDetails-dialog/viewOrderDetails.component';
 
 @NgModule({
     imports: [
@@ -33,9 +34,10 @@ import { AddToCartOrderDialogComponent } from './orders/addtoCart-order-dialog/a
                     { path: 'customers', component: CustomersComponent, data: { permission: 'Pages.Customers' }, canActivate: [AppRouteGuard] },
                     { path: 'categories', component: CategoriesComponent, data: { permission: 'Pages.Categories' }, canActivate: [AppRouteGuard] },
                     { path: 'types', component: TypeComponent, data: { permission: 'Pages.Types' }, canActivate: [AppRouteGuard] },
-                    { path: 'foods', component: FoodComponent, canActivate: [AppRouteGuard] },
-                    { path: 'orders', component: OrderComponent, canActivate: [AppRouteGuard] },
-                    { path: 'orders/addToCart-order-dialog', component: AddToCartOrderDialogComponent, canActivate: [AppRouteGuard]}
+                    { path: 'foods', component: FoodComponent, data: { permission: 'Pages.Foods' }, canActivate: [AppRouteGuard] },
+                    { path: 'orders', component: OrderComponent, data: { permission: 'Pages.Orders' }, canActivate: [AppRouteGuard] },
+                    { path: 'orders/addToCart-order-dialog', component: AddToCartOrderDialogComponent, canActivate: [AppRouteGuard]},
+                    { path: 'orders/viewOrderDetails-dialog', component: OrderDetailsComponent, canActivate: [AppRouteGuard]}
                 ]
             }
         ])
