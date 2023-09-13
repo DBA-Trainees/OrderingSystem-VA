@@ -2,6 +2,7 @@
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Abp.Extensions;
 using Microsoft.EntityFrameworkCore;
 using OrderingSystemVA.Authorization;
 using OrderingSystemVA.Entities;
@@ -13,6 +14,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.Linq.Extensions;
+
 
 namespace OrderingSystemVA.Foods
 {
@@ -61,20 +64,12 @@ namespace OrderingSystemVA.Foods
             var query = await _repository.GetAll()
                 .Include(x => x.Category)
                 .Include(x => x.Type)
+                .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Keyword) || x.Category.Name.Contains(input.Keyword) || x.Type.Name.Contains(input.Keyword))
                 .Select(x => ObjectMapper.Map<FoodDto>(x))
                 .ToListAsync();
 
             return new PagedResultDto<FoodDto>(query.Count, query);
         }
 
-        public async Task<IEnumerable<FoodSizeEnum>> GetAllSize()
-        {
-            var query = await _repository.GetAll()
-                .Select(x => ObjectMapper.Map<FoodSizeEnum>(x))
-                .ToListAsync();
-
-            return query;
-        }
-        
     }
 }

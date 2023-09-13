@@ -4,25 +4,15 @@
 }
 /* END CARD */
 
-
 /* SEARCH */
-.btn-search {
+.btn-search, .btn-search-append {
     background-color: #765827;
 }
 
-.fa-search {
+.fa-search, .fas {
     color: #F2E8C6;
 }
 /* END SEARCH */
-
-
-/* IMAGE */
-.img {
-    width:70px;
-    height:70px;
-}
-/* END IMAGE */
-
 
 /* TABLE */
 .table-head {
@@ -32,25 +22,13 @@
     white-space: nowrap;
 }
 
-.food-image, .food-availability,
-.food-category, .food-type, .food-size, 
-.food-action, .th-name, .th-image, .th-availability,
-.th-qty, .th-category, .th-type, .th-size, .th-price,
-.th-actions {
-    text-align: center;
-}
-
-.food-price {
-    text-align: right;
-}
-
-.food-qty {
-    align-items: center;
+.th-userName, .th-fullName, .th-emailAdd,
+.th-isActive, .th-actions {
     text-align: center;
 }
 
 .th-actions {
-    width: 110px;
+    width: 160px;
 }
 
 tr:nth-child(even) {
@@ -130,6 +108,22 @@ td:hover {
     white-space: nowrap;
 }
 
+.btn-reset {
+    appearance: button;
+    background-color: #243763;
+    border: 1px solid #674747;
+    border-radius: 4px;
+    box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 5px 10px;    
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
 .btn:hover {
     text-decoration: none;
 }
@@ -152,16 +146,3 @@ i {
     color: #F2F2F2;
 }
 /* END BUTTONS */
-
-
-/* PAGINATION FOOTER*/
-::ng-deep ul > li.disabled > span {
-    background-color: #65451F !important;
-    border-color: black !important;
-}
-  
-::ng-deep ul > li.active > a {
-    background-color: #65451F !important;
-    border-color: black !important;
-}
-/* END PAGINATION FOOTER */

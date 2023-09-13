@@ -10,10 +10,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Abp.Linq.Extensions;
+using Abp.Extensions;
 
 namespace OrderingSystemVA.Types
 {
-    [AbpAuthorize(PermissionNames.Pages_Types)]
+    //[AbpAuthorize(PermissionNames.Pages_Types)]
     public class TypeAppService : AsyncCrudAppService<Entities.Type, TypeDto, int, PagedTypeResultRequestDto, CreateTypeDto, TypeDto>, ITypeAppService
     {
         private readonly IRepository<Entities.Type, int> _repository;
@@ -59,6 +61,12 @@ namespace OrderingSystemVA.Types
                 .ToListAsync();
 
             return query;
+        }
+
+        protected override IQueryable<Entities.Type> CreateFilteredQuery(PagedTypeResultRequestDto input)
+        {
+            return Repository.GetAll()
+                .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Keyword));
         }
     }
 }

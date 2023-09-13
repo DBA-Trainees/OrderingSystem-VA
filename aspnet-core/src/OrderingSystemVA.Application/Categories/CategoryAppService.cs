@@ -2,6 +2,7 @@
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
+using Abp.Extensions;
 using Microsoft.EntityFrameworkCore;
 using OrderingSystemVA.Authorization;
 using OrderingSystemVA.Categories.Dto;
@@ -9,12 +10,12 @@ using OrderingSystemVA.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Abp.Linq.Extensions;
 
 namespace OrderingSystemVA.Categories
 {
-    [AbpAuthorize(PermissionNames.Pages_Categories)]
+    //[AbpAuthorize(PermissionNames.Pages_Categories)]
     public class CategoryAppService : AsyncCrudAppService<Category, CategoryDto, int, PagedCategoryResultRequestDto, CreateCategoryDto, CategoryDto>, ICategoryAppService
     {
 
@@ -62,6 +63,12 @@ namespace OrderingSystemVA.Categories
                 .ToListAsync();
 
             return query;
+        }
+
+        protected override IQueryable<Category> CreateFilteredQuery(PagedCategoryResultRequestDto input)
+        {
+            return Repository.GetAll()
+                .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Keyword));
         }
     }
 }

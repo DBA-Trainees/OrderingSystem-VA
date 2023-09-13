@@ -8,20 +8,13 @@
 /* SEARCH */
 .btn-search {
     background-color: #765827;
+    border-radius: 3px;
 }
 
 .fa-search {
     color: #F2E8C6;
 }
 /* END SEARCH */
-
-
-/* IMAGE */
-.img {
-    width:70px;
-    height:70px;
-}
-/* END IMAGE */
 
 
 /* TABLE */
@@ -32,25 +25,16 @@
     white-space: nowrap;
 }
 
-.food-image, .food-availability,
-.food-category, .food-type, .food-size, 
-.food-action, .th-name, .th-image, .th-availability,
-.th-qty, .th-category, .th-type, .th-size, .th-price,
-.th-actions {
-    text-align: center;
-}
-
-.food-price {
-    text-align: right;
-}
-
-.food-qty {
-    align-items: center;
+.th-name, .th-division {
     text-align: center;
 }
 
 .th-actions {
-    width: 110px;
+    width: 130px;
+}
+
+.td-actions, .td-division {
+    text-align: center;
 }
 
 tr:nth-child(even) {

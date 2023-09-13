@@ -6,19 +6,16 @@ using Abp.Domain.Repositories;
 using Abp.Extensions;
 using Microsoft.EntityFrameworkCore;
 using OrderingSystemVA.Authorization;
-using OrderingSystemVA.Authorization.Users;
 using OrderingSystemVA.Customers.Dto;
 using OrderingSystemVA.Entities;
-using OrderingSystemVA.Users.Dto;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Abp.Linq.Extensions;
 
 namespace OrderingSystemVA.Customers
 {
-    [AbpAuthorize(PermissionNames.Pages_Customers)]
+    //[AbpAuthorize(PermissionNames.Pages_Customers)]
     public class CustomerAppService : AsyncCrudAppService<Customer, CustomerDto, int, PagedCustomerResultRequestDto, CreateCustomerDto, CustomerDto>, ICustomerAppService
     {
         private readonly IRepository <Customer, int> _repository;
@@ -62,6 +59,7 @@ namespace OrderingSystemVA.Customers
         {
             var query = await _repository.GetAll()
                 .Include(x => x.Division)
+                .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Keyword) || x.Division.Name.Contains(input.Keyword))
                 .Select(x => ObjectMapper.Map<CustomerDto>(x))
                 .ToListAsync();
 

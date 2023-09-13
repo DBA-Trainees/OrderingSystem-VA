@@ -47,6 +47,16 @@ body{
    text-align: center
 }
 
+.el-card-item {
+   background-image: linear-gradient(120deg, #EAC696 60%, #765827 100%);
+   /* background-image: linear-gradient(to right, #EAC696, #765827); */
+}
+
+.span-price, .currency-code {
+   color: #65451F;
+   font-weight: bold;
+}
+
 .el-element-overlay .el-card-item .el-overlay-1 {
    width: 100%;
    overflow: hidden;
@@ -156,3 +166,9 @@ h4 {
   font-weight: bold;
 }
 
+a.disabled {
+   color : gray;
+   cursor : not-allowed;
+   text-decoration: underline;
+   font-size: 30px;
+}

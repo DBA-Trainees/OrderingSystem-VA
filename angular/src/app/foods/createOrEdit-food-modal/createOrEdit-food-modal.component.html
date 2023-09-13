@@ -3,10 +3,9 @@
     #createOrEditFoodModal="ngForm"
     (ngSubmit)="saveFood()">
 
-    <abp-modal-header
-        [title]="'CreateOrEditFood' | localize"
-        (onCloseClick)="bsModalRef.hide()">
-    </abp-modal-header>
+    <abp-modal-header *ngIf="isEdit == false" [title]="'CreateFood' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+    <abp-modal-header *ngIf="isEdit == true" [title]="'EditFood' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+
 
     <div class="modal-body">
         <!-- NAME -->

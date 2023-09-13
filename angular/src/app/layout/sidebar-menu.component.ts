@@ -46,6 +46,12 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
             // new MenuItem(this.l('About'), '/app/about', 'fas fa-info-circle'),
             // new MenuItem(this.l('HomePage'), '/app/home', 'fas fa-home'),
             new MenuItem(
+                this.l('Dashboard'),
+                '/app/dashboard',
+                'fa solid fa-house',
+                'Pages.Foods'
+            ),
+            new MenuItem(
                 this.l('Roles'),
                 '/app/roles',
                 'fas fa-theater-masks',
@@ -102,7 +108,8 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
             new MenuItem(
                 this.l('Cart'),
                 '/app/orders/addToCart-order-dialog',
-                'fas fa-clipboard-check'
+                'fas fa-clipboard-check',
+                'Pages.Orders'
             )
             // new MenuItem(this.l('MultiLevelMenu'), '', 'fas fa-circle', '', [
             //     new MenuItem('ASP.NET Boilerplate', '', 'fas fa-dot-circle', '', [

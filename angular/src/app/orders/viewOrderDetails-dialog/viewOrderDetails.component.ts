@@ -1,9 +1,10 @@
 import { Component, Injector, OnInit, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { AppComponentBase } from '@shared/app-component-base';
 import { FoodDto, FoodServiceProxy, OrderDto, OrderServiceProxy } from '@shared/service-proxies/service-proxies';
-import { parse } from 'path';
+import * as moment from 'moment';
 
 enum foodSize {
     Small = 'Small',
@@ -25,13 +26,18 @@ export class OrderDetailsComponent extends AppComponentBase implements OnInit {
     selectedSize : string;
     orderQty : number = 1;
     priceOrder : number;
+    currentFoodQty : number;
     orderTotalPrice : number;
     orderNotes : string;
+    priceAmount : number;
+    orderDateTime = new Date();
     foodLabels = [
         foodSize.Small,
         foodSize.Medium,
         foodSize.Large
     ]
+
+    qtyControl : any;
 
     @Output() onSave = new EventEmitter<any>();
 
@@ -39,59 +45,78 @@ export class OrderDetailsComponent extends AppComponentBase implements OnInit {
         injector : Injector,
         private _foodService : FoodServiceProxy,
         private _orderService : OrderServiceProxy,
+        private route : ActivatedRoute,
         private router : Router
-    ) { 
+    ) {
         super(injector);
     }
 
-    ngOnInit() : void {
+    ngOnInit() : void {        
+        // if (this.id) {
+        //     this._orderService.get(this.id).subscribe((result) => {
+        //         this.orderNotes = result.notes;
+        //     })
+        // }
+
         if (parseInt(sessionStorage.getItem('id'))) {
             this._foodService.get(parseInt(sessionStorage.getItem('id'))).subscribe((result) => {
                 this.food = result;
                 this.selectedSize = result.size;
+                this.priceAmount = result.price;
+                this.UpdateFoodSize(this.food, this.selectedSize)
             });
+            
         }
     }
 
     addToCartOrder(foodId : number) : void {
-        this.priceOrder = this.food.price * this.orderQty;
+        //this.priceOrder = this.priceAmount * this.orderQty;
 
         this.saving = true;
         this.order.foodId = foodId;
         this.order.quantity = this.orderQty;
         this.order.size = this.selectedSize;
-        this.order.totalPrice = this.priceOrder;
+        this.order.totalPrice = this.priceAmount;
         this.order.notes = this.orderNotes;
+        this.order.dateTimeOrdered = moment(this.orderDateTime);
 
-        if (this.id > 0) {
-            this._orderService.update(this.order).subscribe(
-                () => {
-                    this.notify.info(this.l('SavedSuccessfully'));
-                    this.onSave.emit();
-                    this.router.navigate(["./app/orders"]);
-                },
-                () => {
-                    this.saving = false;
-                }
-            )
-        } else {
-            this._orderService.create(this.order).subscribe(
-                () => {
-                    this.notify.info(this.l('SavedSuccessfully'));
-                    this.onSave.emit();
-                    this.router.navigate(["./app/orders"]);
-                },
-                () => {
-                    this.saving = false;
-                }
-            );
-        }
+        this._orderService.updateOrderTable(this.order).subscribe(
+            () => {
+                this.notify.info(this.l('SavedSuccessfully'));
+                this.onSave.emit();
+                this.router.navigate(["./app/orders"]);
+            },
+            () => {
+                this.saving = false;
+            }
+        );
     }
 
-    // disableOption(categoryId : number, value : string) : boolean {
-    //     if (categoryId === 2) {
-    //         return value === "No size";
-    //     }
-    // }
+    UpdateFoodSize(food : FoodDto, newSize : string) : void {
+        if (newSize == "Small") {
+            this.priceAmount = this.food.price;
+        }
+        else if (newSize == "Medium") {
+            this.priceAmount = this.food.price + 10;
+        }
+        else {
+            this.priceAmount = this.food.price + 15;
+        }
+        console.log(this.priceAmount);
+    }
+
+    CheckQtyInput(event : any, input : any = null, maxQty : number) : void {
+       let value = +event;
+
+       if (value < 1) value = 1;
+       if (value > maxQty) value = maxQty;
+       this.orderQty = value;
+
+       if (input.value != value) {
+        const start = input.selectionStart ? input.selectionStart - 1: -1;
+        input.value = value;
+        if (start > 0) input.selectionStart = input.selectionEnd = start;
+       }
+    }
 
 }

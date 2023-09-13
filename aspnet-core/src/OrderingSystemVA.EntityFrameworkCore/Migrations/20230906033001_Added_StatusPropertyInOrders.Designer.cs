@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderingSystemVA.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using OrderingSystemVA.EntityFrameworkCore;
 namespace OrderingSystemVA.Migrations
 {
     [DbContext(typeof(OrderingSystemVADbContext))]
-    partial class OrderingSystemVADbContextModelSnapshot : ModelSnapshot
+    [Migration("20230906033001_Added_StatusPropertyInOrders")]
+    partial class Added_StatusPropertyInOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1792,9 +1795,6 @@ namespace OrderingSystemVA.Migrations
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -1806,12 +1806,6 @@ namespace OrderingSystemVA.Migrations
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("dateTimeOrdered")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("isChecked")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

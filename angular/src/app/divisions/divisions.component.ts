@@ -23,7 +23,8 @@ class PagedDivisionRequestDto extends PagedRequestDto {
 
 @Component({
   templateUrl: './divisions.component.html',
-  animations: [appModuleAnimation()]
+  animations: [appModuleAnimation()],
+  styleUrls: ['./divisions.component.css']
 })
 export class DivisionsComponent extends PagedListingComponentBase<DivisionDto>  {
   divisions : DivisionDto[] = [];

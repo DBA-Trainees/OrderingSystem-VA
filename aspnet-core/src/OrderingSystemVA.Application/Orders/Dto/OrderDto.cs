@@ -16,11 +16,15 @@ namespace OrderingSystemVA.Orders.Dto
 
     public class OrderDto : EntityDto<int>
     {
-        public int? FoodId { get; set; }
+        public int FoodId { get; set; }
         public FoodDto Food { get; set; }
         public int Quantity { get; set; }
         public string? Size { get; set; }
         public decimal TotalPrice { get; set; }
-        public string Notes { get; set; }
+        public string? Notes { get; set; }
+        public int Status { get; set; }
+        public int? OrderId { get; set; }
+        public bool? isChecked { get; set; }
+        public DateTime dateTimeOrdered { get; set; }
     }
 }

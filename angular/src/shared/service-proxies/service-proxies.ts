@@ -1673,64 +1673,6 @@ export class FoodServiceProxy {
         }
         return _observableOf(null as any);
     }
-
-    /**
-     * @return Success
-     */
-    getAllSize(): Observable<FoodSizeEnum[]> {
-        let url_ = this.baseUrl + "/api/services/app/Food/GetAllSize";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetAllSize(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGetAllSize(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<FoodSizeEnum[]>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<FoodSizeEnum[]>;
-        }));
-    }
-
-    protected processGetAllSize(response: HttpResponseBase): Observable<FoodSizeEnum[]> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (Array.isArray(resultData200)) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200.push(item);
-            }
-            else {
-                result200 = <any>null;
-            }
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(null as any);
-    }
 }
 
 @Injectable()
@@ -1748,8 +1690,8 @@ export class OrderServiceProxy {
      * @param body (optional) 
      * @return Success
      */
-    create(body: CreateOrderDto | undefined): Observable<OrderDto> {
-        let url_ = this.baseUrl + "/api/services/app/Order/Create";
+    updateOrderTable(body: OrderDto | undefined): Observable<OrderDto> {
+        let url_ = this.baseUrl + "/api/services/app/Order/UpdateOrderTable";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -1764,12 +1706,12 @@ export class OrderServiceProxy {
             })
         };
 
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processCreate(response_);
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdateOrderTable(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processCreate(response_ as any);
+                    return this.processUpdateOrderTable(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<OrderDto>;
                 }
@@ -1778,7 +1720,7 @@ export class OrderServiceProxy {
         }));
     }
 
-    protected processCreate(response: HttpResponseBase): Observable<OrderDto> {
+    protected processUpdateOrderTable(response: HttpResponseBase): Observable<OrderDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -2096,6 +2038,118 @@ export class OrderServiceProxy {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = OrderDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param id (optional) 
+     * @return Success
+     */
+    getOrderById(id: number | undefined): Observable<OrderDto> {
+        let url_ = this.baseUrl + "/api/services/app/Order/GetOrderById?";
+        if (id === null)
+            throw new Error("The parameter 'id' cannot be null.");
+        else if (id !== undefined)
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetOrderById(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetOrderById(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<OrderDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<OrderDto>;
+        }));
+    }
+
+    protected processGetOrderById(response: HttpResponseBase): Observable<OrderDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = OrderDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param body (optional) 
+     * @return Success
+     */
+    create(body: CreateOrderDto | undefined): Observable<OrderDto> {
+        let url_ = this.baseUrl + "/api/services/app/Order/Create";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json-patch+json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processCreate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processCreate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<OrderDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<OrderDto>;
+        }));
+    }
+
+    protected processCreate(response: HttpResponseBase): Observable<OrderDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = OrderDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -4823,6 +4877,10 @@ export class CreateOrderDto implements ICreateOrderDto {
     size: string | undefined;
     totalPrice: number;
     notes: string | undefined;
+    status: number;
+    orderId: number | undefined;
+    isChecked: boolean | undefined;
+    dateTimeOrdered: moment.Moment;
 
     constructor(data?: ICreateOrderDto) {
         if (data) {
@@ -4841,6 +4899,10 @@ export class CreateOrderDto implements ICreateOrderDto {
             this.size = _data["size"];
             this.totalPrice = _data["totalPrice"];
             this.notes = _data["notes"];
+            this.status = _data["status"];
+            this.orderId = _data["orderId"];
+            this.isChecked = _data["isChecked"];
+            this.dateTimeOrdered = _data["dateTimeOrdered"] ? moment(_data["dateTimeOrdered"].toString()) : <any>undefined;
         }
     }
 
@@ -4859,6 +4921,10 @@ export class CreateOrderDto implements ICreateOrderDto {
         data["size"] = this.size;
         data["totalPrice"] = this.totalPrice;
         data["notes"] = this.notes;
+        data["status"] = this.status;
+        data["orderId"] = this.orderId;
+        data["isChecked"] = this.isChecked;
+        data["dateTimeOrdered"] = this.dateTimeOrdered ? this.dateTimeOrdered.toISOString() : <any>undefined;
         return data;
     }
 
@@ -4877,6 +4943,10 @@ export interface ICreateOrderDto {
     size: string | undefined;
     totalPrice: number;
     notes: string | undefined;
+    status: number;
+    orderId: number | undefined;
+    isChecked: boolean | undefined;
+    dateTimeOrdered: moment.Moment;
 }
 
 export class CreateRoleDto implements ICreateRoleDto {
@@ -5689,12 +5759,6 @@ export interface IFoodDtoPagedResultDto {
     totalCount: number;
 }
 
-export enum FoodSizeEnum {
-    _0 = 0,
-    _1 = 1,
-    _2 = 2,
-}
-
 export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInformationsOutput {
     application: ApplicationInfoDto;
     user: UserLoginInfoDto;
@@ -5948,12 +6012,16 @@ export interface IIsTenantAvailableOutput {
 
 export class OrderDto implements IOrderDto {
     id: number;
-    foodId: number | undefined;
+    foodId: number;
     food: FoodDto;
     quantity: number;
     size: string | undefined;
     totalPrice: number;
     notes: string | undefined;
+    status: number;
+    orderId: number | undefined;
+    isChecked: boolean | undefined;
+    dateTimeOrdered: moment.Moment;
 
     constructor(data?: IOrderDto) {
         if (data) {
@@ -5973,6 +6041,10 @@ export class OrderDto implements IOrderDto {
             this.size = _data["size"];
             this.totalPrice = _data["totalPrice"];
             this.notes = _data["notes"];
+            this.status = _data["status"];
+            this.orderId = _data["orderId"];
+            this.isChecked = _data["isChecked"];
+            this.dateTimeOrdered = _data["dateTimeOrdered"] ? moment(_data["dateTimeOrdered"].toString()) : <any>undefined;
         }
     }
 
@@ -5992,6 +6064,10 @@ export class OrderDto implements IOrderDto {
         data["size"] = this.size;
         data["totalPrice"] = this.totalPrice;
         data["notes"] = this.notes;
+        data["status"] = this.status;
+        data["orderId"] = this.orderId;
+        data["isChecked"] = this.isChecked;
+        data["dateTimeOrdered"] = this.dateTimeOrdered ? this.dateTimeOrdered.toISOString() : <any>undefined;
         return data;
     }
 
@@ -6005,12 +6081,16 @@ export class OrderDto implements IOrderDto {
 
 export interface IOrderDto {
     id: number;
-    foodId: number | undefined;
+    foodId: number;
     food: FoodDto;
     quantity: number;
     size: string | undefined;
     totalPrice: number;
     notes: string | undefined;
+    status: number;
+    orderId: number | undefined;
+    isChecked: boolean | undefined;
+    dateTimeOrdered: moment.Moment;
 }
 
 export class OrderDtoPagedResultDto implements IOrderDtoPagedResultDto {

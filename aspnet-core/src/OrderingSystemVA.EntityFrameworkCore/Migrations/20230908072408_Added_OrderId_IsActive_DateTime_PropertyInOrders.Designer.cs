@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderingSystemVA.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using OrderingSystemVA.EntityFrameworkCore;
 namespace OrderingSystemVA.Migrations
 {
     [DbContext(typeof(OrderingSystemVADbContext))]
-    partial class OrderingSystemVADbContextModelSnapshot : ModelSnapshot
+    [Migration("20230908072408_Added_OrderId_IsActive_DateTime_PropertyInOrders")]
+    partial class Added_OrderId_IsActive_DateTime_PropertyInOrders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1810,7 +1813,7 @@ namespace OrderingSystemVA.Migrations
                     b.Property<DateTime>("dateTimeOrdered")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("isChecked")
+                    b.Property<bool?>("isActive")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");

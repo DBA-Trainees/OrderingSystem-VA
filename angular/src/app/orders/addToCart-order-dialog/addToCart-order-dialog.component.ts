@@ -4,9 +4,9 @@ import { CreateOrderDto, FoodDto, FoodServiceProxy, OrderDto, OrderDtoPagedResul
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { PagedListingComponentBase, PagedRequestDto } from '@shared/paged-listing-component-base';
 import { finalize, reduce } from 'rxjs/operators';
+import { FormControl, Validators } from '@angular/forms';
 import { result } from 'lodash-es';
-import { FormArray } from '@angular/forms';
-
+import { Router } from '@angular/router';
 
 class PagedOrderRequestDto extends PagedRequestDto {
     keyword: string;
@@ -15,28 +15,33 @@ class PagedOrderRequestDto extends PagedRequestDto {
 
 @Component({
     templateUrl: './addToCart-order-dialog.component.html',
+    styleUrls: ['./addToCart-order-dialog.component.css'],
     animations: [appModuleAnimation()]
 })
 
 export class AddToCartOrderDialogComponent extends PagedListingComponentBase<OrderDto> {
 
+    saving = false;
+    id : number;
     keyword = '';
     isActive : boolean | null;
     orders : OrderDto[] = [];
     order = new OrderDto;
-    firstTableData = [];
-    itemRow : any[];
+    food = new FoodDto;
     priceTotal : number = 0;
-    private priceValue;
-
+    priceValue : number;
+    dataValue : number;
+    orderStatus : number = 1;
+    orderQty : number;
+    
 
     @Output() onSave = new EventEmitter<any>();
-    myForm: any;
 
     constructor(
         injector : Injector,
         private _orderService : OrderServiceProxy,
-        private _foodService : FoodServiceProxy
+        private _foodService : FoodServiceProxy,
+        private router : Router
     ) {
         super(injector)
     }
@@ -64,7 +69,9 @@ export class AddToCartOrderDialogComponent extends PagedListingComponentBase<Ord
             .subscribe((result : OrderDtoPagedResultDto) => {
                 this.orders = result.items;
                 this.showPaging(result, pageNumber);
+                this.getTotalAmount(this.orders);
             })
+        
     }
     
     protected delete(order: OrderDto): void {
@@ -82,14 +89,70 @@ export class AddToCartOrderDialogComponent extends PagedListingComponentBase<Ord
         );
     }
 
-    // getTotalPrice() : number {
-            
-    //   return this.orders.reduce((sum,amount) => sum + this.order.amount,0);
-    // }
-          //   return orders.controls.
-    //     map((order) => order.get('quantity').value * order.get('price').value).
-    //         reduce((sum, amount) => sum + amount,0);
-      
+    getTotalAmount(data) {
+        this.priceValue = 0;
+        this.priceTotal = 0;
+        
+        this.priceValue = data;
+        console.log(this.priceValue);
+        for (let i = 0; i < data.length ; i++) {
+            this.priceTotal += this.priceValue[i].totalPrice
+            console.log(this.priceTotal);
+        }
+    }
 
+    placeOrder(data) : void {
+        abp.message.confirm (
+            undefined,
+            undefined,
+            (result : boolean) => {
+                if (result) {
+                    this.saving = true;
+                    var newOrder = new OrderDto;
+
+                    data.forEach(item => {
+                        this._orderService.get(item.id).subscribe((result) => {
+                            newOrder = result;
+                            newOrder.status = this.orderStatus;
+                            newOrder.quantity = item.quantity;
+                            newOrder.notes = item.notes;
+                            newOrder.totalPrice = item.totalPrice * item.quantity;
+                        
+                            this._orderService.update(newOrder).subscribe(
+                                () => {
+                                    this.onSave.emit();
+                                    this.notify.info(this.l('SavedSuccessfully'));
+                                    this.refresh();
+                                }
+                            ) 
+                        })          
+                    });
+                    this.saving = false;
+                    
+                    //this.router.navigate(["./app/orders"]);
+                }
+            }
+        )
+
+        
+    }
+
+    CheckQtyInput(event : any, input : any = null, maxQty : number) : void {
+        let value = +event;
+ 
+        if (value < 1) value = 1;
+        if (value > maxQty) value = maxQty;
+        this.orderQty = value;
+ 
+        if (input.value != value) {
+         const start = input.selectionStart ? input.selectionStart - 1: -1;
+         input.value = value;
+         if (start > 0) input.selectionStart = input.selectionEnd = start;
+        }
+     }
+
+
+
+    
     
 }

@@ -142,6 +142,7 @@
 	<text name="CreateOrEditType">Create Or Edit Type</text>
 	  
     //Food
+	<text name="Foods">Foods</text>
 	<text name="FoodDeleteWarningMessage">{0} will be deleted.</text>
 	<text name="Image">Image</text>
 	<text name="ImageName">Image Name</text>
@@ -152,7 +153,8 @@
 	<text name="Size">Size</text>
 	<text name="Price">Price</text>
 	<text name="UploadImage">Upload Image</text>
-	<text name="CreateOrEditFood">Create Or Edit Food</text>
+	<text name="CreateFood">Create New Food</text>
+	<text name="EditFood">Edit Food</text>
 	  
 	//Order
 	<text name="OrderDeleteWarningMessage">Order {0} will be deleted.</text>
@@ -165,6 +167,10 @@
 	<text name="ORDERHERE">ORDER HERE</text>
 	<text name="Cart">Cart</text>
 	<text name="ViewOrderDetails">View Order Details</text>
+	<text name="NoRecordsFound">No matching record(s) found!</text>
+	<text name="NoOrdersToDisplay">No Orders To Display</text>
+	<text name="NotesAndSpecialInstruction">Notes (Special Instruction)</text>
+	<text name="PlaceOrderWarningMessage">Are you sure you want to proceed?</text>
 	  
 	  
 	

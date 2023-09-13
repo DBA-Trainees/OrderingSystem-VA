@@ -25,7 +25,7 @@ class PagedOrderRequestDto extends PagedRequestDto {
 export class OrderComponent extends PagedListingComponentBase<OrderDto>{
     
     orders : OrderDto[] = [];
-    order = new OrderDto();
+    order = new OrderDto;
     foods : FoodDto[] = [];
     foodDetails = new FoodDto();
     
@@ -41,10 +41,8 @@ export class OrderComponent extends PagedListingComponentBase<OrderDto>{
         foodSize.Medium,
         foodSize.Large
     ]
-    value : number = 1;     
-    // minimumValue = 1;
+    value : number = 1;
      selectedSize : string;
-    // orderQty : number[]; 
     
     @Output() onSave = new EventEmitter<any>();
 
@@ -55,10 +53,6 @@ export class OrderComponent extends PagedListingComponentBase<OrderDto>{
         private router : Router
     ) { 
         super(injector);
-        // this.orders = this.orders.map(order => {
-        //     order['quantity'] = 0;
-        //     return order
-        // });
     }
 
     CheckOrderDetails(food : FoodDto) : void {
@@ -109,46 +103,5 @@ export class OrderComponent extends PagedListingComponentBase<OrderDto>{
 
     ViewOrderDetails() : void {
         this.router.navigate(["./app/orders/viewOrderDetails-dialog"]);
-    }    
-
-    // AddQty(food:FoodDto, foodId : number, i : number) : void {    
-    //     // console.log(food.quantity += 1);    , foodId :number
-    //     foodId = food.id;
-    //     if(foodId){
-    //         if(this.value[i] <= food.quantity){
-    //             this.value[i]++;
-    //         }
-    //     }
-    //         // if (this.value <= food.quantity) {
-    //         //     this.value += 1;
-    //         // }
-
-    // }
-
-    // LessQty(food : FoodDto) : void {
-    //     if (this.value > 1) {
-    //         this.value -= 1;
-    //     } else {
-    //         abp.message.error(this.l('You have reached the minimum quantity.'));
-    //     }
-    // }
-
-    // AddQty(food : FoodDto) : void {
-    //         this.value += 1;
-    //         this._orderService.update(this.order).subscribe(
-    //             () => {
-    //                 this.notify.info(this.l('SavedSuccessfully'));
-    //                 this.onSave.emit();
-    //             },
-    //             () => {
-    //                 this.saving = false;
-    //             }
-    //         )
-    // }
-
-    // LessQty(food : FoodDto) : void {
-    //     if (this.value > 1) {
-    //         this.value -= 1;
-    //     }        
-    // }
+    }
 }

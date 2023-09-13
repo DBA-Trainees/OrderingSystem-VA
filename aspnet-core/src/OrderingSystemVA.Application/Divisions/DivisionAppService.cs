@@ -9,14 +9,14 @@ using OrderingSystemVA.Authorization;
 using OrderingSystemVA.Divisions.Dto;
 using OrderingSystemVA.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.Generic; 
 using System.Threading.Tasks;
+using Abp.Linq.Extensions;
+using System.Linq;
 
 namespace OrderingSystemVA.Divisions
 {
-    [AbpAuthorize(PermissionNames.Pages_Divisions)]
+    //[AbpAuthorize(PermissionNames.Pages_Divisions)]
     public class DivisionAppService : AsyncCrudAppService<Division, DivisionDto, int, PagedDivisionResultRequestDto, CreateDivisionDto, DivisionDto>, IDivisionAppService
     {
         private readonly IRepository<Division, int> _repository; 
@@ -65,10 +65,11 @@ namespace OrderingSystemVA.Divisions
             return query;
         }
 
-        //protected override IQueryable<Division> CreateFilteredQuery(PagedDivisionResultRequestDto input)
-        //{
-        //    return Repository.GetAllIncluding(x => x.Id)
-        //        .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Keyword));
-        //}
+        protected override IQueryable<Division> CreateFilteredQuery(PagedDivisionResultRequestDto input)
+        {
+            return Repository.GetAll()
+                .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Keyword));
+        }
+
     }
 }

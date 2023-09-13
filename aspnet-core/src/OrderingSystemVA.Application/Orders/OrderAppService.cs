@@ -20,23 +20,40 @@ namespace OrderingSystemVA.Orders
     public class OrderAppService : AsyncCrudAppService<Order, OrderDto, int, PagedOrderResultRequestDto, CreateOrderDto, OrderDto>, IOrderAppService
     {
         private readonly IRepository<Order, int> _repository;
+        private readonly IRepository<Food, int> _foodRepository;
 
-        public OrderAppService(IRepository<Order, int> repository) : base(repository)
+        public OrderAppService(IRepository<Order, int> repository, IRepository<Food, int> foodRepository) : base(repository)
         {
             _repository = repository;
+            _foodRepository = foodRepository;
         }
 
-        public override Task<OrderDto> CreateAsync(CreateOrderDto input)
+        public async Task<OrderDto> UpdateOrderTable(OrderDto input)
         {
-            var order = ObjectMapper.Map<Order>(input);
+            var user = AbpSession.UserId;
+            var orderEntity = ObjectMapper.Map<Order>(input);
+            var order = await _repository.GetAll().AsNoTracking().Where(x => x.FoodId == input.FoodId && x.Size == input.Size && x.CreatorUserId == user).FirstOrDefaultAsync();
 
-            if (order.FoodId == input.FoodId)
-            {
-                
+            try
+            {               
+                if (order == null)
+                {
+                    orderEntity.dateTimeOrdered = input.dateTimeOrdered.ToLocalTime();
+                    await _repository.InsertAsync(orderEntity);
+                    return ObjectMapper.Map<OrderDto>(orderEntity);
+                }
+                else
+                {
+                    order.Quantity += input.Quantity;
+                    order.dateTimeOrdered = input.dateTimeOrdered.ToLocalTime();
+                    await _repository.UpdateAsync(order);
+                    return ObjectMapper.Map<OrderDto>(order);
+                }
             }
-
-            //return base.MapToEntityDto(order);
-            return base.CreateAsync(input);
+            catch (System.Exception e)
+            {
+                throw e;
+            }
         }
 
         public override Task DeleteAsync(EntityDto<int> input)
@@ -54,9 +71,24 @@ namespace OrderingSystemVA.Orders
             return base.GetAsync(input);
         }
 
-        public override Task<OrderDto> UpdateAsync(OrderDto input)
+        public override async Task<OrderDto> UpdateAsync(OrderDto input)
         {
-            return base.UpdateAsync(input);
+            var order = ObjectMapper.Map<Order>(input);
+            await _repository.UpdateAsync(order);
+
+
+            var food = await _foodRepository.GetAsync(input.FoodId);
+            food.Quantity -= order.Quantity;
+
+            if (food.Quantity == 0)
+            {
+                food.Availability = false;
+            }
+
+            await _foodRepository.UpdateAsync(food);
+
+            return base.MapToEntityDto(order);
+
         }
 
         protected override Task<Order> GetEntityByIdAsync(int id)
@@ -66,21 +98,32 @@ namespace OrderingSystemVA.Orders
 
         public async Task<PagedResultDto<OrderDto>> GetAllOrderWithFood(PagedOrderResultRequestDto input)
         {
+            var userId = AbpSession.UserId;
             var query = await _repository.GetAllIncluding(x => x.Food)
+                .Where(x => x.CreatorUserId == userId && x.Status == 0)
                 .Select(x => ObjectMapper.Map<OrderDto>(x))
                 .ToListAsync();
 
             return new PagedResultDto<OrderDto>(query.Count(), query);
-
-
-    //        var query = _repository.GetAll()
-    //        .Include(x => x.Food);
-    //        var food = new OrderDto()
-    //        {
-    //            Food = query
-    //        };
-    //        return new PagedResultDto<OrderDto>(query.Count, query);
         }
 
+        public async Task<OrderDto> GetOrderById(int id)
+        {
+            var query = await _repository.GetAll()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            return ObjectMapper.Map<OrderDto>(query);
+        }
+
+        public override Task<OrderDto> CreateAsync(CreateOrderDto input)
+        {
+            return base.CreateAsync(input);
+        }
+
+        //public override Task<OrderDto> UpdateAsync(OrderDto input)
+        //{
+        //    return base.UpdateAsync(input);
+        //}
     }
 }

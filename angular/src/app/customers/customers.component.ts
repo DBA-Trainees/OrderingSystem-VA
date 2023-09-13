@@ -16,13 +16,13 @@ class PagedCustomerRequestDto extends PagedRequestDto {
 
 @Component({
     templateUrl: './customers.component.html',
-    animations: [appModuleAnimation()]
+    animations: [appModuleAnimation()],
+    styleUrls: ['./customers.component.css']
 })
 
 export class CustomersComponent extends PagedListingComponentBase<CustomerDto> {
     
     customers : CustomerDto[] = [];
-    //divisions : DivisionDto[] = [];
     keyword = '';
     isActive : boolean | null;    
 

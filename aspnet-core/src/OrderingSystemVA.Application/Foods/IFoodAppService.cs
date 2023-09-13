@@ -13,6 +13,6 @@ namespace OrderingSystemVA.Foods
     public interface IFoodAppService : IAsyncCrudAppService<FoodDto, int, PagedFoodResultRequestDto, CreateFoodDto, FoodDto>
     {
         Task<PagedResultDto<FoodDto>> GetAllFoodWithCategoryAndType(PagedFoodResultRequestDto input);
-        Task<IEnumerable<FoodSizeEnum>> GetAllSize();
+        //Task<IEnumerable<FoodSizeEnum>> GetAllSize();
     }
 }

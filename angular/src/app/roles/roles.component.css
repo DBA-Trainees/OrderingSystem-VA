@@ -16,14 +16,6 @@
 /* END SEARCH */
 
 
-/* IMAGE */
-.img {
-    width:70px;
-    height:70px;
-}
-/* END IMAGE */
-
-
 /* TABLE */
 .table-head {
     color: #040D12;
@@ -32,20 +24,7 @@
     white-space: nowrap;
 }
 
-.food-image, .food-availability,
-.food-category, .food-type, .food-size, 
-.food-action, .th-name, .th-image, .th-availability,
-.th-qty, .th-category, .th-type, .th-size, .th-price,
-.th-actions {
-    text-align: center;
-}
-
-.food-price {
-    text-align: right;
-}
-
-.food-qty {
-    align-items: center;
+.th-roleName, .th-displayName, .th-actions {
     text-align: center;
 }
 
@@ -80,7 +59,7 @@ td:hover {
 /* BUTTONS */
 .btn-create {
     appearance: button;
-    background-color: #3A3845;
+    background-color: #567189;
     border: 1px solid #000;
     border-radius: 4px;
     box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
@@ -155,12 +134,16 @@ i {
 
 
 /* PAGINATION FOOTER*/
-::ng-deep ul > li.disabled > span {
+/* ::ng-deep ul > li.disabled > span {
     background-color: #65451F !important;
     border-color: black !important;
-}
+} */
   
-::ng-deep ul > li.active > a {
+/* ::ng-deep ul > li.active > a {
+    background-color: #65451F !important;
+    border-color: black !important;
+} */
+::ng-deep #item-page ul > li.active > a {
     background-color: #65451F !important;
     border-color: black !important;
 }

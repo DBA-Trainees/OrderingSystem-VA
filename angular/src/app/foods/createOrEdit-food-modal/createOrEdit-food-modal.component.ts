@@ -16,6 +16,7 @@ enum foodSize {
 })
 export class CreateOrEditFoodModalComponent extends AppComponentBase implements OnInit {
     
+    isEdit = false;
     saving = false;    
     foods = new FoodDto;
     categories : CategoryDto[] = [];
@@ -48,6 +49,7 @@ export class CreateOrEditFoodModalComponent extends AppComponentBase implements 
 
     ngOnInit(): void {
         if(this.id) {
+            this.isEdit = true;
             this._foodService.get(this.id).subscribe((result => {
                 this.foods = result;
                 this.selectedCategoryId = result.categoryId;
@@ -101,6 +103,7 @@ export class CreateOrEditFoodModalComponent extends AppComponentBase implements 
                 },
                 () => {
                     this.saving = false;
+                    this.isEdit = false;
                 }
             )
         } else {

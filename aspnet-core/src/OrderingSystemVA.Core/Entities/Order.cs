@@ -17,6 +17,10 @@ namespace OrderingSystemVA.Entities
         
         [DataType("decimal(18,2)")]
         public decimal TotalPrice { get; set; }
-        public string Notes { get; set; }
+        public string? Notes { get; set; }
+        public int Status { get; set; }
+        public int? OrderId { get; set; }
+        public bool? isChecked { get; set; }
+        public DateTime dateTimeOrdered { get; set; }
     }
 }

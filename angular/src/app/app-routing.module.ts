@@ -16,6 +16,7 @@ import { FoodComponent } from './foods/foods.component';
 import { OrderComponent } from './orders/orders.component';
 import { AddToCartOrderDialogComponent } from './orders/addtoCart-order-dialog/addtoCart-order-dialog.component';
 import { OrderDetailsComponent } from './orders/viewOrderDetails-dialog/viewOrderDetails.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
     imports: [
@@ -25,10 +26,11 @@ import { OrderDetailsComponent } from './orders/viewOrderDetails-dialog/viewOrde
                 component: AppComponent,
                 children: [
                     { path: 'home', component: HomeComponent,  canActivate: [AppRouteGuard] },
+                    { path: 'about', component: AboutComponent, canActivate: [AppRouteGuard] },
+                    { path: 'dashboard', component: DashboardComponent, canActivate: [AppRouteGuard]},
                     { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
                     { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard] },
-                    { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },
-                    { path: 'about', component: AboutComponent, canActivate: [AppRouteGuard] },
+                    { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },                    
                     { path: 'update-password', component: ChangePasswordComponent, canActivate: [AppRouteGuard] },
                     { path: 'divisions', component: DivisionsComponent, data: { permission: 'Pages.Divisions' }, canActivate: [AppRouteGuard] },
                     { path: 'customers', component: CustomersComponent, data: { permission: 'Pages.Customers' }, canActivate: [AppRouteGuard] },
@@ -38,6 +40,7 @@ import { OrderDetailsComponent } from './orders/viewOrderDetails-dialog/viewOrde
                     { path: 'orders', component: OrderComponent, data: { permission: 'Pages.Orders' }, canActivate: [AppRouteGuard] },
                     { path: 'orders/addToCart-order-dialog', component: AddToCartOrderDialogComponent, canActivate: [AppRouteGuard]},
                     { path: 'orders/viewOrderDetails-dialog', component: OrderDetailsComponent, canActivate: [AppRouteGuard]}
+
                 ]
             }
         ])

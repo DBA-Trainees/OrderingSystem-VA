@@ -30,7 +30,7 @@
                                     </button>
                                 </div>
                                 <input type="text" class="form-control" name="keyword" 
-                                    [placeholder]="'SearchWithThreeDot' | localize" [(ngModel)]="keyword"
+                                    [placeholder]="'Search...' | localize" [(ngModel)]="keyword"
                                     (keyup.enter)="getDataPage(1)"/>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                                     <th style="width: 310px;">{{ "Actions" | localize }}</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody *ngIf="types?.length > 0">
                                 <tr *ngFor="let type of types | paginate
                                     : {
                                         id: 'server',
@@ -68,6 +68,11 @@
                                             {{ "Delete" | localize }}
                                         </button>
                                     </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="types?.length == 0">
+                                <tr>
+                                    <td class="no-data-available" colspan="4">No record(s) found</td>
                                 </tr>
                             </tbody>
                         </table>

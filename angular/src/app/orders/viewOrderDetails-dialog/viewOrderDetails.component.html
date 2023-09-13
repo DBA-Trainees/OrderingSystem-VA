@@ -17,16 +17,20 @@
 
                     <div class="col-md-6 col-sm-12 description-container p-5">
                         <div class="main-description">
+                            <!-- FOOD NAME -->
                             <p class="product-category mb-0">{{food.category?.name}}</p>
                             <h3>{{food.name}}</h3>                                
                             <hr>
-                            <p class="product-price"><span class="currency-code">&#8369;</span>{{ food.price | number:'1.2-2' }}</p>
+                            <!-- PRICE -->
+                            <p class="product-price"><span class="currency-code">&#8369;</span>{{ priceAmount | number:'1.2-2' }}</p>
                             <hr>
+                            <!-- QTY -->
                             <label>Quantity</label>
-                            <input type="number" class="form-control" id="cart_quantity" name="cart_quantity" value="1" min="1" max={{food.quantity}} [(ngModel)]="orderQty"/>
+                            <input type="number" #inputQty class="form-control orderDetailsQty" id="cart_quantity" name="cart_quantity" value="1" min="1" max={{food.quantity}} [(ngModel)]="orderQty" (ngModelChange)="CheckQtyInput($event, inputQty, food.quantity)"/>
                             <hr>
-                            <label>Size</label>
-                            <select class="form-control" [ngModel]="food.size" (ngModelChange)="selectedSize=$event" name="foodSize" id="foodSize">
+                            <!-- SIZE -->
+                            <label>Size</label>                            
+                            <select class="form-control" [ngModel]="food.size" (ngModelChange)="selectedSize=$event" (change)="UpdateFoodSize(food, selectedSize)" name="foodSize" id="foodSize">
                                 <ng-container *ngFor="let food of foodLabels">
                                 <option *ngIf="food.categoryId != 2; else OptionSizeFalse" [ngValue]="food">
                                     {{food}}
@@ -37,9 +41,10 @@
                                         <option>No Size Option</option>
                                     </select>
                                 </ng-template>
-                            </select>   
+                            </select>
                             <hr>
-                            <label>Notes [Special Instructions]</label>
+                            <!-- NOTES -->
+                            <label>{{ 'NotesAndSpecialInstruction' | localize}}</label>
                             <textarea class="form-control" [(ngModel)]="orderNotes" placeholder="Please let us know if you are allergic to anything or if we need to avoid anything. (e.g No ketchup)"></textarea>
                             <hr>
                             <button name="add_to_cart" type="submit" class="btn btn-md" (click)="addToCartOrder(food.id)">Add to cart</button>
