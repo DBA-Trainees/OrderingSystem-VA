@@ -138,14 +138,9 @@ i {
 /* END BUTTONS */
 
 
-/* PAGINATION FOOTER*/
-::ng-deep ul > li.disabled > span {
-    background-color: #65451F !important;
-    border-color: black !important;
+/* OTHERS */
+h1 {
+    font-family: Georgia, serif;
+    text-transform: uppercase;
 }
-  
-::ng-deep ul > li.active > a {
-    background-color: #65451F !important;
-    border-color: black !important;
-}
-/* END PAGINATION FOOTER */
+/* END OTHERS */

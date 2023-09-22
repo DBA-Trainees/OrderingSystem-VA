@@ -6,9 +6,9 @@
                     <h1>{{ "Categories" | localize }}</h1>
                 </div>
                 <div class="col-6 text-right">
-                    <a href="javascript:;" class="btn bg-blue" (click)="createCategory()">
+                    <a href="javascript:;" class="btn btn-create" (click)="createCategory()">
                         <i class="fa fa-plus-square"></i>
-                            {{ "Create" | localize }}                        
+                            {{ "Create" | localize }}                  
                     </a>
                 </div>
             </div>
@@ -19,13 +19,14 @@
         <div class="container-fluid">
             <div class="card">
 
+                <!-- HEADER -->
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">&emsp;</div>
                         <div class="col-md-6">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <button type="button" class="btn bg-blue" (click)="getDataPage(1)">
+                                    <button type="button" class="btn-search" (click)="getDataPage(1)">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
@@ -36,14 +37,15 @@
                         </div>
                     </div>
                 </div>
-                
+
+                <!-- BODY -->
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered" [busy]="isTableLoading">
-                            <thead class="bg-light">
+                        <table class="table" [busy]="isTableLoading">
+                            <thead class="table-head">
                                 <tr>
-                                    <th>{{ "Name" | localize }}</th>
-                                    <th style="width: 310px;">{{ "Actions" | localize }}</th>
+                                    <th class="th-name">{{ "Name" | localize }}</th>
+                                    <th class="th-actions">{{ "Actions" | localize }}</th>
                                 </tr>
                             </thead>
                             <tbody *ngIf="categories?.length > 0">
@@ -54,29 +56,30 @@
                                         currentPage : pageNumber,
                                         totalItems : totalItems
                                     }">
-                                    <td>{{ category.name }}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-secondary" (click)="editCategory(category)">
+                                    <td class="td-name">{{ category.name }}</td>
+                                    <td class="td-actions">
+                                        <!-- EDIT -->
+                                        <button type="button" class="btn btn-edit btn-sm mx-2" (click)="editCategory(category)">
                                             <i class="fas fa-pencil-alt"></i>
-                                            {{ "Edit" | localize }}
                                         </button>
-                                        <button type="button" class="btn btn-sm bg-danger mx-2" (click)="delete(category)">
+                                        <!-- DELETE -->
+                                        <button type="button" class="btn btn-delete btn-sm" (click)="delete(category)">
                                             <i class="fas fa-trash"></i>
-                                            {{ "Delete" | localize }}
                                         </button>
                                     </td>
                                 </tr>
                             </tbody>
                             <tbody *ngIf="categories?.length == 0">
                                 <tr>
-                                    <td class="no-data-available" colspan="4">No record(s) found</td>
+                                    <td class="no-data-available" colspan="2">{{ 'NoRecordsFound' | localize}}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <div class="card-footer table-card-footer bg-light border-top">
+                <!-- FOOTER -->
+                <div class="card-footer table-card-footer border-top">
                     <div class="row">
                         <div class="col-sm-4 col-12 text-sm-left text-center">
                             <button class="btn btn-secondary" (click)="refresh()">
@@ -90,10 +93,7 @@
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="float-sm-right m-auto">
-                                <abp-pagination-controls
-                                    id = "server"
-                                    (pageChange)="getDataPage($event)">
-                                </abp-pagination-controls>
+                                <abp-pagination-controls id = "server" (pageChange)="getDataPage($event)"></abp-pagination-controls>
                             </div>
                         </div>
                     </div>

@@ -1423,11 +1423,12 @@ export class FoodServiceProxy {
     /**
      * @param keyword (optional) 
      * @param isActive (optional) 
+     * @param isAvailable (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
      * @return Success
      */
-    getAll(keyword: string | undefined, isActive: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<FoodDtoPagedResultDto> {
+    getAll(keyword: string | undefined, isActive: boolean | undefined, isAvailable: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<FoodDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Food/GetAll?";
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
@@ -1437,6 +1438,10 @@ export class FoodServiceProxy {
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
+        if (isAvailable === null)
+            throw new Error("The parameter 'isAvailable' cannot be null.");
+        else if (isAvailable !== undefined)
+            url_ += "IsAvailable=" + encodeURIComponent("" + isAvailable) + "&";
         if (skipCount === null)
             throw new Error("The parameter 'skipCount' cannot be null.");
         else if (skipCount !== undefined)
@@ -1606,11 +1611,12 @@ export class FoodServiceProxy {
     /**
      * @param keyword (optional) 
      * @param isActive (optional) 
+     * @param isAvailable (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
      * @return Success
      */
-    getAllFoodWithCategoryAndType(keyword: string | undefined, isActive: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<FoodDtoPagedResultDto> {
+    getAllFoodWithCategoryAndType(keyword: string | undefined, isActive: boolean | undefined, isAvailable: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<FoodDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Food/GetAllFoodWithCategoryAndType?";
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
@@ -1620,6 +1626,10 @@ export class FoodServiceProxy {
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
+        if (isAvailable === null)
+            throw new Error("The parameter 'isAvailable' cannot be null.");
+        else if (isAvailable !== undefined)
+            url_ += "IsAvailable=" + encodeURIComponent("" + isAvailable) + "&";
         if (skipCount === null)
             throw new Error("The parameter 'skipCount' cannot be null.");
         else if (skipCount !== undefined)
@@ -1797,11 +1807,12 @@ export class OrderServiceProxy {
     /**
      * @param keyword (optional) 
      * @param isActive (optional) 
+     * @param isStatus (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
      * @return Success
      */
-    getAll(keyword: string | undefined, isActive: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<OrderDtoPagedResultDto> {
+    getAll(keyword: string | undefined, isActive: boolean | undefined, isStatus: number | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<OrderDtoPagedResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Order/GetAll?";
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
@@ -1811,6 +1822,10 @@ export class OrderServiceProxy {
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
+        if (isStatus === null)
+            throw new Error("The parameter 'isStatus' cannot be null.");
+        else if (isStatus !== undefined)
+            url_ += "IsStatus=" + encodeURIComponent("" + isStatus) + "&";
         if (skipCount === null)
             throw new Error("The parameter 'skipCount' cannot be null.");
         else if (skipCount !== undefined)
@@ -1980,12 +1995,13 @@ export class OrderServiceProxy {
     /**
      * @param keyword (optional) 
      * @param isActive (optional) 
+     * @param isStatus (optional) 
      * @param skipCount (optional) 
      * @param maxResultCount (optional) 
      * @return Success
      */
-    getAllOrderWithFood(keyword: string | undefined, isActive: boolean | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<OrderDtoPagedResultDto> {
-        let url_ = this.baseUrl + "/api/services/app/Order/GetAllOrderWithFood?";
+    getAllOrderWithFoodStatusNotComplete(keyword: string | undefined, isActive: boolean | undefined, isStatus: number | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<OrderDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Order/GetAllOrderWithFoodStatusNotComplete?";
         if (keyword === null)
             throw new Error("The parameter 'keyword' cannot be null.");
         else if (keyword !== undefined)
@@ -1994,6 +2010,10 @@ export class OrderServiceProxy {
             throw new Error("The parameter 'isActive' cannot be null.");
         else if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
+        if (isStatus === null)
+            throw new Error("The parameter 'isStatus' cannot be null.");
+        else if (isStatus !== undefined)
+            url_ += "IsStatus=" + encodeURIComponent("" + isStatus) + "&";
         if (skipCount === null)
             throw new Error("The parameter 'skipCount' cannot be null.");
         else if (skipCount !== undefined)
@@ -2013,11 +2033,11 @@ export class OrderServiceProxy {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetAllOrderWithFood(response_);
+            return this.processGetAllOrderWithFoodStatusNotComplete(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processGetAllOrderWithFood(response_ as any);
+                    return this.processGetAllOrderWithFoodStatusNotComplete(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<OrderDtoPagedResultDto>;
                 }
@@ -2026,7 +2046,7 @@ export class OrderServiceProxy {
         }));
     }
 
-    protected processGetAllOrderWithFood(response: HttpResponseBase): Observable<OrderDtoPagedResultDto> {
+    protected processGetAllOrderWithFoodStatusNotComplete(response: HttpResponseBase): Observable<OrderDtoPagedResultDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -2049,15 +2069,35 @@ export class OrderServiceProxy {
     }
 
     /**
-     * @param id (optional) 
+     * @param keyword (optional) 
+     * @param isActive (optional) 
+     * @param isStatus (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
      * @return Success
      */
-    getOrderById(id: number | undefined): Observable<OrderDto> {
-        let url_ = this.baseUrl + "/api/services/app/Order/GetOrderById?";
-        if (id === null)
-            throw new Error("The parameter 'id' cannot be null.");
-        else if (id !== undefined)
-            url_ += "id=" + encodeURIComponent("" + id) + "&";
+    getAllOrderWithFoodWithAllStatus(keyword: string | undefined, isActive: boolean | undefined, isStatus: number | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<OrderDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Order/GetAllOrderWithFoodWithAllStatus?";
+        if (keyword === null)
+            throw new Error("The parameter 'keyword' cannot be null.");
+        else if (keyword !== undefined)
+            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
+        if (isActive === null)
+            throw new Error("The parameter 'isActive' cannot be null.");
+        else if (isActive !== undefined)
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
+        if (isStatus === null)
+            throw new Error("The parameter 'isStatus' cannot be null.");
+        else if (isStatus !== undefined)
+            url_ += "IsStatus=" + encodeURIComponent("" + isStatus) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -2069,20 +2109,20 @@ export class OrderServiceProxy {
         };
 
         return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGetOrderById(response_);
+            return this.processGetAllOrderWithFoodWithAllStatus(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processGetOrderById(response_ as any);
+                    return this.processGetAllOrderWithFoodWithAllStatus(response_ as any);
                 } catch (e) {
-                    return _observableThrow(e) as any as Observable<OrderDto>;
+                    return _observableThrow(e) as any as Observable<OrderDtoPagedResultDto>;
                 }
             } else
-                return _observableThrow(response_) as any as Observable<OrderDto>;
+                return _observableThrow(response_) as any as Observable<OrderDtoPagedResultDto>;
         }));
     }
 
-    protected processGetOrderById(response: HttpResponseBase): Observable<OrderDto> {
+    protected processGetAllOrderWithFoodWithAllStatus(response: HttpResponseBase): Observable<OrderDtoPagedResultDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -2093,7 +2133,83 @@ export class OrderServiceProxy {
             return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = OrderDto.fromJS(resultData200);
+            result200 = OrderDtoPagedResultDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
+     * @param keyword (optional) 
+     * @param isActive (optional) 
+     * @param isStatus (optional) 
+     * @param skipCount (optional) 
+     * @param maxResultCount (optional) 
+     * @return Success
+     */
+    getAllOrderWithFoodBasedOnIdAndStatusComplete(keyword: string | undefined, isActive: boolean | undefined, isStatus: number | undefined, skipCount: number | undefined, maxResultCount: number | undefined): Observable<OrderDtoPagedResultDto> {
+        let url_ = this.baseUrl + "/api/services/app/Order/GetAllOrderWithFoodBasedOnIdAndStatusComplete?";
+        if (keyword === null)
+            throw new Error("The parameter 'keyword' cannot be null.");
+        else if (keyword !== undefined)
+            url_ += "Keyword=" + encodeURIComponent("" + keyword) + "&";
+        if (isActive === null)
+            throw new Error("The parameter 'isActive' cannot be null.");
+        else if (isActive !== undefined)
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
+        if (isStatus === null)
+            throw new Error("The parameter 'isStatus' cannot be null.");
+        else if (isStatus !== undefined)
+            url_ += "IsStatus=" + encodeURIComponent("" + isStatus) + "&";
+        if (skipCount === null)
+            throw new Error("The parameter 'skipCount' cannot be null.");
+        else if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
+        if (maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' cannot be null.");
+        else if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetAllOrderWithFoodBasedOnIdAndStatusComplete(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetAllOrderWithFoodBasedOnIdAndStatusComplete(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<OrderDtoPagedResultDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<OrderDtoPagedResultDto>;
+        }));
+    }
+
+    protected processGetAllOrderWithFoodBasedOnIdAndStatusComplete(response: HttpResponseBase): Observable<OrderDtoPagedResultDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = OrderDtoPagedResultDto.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -4875,12 +4991,13 @@ export class CreateOrderDto implements ICreateOrderDto {
     foodId: number | undefined;
     quantity: number;
     size: string | undefined;
+    foodPrice: number;
     totalPrice: number;
     notes: string | undefined;
     status: number;
-    orderId: number | undefined;
-    isChecked: boolean | undefined;
     dateTimeOrdered: moment.Moment;
+    userId: number;
+    user: UserDto;
 
     constructor(data?: ICreateOrderDto) {
         if (data) {
@@ -4897,12 +5014,13 @@ export class CreateOrderDto implements ICreateOrderDto {
             this.foodId = _data["foodId"];
             this.quantity = _data["quantity"];
             this.size = _data["size"];
+            this.foodPrice = _data["foodPrice"];
             this.totalPrice = _data["totalPrice"];
             this.notes = _data["notes"];
             this.status = _data["status"];
-            this.orderId = _data["orderId"];
-            this.isChecked = _data["isChecked"];
             this.dateTimeOrdered = _data["dateTimeOrdered"] ? moment(_data["dateTimeOrdered"].toString()) : <any>undefined;
+            this.userId = _data["userId"];
+            this.user = _data["user"] ? UserDto.fromJS(_data["user"]) : <any>undefined;
         }
     }
 
@@ -4919,12 +5037,13 @@ export class CreateOrderDto implements ICreateOrderDto {
         data["foodId"] = this.foodId;
         data["quantity"] = this.quantity;
         data["size"] = this.size;
+        data["foodPrice"] = this.foodPrice;
         data["totalPrice"] = this.totalPrice;
         data["notes"] = this.notes;
         data["status"] = this.status;
-        data["orderId"] = this.orderId;
-        data["isChecked"] = this.isChecked;
         data["dateTimeOrdered"] = this.dateTimeOrdered ? this.dateTimeOrdered.toISOString() : <any>undefined;
+        data["userId"] = this.userId;
+        data["user"] = this.user ? this.user.toJSON() : <any>undefined;
         return data;
     }
 
@@ -4941,12 +5060,13 @@ export interface ICreateOrderDto {
     foodId: number | undefined;
     quantity: number;
     size: string | undefined;
+    foodPrice: number;
     totalPrice: number;
     notes: string | undefined;
     status: number;
-    orderId: number | undefined;
-    isChecked: boolean | undefined;
     dateTimeOrdered: moment.Moment;
+    userId: number;
+    user: UserDto;
 }
 
 export class CreateRoleDto implements ICreateRoleDto {
@@ -6016,12 +6136,13 @@ export class OrderDto implements IOrderDto {
     food: FoodDto;
     quantity: number;
     size: string | undefined;
+    foodPrice: number;
     totalPrice: number;
     notes: string | undefined;
     status: number;
-    orderId: number | undefined;
-    isChecked: boolean | undefined;
     dateTimeOrdered: moment.Moment;
+    userId: number;
+    user: UserDto;
 
     constructor(data?: IOrderDto) {
         if (data) {
@@ -6039,12 +6160,13 @@ export class OrderDto implements IOrderDto {
             this.food = _data["food"] ? FoodDto.fromJS(_data["food"]) : <any>undefined;
             this.quantity = _data["quantity"];
             this.size = _data["size"];
+            this.foodPrice = _data["foodPrice"];
             this.totalPrice = _data["totalPrice"];
             this.notes = _data["notes"];
             this.status = _data["status"];
-            this.orderId = _data["orderId"];
-            this.isChecked = _data["isChecked"];
             this.dateTimeOrdered = _data["dateTimeOrdered"] ? moment(_data["dateTimeOrdered"].toString()) : <any>undefined;
+            this.userId = _data["userId"];
+            this.user = _data["user"] ? UserDto.fromJS(_data["user"]) : <any>undefined;
         }
     }
 
@@ -6062,12 +6184,13 @@ export class OrderDto implements IOrderDto {
         data["food"] = this.food ? this.food.toJSON() : <any>undefined;
         data["quantity"] = this.quantity;
         data["size"] = this.size;
+        data["foodPrice"] = this.foodPrice;
         data["totalPrice"] = this.totalPrice;
         data["notes"] = this.notes;
         data["status"] = this.status;
-        data["orderId"] = this.orderId;
-        data["isChecked"] = this.isChecked;
         data["dateTimeOrdered"] = this.dateTimeOrdered ? this.dateTimeOrdered.toISOString() : <any>undefined;
+        data["userId"] = this.userId;
+        data["user"] = this.user ? this.user.toJSON() : <any>undefined;
         return data;
     }
 
@@ -6085,12 +6208,13 @@ export interface IOrderDto {
     food: FoodDto;
     quantity: number;
     size: string | undefined;
+    foodPrice: number;
     totalPrice: number;
     notes: string | undefined;
     status: number;
-    orderId: number | undefined;
-    isChecked: boolean | undefined;
     dateTimeOrdered: moment.Moment;
+    userId: number;
+    user: UserDto;
 }
 
 export class OrderDtoPagedResultDto implements IOrderDtoPagedResultDto {

@@ -5,6 +5,7 @@ import {
     GetCurrentLoginInformationsOutput,
     SessionServiceProxy,
     TenantLoginInfoDto,
+    UserDto,
     UserLoginInfoDto
 } from '@shared/service-proxies/service-proxies';
 
@@ -38,6 +39,10 @@ export class AppSessionService {
 
     get tenantId(): number {
         return this.tenant ? this.tenant.id : null;
+    }
+
+    getLoginUserId() : number {
+        return this.userId
     }
 
     getShownLoginName(): string {

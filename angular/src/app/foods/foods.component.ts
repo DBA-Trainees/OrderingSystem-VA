@@ -9,6 +9,7 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 class PagedFoodRequestDto extends PagedRequestDto {
     keyword: string;
     isActive: boolean | null;
+    isAvailability : boolean | null;
 }
 
 @Component({
@@ -22,6 +23,8 @@ export class FoodComponent extends PagedListingComponentBase<FoodDto> {
     foods : FoodDto[] = [];
     keyword = '';
     isActive : boolean | null;
+    isAvailability : boolean | null;
+    advancedFiltersVisible = false;
 
     constructor(
         injector : Injector,
@@ -39,6 +42,13 @@ export class FoodComponent extends PagedListingComponentBase<FoodDto> {
       this.showCreateOrEditFoodModal(food.id)  
      }
 
+     clearFilters(): void {
+        this.keyword = '';
+        this.isActive = undefined;
+        this.isAvailability = undefined;
+        this.getDataPage(1);
+    }
+
     protected list(
         request: PagedFoodRequestDto, 
         pageNumber: number, 
@@ -46,11 +56,13 @@ export class FoodComponent extends PagedListingComponentBase<FoodDto> {
         ): void {
         request.keyword = this.keyword;
         request.isActive = this.isActive;
+        request.isAvailability = this.isAvailability;
 
         this._foodService
             .getAllFoodWithCategoryAndType(
                 request.keyword,
                 request.isActive,
+                request.isAvailability,
                 request.skipCount,
                 request.maxResultCount
             )

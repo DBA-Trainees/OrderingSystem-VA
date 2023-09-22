@@ -1,26 +1,15 @@
-import {
-  Component,
-  Injector,
-  OnInit,
-  EventEmitter,
-  Output,
-} from '@angular/core';
+import { Component, Injector, OnInit, EventEmitter, Output } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AppComponentBase } from '@shared/app-component-base';
-import {
-  RoleServiceProxy,
-  RoleDto,
-  PermissionDto,
-  CreateRoleDto,
-  PermissionDtoListResultDto
-} from '@shared/service-proxies/service-proxies';
+import { RoleServiceProxy, RoleDto, PermissionDto, CreateRoleDto, PermissionDtoListResultDto } from '@shared/service-proxies/service-proxies';
 import { forEach as _forEach, map as _map } from 'lodash-es';
 
 @Component({
   templateUrl: 'create-role-dialog.component.html'
 })
-export class CreateRoleDialogComponent extends AppComponentBase
-  implements OnInit {
+
+export class CreateRoleDialogComponent extends AppComponentBase implements OnInit {
+  
   saving = false;
   role = new RoleDto();
   permissions: PermissionDto[] = [];

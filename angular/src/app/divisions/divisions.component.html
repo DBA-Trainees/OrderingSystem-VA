@@ -18,6 +18,7 @@
     <section class="content px-2">
         <div class="container-fluid">
             <div class="card">
+                
                 <!-- HEADER -->
                 <div class="card-header">
                     <div class="row">
@@ -29,13 +30,13 @@
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
-                                <input type="text" class="form-control" name="keyword"
-                                    [placeholder]="'SearchWithThreeDot' | localize" [(ngModel)]="keyword"
-                                    (keyup.enter)="getDataPage(1)" />
+                                <input type="text" class="form-control" name="keyword" [placeholder]="'SearchWithThreeDot' | localize" 
+                                    [(ngModel)]="keyword" (keyup.enter)="getDataPage(1)" />
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- BODY -->
                 <div class="card-body">
                     <div class="table-responsive">
@@ -43,7 +44,7 @@
                             <thead class="table-head">
                                 <tr>
                                     <th class="th-name">{{ "Name" | localize }}</th>
-                                    <th class="th-actions" style="width: 310px;">{{ "Actions" | localize }}</th>
+                                    <th class="th-actions">{{ "Actions" | localize }}</th>
                                 </tr>
                             </thead>
                             <tbody *ngIf="divisions?.length > 0">
@@ -54,7 +55,7 @@
                                         currentPage: pageNumber,
                                         totalItems: totalItems
                                     } ">
-                                    <td>{{ division.name }}</td>
+                                    <td class="td-name">{{ division.name }}</td>
                                     <td class="td-actions">
                                         <!-- EDIT -->
                                         <button type="button" class="btn btn-edit btn-sm mx-2" (click)="editDivision(division)">
@@ -69,12 +70,13 @@
                             </tbody>
                             <tbody *ngIf="divisions?.length == 0">                                
                                 <tr>
-                                    <td class="no-data-available" colspan="4">No record(s) found</td>
+                                    <td class="no-data-available" colspan="4">{{ 'NoRecordsFound' | localize}}</td>
                                 </tr>
                             </tbody>                            
                         </table>
                     </div>
                 </div>
+
                 <!-- FOOTER -->
                 <div class="card-footer table-card-footer border-top">
                     <div class="row">
@@ -90,10 +92,7 @@
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="float-sm-right m-auto">
-                                <abp-pagination-controls
-                                        id="server"
-                                        (pageChange)="getDataPage($event)">
-                                </abp-pagination-controls>
+                                <abp-pagination-controls id="server" (pageChange)="getDataPage($event)"></abp-pagination-controls>
                             </div>
                         </div>
                     </div>

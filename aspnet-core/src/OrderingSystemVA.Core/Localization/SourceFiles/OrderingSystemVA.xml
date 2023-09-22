@@ -139,7 +139,9 @@
 	//Type
 	<text name="TypeDeleteWarningMessage">Type {0} will be deleted.</text>
 	<text name="Types">Types</text>
-	<text name="CreateOrEditType">Create Or Edit Type</text>
+	<text name="EditType">Edit Cuisine</text>
+	<text name="CreateType">Create New Cuisine</text>
+	<text name="Cuisine">Cuisine</text>
 	  
     //Food
 	<text name="Foods">Foods</text>
@@ -152,9 +154,12 @@
 	<text name="Type">Type</text>
 	<text name="Size">Size</text>
 	<text name="Price">Price</text>
+	<text name="TotalPrice">Total Price</text>
+	<text name="Notes">Notes</text>
 	<text name="UploadImage">Upload Image</text>
-	<text name="CreateFood">Create New Food</text>
-	<text name="EditFood">Edit Food</text>
+	<text name="CreateFood">Create New Menu</text>
+	<text name="EditFood">Edit Menu</text>
+	<text name="Menu">Menu</text>
 	  
 	//Order
 	<text name="OrderDeleteWarningMessage">Order {0} will be deleted.</text>
@@ -171,6 +176,15 @@
 	<text name="NoOrdersToDisplay">No Orders To Display</text>
 	<text name="NotesAndSpecialInstruction">Notes (Special Instruction)</text>
 	<text name="PlaceOrderWarningMessage">Are you sure you want to proceed?</text>
+	<text name="Dashboard">Dashboard</text>
+	<text name="UserId">User ID</text>
+	<text name="DateFrom">Date From</text>
+	<text name="DateTo">Date To</text>
+	<text name="IsStatus">Is Status</text>
+	<text name="Completed">Completed</text>
+	<text name="OrderSummary">Order Summary</text>
+	<text name="IsAvailable">Is Available</text>
+	<text name="CartIsEmpty">Your cart is empty</text>
 	  
 	  
 	

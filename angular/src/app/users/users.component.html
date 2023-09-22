@@ -14,6 +14,7 @@
             </div>
         </div>
     </section>
+
     <section class="content px-2">
         <div class="container-fluid">
             <div class="card">
@@ -23,38 +24,21 @@
                         <div class="col-md-6">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <button
-                                            type="button"
-                                            class="btn-search"
-                                            (click)="getDataPage(1)"
-                                    >
+                                    <button type="button" class="btn-search" (click)="getDataPage(1)">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
-                                <input
-                                        type="text"
-                                        class="form-control"
-                                        name="keyword"
-                                        [placeholder]="'SearchWithThreeDot' | localize"
-                                        [(ngModel)]="keyword"
-                                        (keyup.enter)="getDataPage(1)"
-                                />
+                                <input type="text" class="form-control" name="keyword" [placeholder]="'SearchWithThreeDot' | localize"
+                                    [(ngModel)]="keyword" (keyup.enter)="getDataPage(1)"/>
                                 <div class="input-group-append">
-                                    <button
-                                            type="button"
-                                            class="btn-search-append"
-                                            (click)="advancedFiltersVisible = !advancedFiltersVisible"
-                                    >
-                                        <i
-                                                class="fas"
-                                                [class.fa-angle-up]="advancedFiltersVisible"
-                                                [class.fa-angle-down]="!advancedFiltersVisible"
-                                        ></i>
+                                    <button type="button" class="btn-search-append" (click)="advancedFiltersVisible = !advancedFiltersVisible">
+                                        <i class="fas" [class.fa-angle-up]="advancedFiltersVisible" [class.fa-angle-down]="!advancedFiltersVisible"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div *ngIf="advancedFiltersVisible" class="card mb-0 mt-1">
                         <div class="card-body">
                             <form class="form-horizontal">
@@ -66,48 +50,23 @@
                                             </label>
                                             <div class="col-md-9 pt-2">
                                                 <div class="custom-control custom-radio d-inline">
-                                                    <input
-                                                            type="radio"
-                                                            class="custom-control-input"
-                                                            id="isActiveAll"
-                                                            name="isActive"
-                                                            [(ngModel)]="isActive"
-                                                            [value]="undefined"
-                                                            checked
-                                                    />
+                                                    <input type="radio" class="custom-control-input" id="isActiveAll" name="isActive"
+                                                        [(ngModel)]="isActive" [value]="undefined" checked/>
                                                     <label class="custom-control-label" for="isActiveAll">
                                                         {{ "All" | localize }}
                                                     </label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline mx-3">
-                                                    <input
-                                                            type="radio"
-                                                            class="custom-control-input"
-                                                            id="isActiveActive"
-                                                            name="isActive"
-                                                            [(ngModel)]="isActive"
-                                                            [value]="true"
-                                                    />
-                                                    <label
-                                                            class="custom-control-label"
-                                                            for="isActiveActive"
-                                                    >
+                                                    <input type="radio" class="custom-control-input" id="isActiveActive" name="isActive"
+                                                        [(ngModel)]="isActive" [value]="true"/>
+                                                    <label class="custom-control-label" for="isActiveActive">
                                                         {{ "Yes" | localize }}
                                                     </label>
                                                 </div>
                                                 <div class="custom-control custom-radio d-inline">
-                                                    <input
-                                                            type="radio"
-                                                            class="custom-control-input"
-                                                            id="isActivePassive"
-                                                            name="isActive"
-                                                            [(ngModel)]="isActive"
-                                                            [value]="false"
-                                                    />
-                                                    <label
-                                                            class="custom-control-label"
-                                                            for="isActivePassive"
-                                                    >
+                                                    <input type="radio" class="custom-control-input" id="isActivePassive" name="isActive"
+                                                        [(ngModel)]="isActive" [value]="false"/>
+                                                    <label class="custom-control-label" for="isActivePassive">
                                                         {{ "No" | localize }}
                                                     </label>
                                                 </div>
@@ -117,24 +76,19 @@
                                 </div>
                             </form>
                         </div>
+
                         <div class="card-footer">
-                            <button
-                                    type="button"
-                                    class="btn bg-blue"
-                                    (click)="getDataPage(1)"
-                            >
+                            <button type="button" class="btn btn-search-footer" (click)="getDataPage(1)">
                                 {{ "Search" | localize }}
                             </button>
-                            <button
-                                    type="button"
-                                    class="btn btn-default float-right"
-                                    (click)="clearFilters()"
-                            >
+                            <button type="button" class="btn btn-clear-footer float-right" (click)="clearFilters()">
                                 {{ "Clear" | localize }}
                             </button>
                         </div>
                     </div>
                 </div>
+
+                <!-- BODY -->
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table" [busy]="isTableLoading">
@@ -154,17 +108,12 @@
                                         currentPage: pageNumber,
                                         totalItems: totalItems }">
 
-                                        <td>{{ user.userName }}</td>
-                                        <td>{{ user.fullName }}</td>
-                                        <td>{{ user.emailAddress }}</td>
-                                        <td>
+                                <td class="td-userName">{{ user.userName }}</td>
+                                <td class="td-fullName">{{ user.fullName }}</td>
+                                <td class="td-emailAdd">{{ user.emailAddress }}</td>
+                                <td class="td-actions">
                                     <div class="custom-control custom-checkbox">
-                                        <input
-                                                type="checkbox"
-                                                class="custom-control-input"
-                                                disabled
-                                                [checked]="user.isActive"
-                                        />
+                                        <input type="checkbox" class="custom-control-input" disabled [checked]="user.isActive"/>
                                         <label class="custom-control-label"></label>
                                     </div>
                                 </td>
@@ -181,30 +130,6 @@
                                     <button type="button" class="btn btn-reset btn-sm" (click)="resetPassword(user)">
                                         <i class="fas fa-lock"></i>
                                     </button>
-                                    <!-- <button
-                                            type="button"
-                                            class="btn btn-sm bg-secondary"
-                                            (click)="editUser(user)"
-                                    >
-                                        <i class="fas fa-pencil-alt"></i>
-                                        {{ "Edit" | localize }}
-                                    </button> -->
-                                    <!-- <button
-                                            type="button"
-                                            class="btn btn-sm bg-danger mx-2"
-                                            (click)="delete(user)"
-                                    >
-                                        <i class="fas fa-trash"></i>
-                                        {{ "Delete" | localize }}
-                                    </button> -->
-                                    <!-- <button
-                                            type="button"
-                                            class="btn btn-sm bg-secondary"
-                                            (click)="resetPassword(user)"
-                                    >
-                                        <i class="fas fa-lock"></i>
-                                        {{ "ResetPassword" | localize }}
-                                    </button> -->
                                 </td>
                             </tr>
                             </tbody>
@@ -216,6 +141,8 @@
                         </table>
                     </div>
                 </div>
+
+                <!-- FOOTER -->
                 <div class="card-footer table-card-footer bg-light border-top">
                     <div class="row">
                         <div class="col-sm-4 col-12 text-sm-left text-center">
@@ -230,15 +157,12 @@
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="float-sm-right m-auto">
-                                <abp-pagination-controls
-                                        id="server"
-                                        (pageChange)="getDataPage($event)"
-                                >
-                                </abp-pagination-controls>
+                                <abp-pagination-controls id="server" (pageChange)="getDataPage($event)"></abp-pagination-controls>
                             </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </section>

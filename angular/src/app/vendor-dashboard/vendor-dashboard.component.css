@@ -1,0 +1,154 @@
+/* CARD */
+.card {
+    background-color: #F0F0EF;
+}
+/* END CARD */
+
+
+/* SEARCH */
+.btn-search, .btn-dropdown {
+    background-color: #765827;
+}
+
+.fa-search, .dropdown {
+    color: #F2E8C6;
+}
+/* END SEARCH */
+
+
+/* BUTTONS */
+.btn-search-footer {
+    appearance: button;
+    background-color: #60463B;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;    
+    padding: 5px 10px;
+    text-align: center;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.btn-clear-footer {
+    appearance: button;
+    background-color: #2E3138;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;    
+    padding: 5px 10px;
+    text-align: center;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    text-decoration: none;
+}
+
+.btn:focus {
+    text-decoration: none;
+}
+
+.btn:active {
+    box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
+    outline: 0;
+}
+
+.btn:not([disabled]):active {
+    box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
+    transform: translate(2px, 2px);
+}
+/* END BUTTONS */
+
+
+/* TABLE */
+.table-head {
+    color: #040D12;
+    font-weight: 700;
+    background: #C8AE7D;
+    white-space: nowrap;
+}
+
+.td-userId, .td-foodName, .td-orderQty,
+.td-orderSize, .td-totalPrice,
+.td-orderStatus, .td-orderDate, .th-userId,
+.th-foodName, .th-qty, .th-size,
+.th-notes, .th-totalPrice, .th-status,
+.th-date {
+    text-align: center;
+}
+
+.td {
+    font-family: Georgia, serif;
+}
+
+
+tr:nth-child(even) {
+    background-color: rgba(231, 231, 231, 0.3);;
+}
+
+tr:nth-child(odd) {
+    background-color: rgb(164, 144, 124, 0.3);
+}
+
+.table, tr, td, th   {
+    border: 1px solid #65451F;
+}
+
+td:hover {
+    border: 1px solid #C8AE7D;
+}
+
+.no-data-available {
+    font-weight: bold;
+    font-family: Courier, monospace;
+    text-align: center;
+}
+/* END TABLE */
+
+.totalSales {
+    background-color: #ABC4AB ;
+}
+
+.totalSalesCompleted {
+    background-color: #D2A87D;
+}
+
+.totalPendingSales {
+    background-color: #DCC9B6;
+}
+
+.totalCustomers {
+    background-color: #CCC9E7;
+}
+
+.titleHeader {
+    text-align: center;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 200px;
+}
+
+.table-header-title {
+    font-family: Georgia, serif;
+    font-style: italic;
+    margin-top: 5px;
+    font-size: 25px;
+}
+
+.p-totalSales, .p-totalCompletedSales,
+.p-totalPendingSales, .p-totalCustomers {
+    font-family: Georgia, serif;
+    font-size: 16px;
+}

@@ -18,6 +18,7 @@
     <section class="content px-2">
         <div class="container-fluid">
             <div class="card">
+
                 <!-- HEADER -->
                 <div class="card-header">
                     <div class="row">
@@ -36,6 +37,7 @@
                         </div>
                     </div>                    
                 </div>
+
                 <!-- BODY -->
                 <div class="card-body">
                     <div class="table-responsive">
@@ -55,7 +57,7 @@
                                         currentPage: pageNumber,
                                         totalItems: totalItems
                                     }">
-                                    <td>{{ customer.name }}</td>
+                                    <td class="td-name">{{ customer.name }}</td>
                                     <td class="td-division">{{ customer.division?.name }}</td>
                                     <td class="td-actions">
                                         <!-- EDIT -->
@@ -65,29 +67,19 @@
                                         <!-- DELETE -->
                                         <button type="button" class="btn btn-delete btn-sm" (click)="delete(customer)">
                                             <i class="fas fa-trash"></i>
-                                        </button> 
-                                        <!-- EDIT -->
-                                        <!-- <button type="button" class="btn btn-sm bg-secondary" (click)="editCustomer(customer)">
-                                        <i class="fas fa-pencil-alt"></i>
-                                            {{ "Edit" | localize }}
-                                        </button> -->
-
-                                        <!-- DELETE -->
-                                        <!-- <button type="button" class="btn btn-sm bg-danger mx-2" (click)="delete(customer)">
-                                        <i class="fas fa-trash"></i>
-                                            {{ "Delete" | localize }}
-                                        </button>                                         -->
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
                             <tbody *ngIf="customers?.length == 0">
                                 <tr>
-                                    <td class="no-data-available" colspan="4">No record(s) found</td>
+                                    <td class="no-data-available" colspan="4">{{ 'NoRecordsFound' | localize}}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+
                 <!-- FOOTER -->
                 <div class="card-footer table-card-footer border-top">
                     <div class="row">
@@ -102,13 +94,9 @@
                                 {{ "TotalRecordsCount" | localize: totalItems }}
                             </p>
                         </div>
-
                         <div class="col-sm-4 col-12">
                             <div class="float-sm-right m-auto">
-                                <abp-pagination-controls
-                                    id="server"
-                                    (pageChange)="getDataPage($event)">
-                                </abp-pagination-controls>
+                                <abp-pagination-controls id="server" (pageChange)="getDataPage($event)"></abp-pagination-controls>
                             </div>
                         </div>
                     </div>

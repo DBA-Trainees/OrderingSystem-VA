@@ -5,7 +5,8 @@ import { result } from 'lodash-es';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-    templateUrl: './edit-customer-modal.component.html'
+    templateUrl: './edit-customer-modal.component.html',
+    styleUrls: ['./edit-customer-modal.component.css']
 })
 export class EditCustomerModalComponent extends AppComponentBase implements OnInit {
     saving = false;

@@ -47,7 +47,7 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
             // new MenuItem(this.l('HomePage'), '/app/home', 'fas fa-home'),
             new MenuItem(
                 this.l('Dashboard'),
-                '/app/dashboard',
+                '/app/vendor-dashboard',
                 'fa solid fa-house',
                 'Pages.Foods'
             ),
@@ -88,19 +88,19 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 'Pages.Categories'
             ),
             new MenuItem(
-                this.l('Types'),
+                this.l('Cuisine'),
                 '/app/types',
                 'fas fa-mobile-alt',
                 'Pages.Types'
             ),
             new MenuItem(
-                this.l('Foods'),
+                this.l('Menu'),
                 '/app/foods',
                 'fa fa-cutlery',
                 'Pages.Foods'
             ),
             new MenuItem(
-                this.l('Orders'),
+                this.l('Menu'),
                 '/app/orders',
                 'fas fa-clipboard-list',
                 'Pages.Orders'
@@ -109,6 +109,12 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                 this.l('Cart'),
                 '/app/orders/addToCart-order-dialog',
                 'fas fa-clipboard-check',
+                'Pages.Orders'
+            ),
+            new MenuItem(
+                this.l('OrderSummary'),
+                '/app/customer-dashboard',
+                'fa solid fa-chart-line',
                 'Pages.Orders'
             )
             // new MenuItem(this.l('MultiLevelMenu'), '', 'fas fa-circle', '', [

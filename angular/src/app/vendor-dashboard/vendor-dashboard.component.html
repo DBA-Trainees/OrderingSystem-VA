@@ -1,0 +1,230 @@
+<div [@routerTransition]>
+    <section class="content-header">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12 titleHeader">
+              <h1>{{ "Dashboard" | localize }}</h1>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="content px-2">
+        <div class="container-fluid">
+          <div class="row">
+
+            <!-- BOX 1 -->
+            <div class="col-lg-3 col-6">
+              <div class="small-box totalSales">
+                <div class="inner">
+                  <h3><span class="currency-code">&#8369; </span>{{ totalSales | number:'1.2-2' }}</h3>
+                  <p class="p-totalSales">Total Sales</p>
+                </div>
+                <div class="icon">
+                  <i class="fa-solid fa-money-bill-trend-up"></i>                  
+                </div>
+              </div>
+            </div>
+
+            <!-- BOX 2 -->
+            <div class="col-lg-3 col-6">
+              <div class="small-box totalSalesCompleted">
+                <div class="inner">
+                  <h3><span class="currency-code">&#8369; </span>{{ totalSalesCompleted | number:'1.2-2' }}</h3>
+                  <p class="p-totalCompletedSales">Total Completed Sales</p>
+                </div>
+                <div class="icon">
+                  <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- BOX 3 -->
+            <div class="col-lg-3 col-6">
+              <div class="small-box totalPendingSales">
+                <div class="inner">
+                  <h3><span class="currency-code">&#8369; </span>{{ totalSalesPending | number:'1.2-2' }}</h3>
+                  <p class="p-totalPendingSales">Total Pending Sales</p>
+                </div>
+                <div class="icon">
+                  <i class="fa-solid fa-hand-holding-dollar"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- BOX 4 -->
+            <div class="col-lg-3 col-6">
+              <div class="small-box totalCustomers">
+                <div class="inner">
+                  <h3>{{ totalCustomer }}</h3>
+                  <p class="p-totalCustomers">Total Customers</p>
+                </div>
+                <div class="icon">
+                  <i class="fa-solid fa-users-line"></i>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- TABLE -->
+      <section class="content px-2">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title table-header-title">Sales Report</h3>
+              <div class="row">
+                <div class="col-md-6">&emsp;</div>
+                  <div class="col-md-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button type="button" class="btn-search" (click)="getDataPage(1)">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <input type="text" class="form-control" name="keyword" [placeholder]="'SearchWithThreeDot' | localize"
+                              [(ngModel)]="keyword" (keyup.enter)="getDataPage(1)"/>
+                        <div class="input-group-append">
+                            <button type="button" class="btn-search-append btn-dropdown" (click)="advancedFiltersVisible = !advancedFiltersVisible">
+                                <i class="fas dropdown" [class.fa-angle-up]="advancedFiltersVisible" [class.fa-angle-down]="!advancedFiltersVisible"></i>
+                            </button>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+                <div *ngIf="advancedFiltersVisible" class="card mb-0 mt-1">
+                  <div class="card-body">
+
+                    <!-- DATE FILTER -->
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input #dateCheckbox type="checkbox" class="form-check-input" id="checkDate" name="dateFilter" checked="" 
+                              (click)="statusCheckbox.checked=false; dateCheckbox.checked=true">Filter By Date
+                      </label>                      
+                    </div>
+                    <div class="form-inline">
+                      <div class="col-md-9 form-group" *ngIf="dateCheckbox.checked == true">
+                        <label class="col-md-2 col-form-label" for="isDateFrom">{{ 'DateFrom' | localize }}</label>
+                        <input type="date" id="isDateFrom" name="dateFrom" class="form-control" [(ngModel)]="setStartDate">
+
+                        <label class="col-sm-1 col-form-label mx-3" for="isDateTo">{{ 'DateTo' | localize }}</label>
+                        <input type="date" id="isDateTo" name="dateTo" class="form-control" [(ngModel)]="setEndDate">
+                      </div>
+                    </div>
+
+                    <!-- STATUS FILTER -->
+                    <div class="form-check-inline">
+                      <label class="form-check-label">
+                        <input #statusCheckbox type="checkbox" class="form-check-input" id="checkStatus" name="statusFilter" 
+                          (click)="dateCheckbox.checked=false; statusCheckbox.checked=true">Filter By Status
+                      </label>                         
+                    </div>
+                    <div class="form-inline">
+                      <div class="form-group" *ngIf="statusCheckbox.checked == true">
+                        <div class="custom-control custom-radio d-inline mx-2">
+                          <input type="radio" class="custom-control-input" id="isAllRecords" name="AllRecords"
+                                [(ngModel)]="isStatus" [value]="undefined" checked />
+                          <label class="custom-control-label" for="isAllRecords">{{ "All" | localize }}</label>
+                        </div>
+
+                        <div class="custom-control custom-radio d-inline mx-2">
+                          <input type="radio" class="custom-control-input" id="isCompleteOnly"
+                                name="isComplete" [(ngModel)]="isStatus" [value]="1"/>
+                          <label class="custom-control-label" for="isCompleteOnly">{{ "Completed" | localize }}</label>
+                        </div>
+
+                        <div class="custom-control custom-radio d-inline mx-2">
+                          <input type="radio" class="custom-control-input" id="isPendingOnly"
+                                name="isPending" [(ngModel)]="isStatus" [value]="0"/>
+                          <label class="custom-control-label" for="isPendingOnly">{{ "Pending" | localize }}</label>
+                        </div>
+                      </div>
+                    </div>                    
+                </div>
+                  <div class="card-footer" *ngIf="dateCheckbox.checked == true">
+                      <button type="button" class="btn btn-search-footer" (click)="filterDate()">{{ "Search" | localize }}</button>
+                      <button type="button" class="btn btn-clear-footer float-right" (click)="clearFilters()">{{ "Clear" | localize }}</button>
+                  </div>
+                  <div class="card-footer" *ngIf="dateCheckbox.checked == false">
+                    <button type="button" class="btn btn-search-footer" (click)="getDataPage(1)">{{ "Search" | localize }}</button>
+                    <button type="button" class="btn btn-clear-footer float-right" (click)="clearFilters()">{{ "Clear" | localize }}</button>
+                  </div>
+              </div>
+            </div>
+
+            <!-- BODY -->
+            <div class="card-body">
+              <div class="table-responsive">
+                  <table class="table" [busy]="isTableLoading">
+                      <thead class="table-head">
+                          <tr>
+                              <th class="th-userId">{{ "UserId" | localize }}</th>
+                              <th class="th-foodName">{{ "FoodName" | localize }}</th>                                    
+                              <th class="th-qty">{{ "Quantity" | localize }}</th>
+                              <th class="th-size">{{ "Size" | localize }}</th>
+                              <th class="th-notes">{{ "Notes" | localize }}</th>
+                              <th class="th-totalPrice">{{ "TotalPrice" | localize }}</th>
+                              <th class="th-status">{{ "Status" | localize }}</th>
+                              <th class="th-date">{{ "Date" | localize }}</th>
+                          </tr>
+                      </thead>
+                      <tbody *ngIf="array?.length > 0">
+                        <tr *ngFor="let order of array">
+                          <td class="td-userId">
+                            <div class="userId-div">
+                              {{ order.userId }}
+                            </div>
+                          </td>
+                          <td class="td-foodName">
+                            <div class="foodName-div">
+                              {{ order.food?.name }}
+                            </div> 
+                          </td>
+                          <td class="td-orderQty">
+                            <div class="orderQty-div">
+                              {{ order.quantity }}
+                            </div>
+                          </td>
+                          <td class="td-orderSize">
+                            <div class="orderSize-div">
+                              {{ order.size || 'N/A' }}
+                            </div>
+                          </td>
+                          <td class="td-orderNotes">
+                            <div class="orderNotes-div">
+                              {{ order.notes || 'N/A' }}
+                            </div>
+                          </td>
+                          <td class="td-totalPrice">
+                            <div class="totalPrice-div">
+                              <span class="currency-code">&#8369;</span> {{ order.totalPrice | number:'1.2-2' }}
+                            </div>
+                          </td>
+                          <td class="td-orderStatus">
+                            <div class="orderStatus-div">
+                              {{ order.status ? 'Completed' : 'Pending' }}
+                            </div>
+                          </td>
+                          <td class="td-orderDate">
+                            <div class="orderDate-div">
+                              {{ order.dateTimeOrdered | date: 'MM-dd-yyyy' }}
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody *ngIf="array?.length == 0">
+                        <tr>
+                          <td class="no-data-available" colspan="9">{{ 'NoRecordsFound' | localize}}
+                        </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+
+          </div>
+        </div>
+      </section>
+          

@@ -24,12 +24,13 @@
     white-space: nowrap;
 }
 
-.th-roleName, .th-displayName, .th-actions {
+.th-roleName, .th-displayName, .th-actions,
+.td-roleName, .td-displayName, .td-actions {
     text-align: center;
 }
 
 .th-actions {
-    width: 110px;
+    width: 140px;
 }
 
 tr:nth-child(even) {
@@ -59,7 +60,7 @@ td:hover {
 /* BUTTONS */
 .btn-create {
     appearance: button;
-    background-color: #567189;
+    background-color: #3A3845;
     border: 1px solid #000;
     border-radius: 4px;
     box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
@@ -133,18 +134,9 @@ i {
 /* END BUTTONS */
 
 
-/* PAGINATION FOOTER*/
-/* ::ng-deep ul > li.disabled > span {
-    background-color: #65451F !important;
-    border-color: black !important;
-} */
-  
-/* ::ng-deep ul > li.active > a {
-    background-color: #65451F !important;
-    border-color: black !important;
-} */
-::ng-deep #item-page ul > li.active > a {
-    background-color: #65451F !important;
-    border-color: black !important;
+/* OTHERS */
+h1 {
+    font-family: Georgia, serif;
+    text-transform: uppercase;
 }
-/* END PAGINATION FOOTER */
+/* END OTHERS */

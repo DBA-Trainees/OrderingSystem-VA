@@ -1,14 +1,16 @@
 import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
-import { CreateTypeDto, DivisionDto, TypeServiceProxy } from '@shared/service-proxies/service-proxies';
+import { DivisionDto, TypeServiceProxy } from '@shared/service-proxies/service-proxies';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { type } from 'os';
 
 @Component({
-    templateUrl: './createOrEdit-type-modal.component.html'
+    templateUrl: './createOrEdit-type-modal.component.html',
+    styleUrls: ['./createOrEdit-type-modal.component.css']
 })
 
 export class CreateOrEditTypeModalComponent extends AppComponentBase implements OnInit {
+    
+    isEdit = false;
     saving = false;
     type = new DivisionDto;
     id : number;
@@ -23,8 +25,9 @@ export class CreateOrEditTypeModalComponent extends AppComponentBase implements 
         super(injector);
     }
 
-    ngOnInit() : void {
+    ngOnInit() : void {        
         if(this.id) {
+            this.isEdit = true;
             this._typeService.get(this.id).subscribe((result) => {
                 this.type = result;
             })
@@ -43,9 +46,11 @@ export class CreateOrEditTypeModalComponent extends AppComponentBase implements 
                 },
                 () => {
                     this.saving = false;
+                    this.isEdit = false;
                 }
             )
-        } else {
+        } 
+        else {
             this._typeService.create(this.type).subscribe(
                 () => {
                     this.notify.info(this.l('SavedSuccessfully'));

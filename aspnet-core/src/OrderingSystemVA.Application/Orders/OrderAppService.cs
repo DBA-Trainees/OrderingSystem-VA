@@ -1,7 +1,10 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Authorization;
+using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
+using Abp.Extensions;
+using Abp.Linq.Extensions;
 using Microsoft.EntityFrameworkCore;
 using OrderingSystemVA.Authorization;
 using OrderingSystemVA.Entities;
@@ -15,7 +18,6 @@ using System.Threading.Tasks;
 
 namespace OrderingSystemVA.Orders
 {
-
     //[AbpAuthorize(PermissionNames.Pages_Orders)]
     public class OrderAppService : AsyncCrudAppService<Order, OrderDto, int, PagedOrderResultRequestDto, CreateOrderDto, OrderDto>, IOrderAppService
     {
@@ -39,12 +41,14 @@ namespace OrderingSystemVA.Orders
                 if (order == null)
                 {
                     orderEntity.dateTimeOrdered = input.dateTimeOrdered.ToLocalTime();
+                    orderEntity.UserId = user;
                     await _repository.InsertAsync(orderEntity);
                     return ObjectMapper.Map<OrderDto>(orderEntity);
                 }
                 else
                 {
                     order.Quantity += input.Quantity;
+                    order.UserId = user;
                     order.dateTimeOrdered = input.dateTimeOrdered.ToLocalTime();
                     await _repository.UpdateAsync(order);
                     return ObjectMapper.Map<OrderDto>(order);
@@ -76,15 +80,12 @@ namespace OrderingSystemVA.Orders
             var order = ObjectMapper.Map<Order>(input);
             await _repository.UpdateAsync(order);
 
-
             var food = await _foodRepository.GetAsync(input.FoodId);
             food.Quantity -= order.Quantity;
-
             if (food.Quantity == 0)
             {
                 food.Availability = false;
             }
-
             await _foodRepository.UpdateAsync(food);
 
             return base.MapToEntityDto(order);
@@ -96,7 +97,7 @@ namespace OrderingSystemVA.Orders
             return base.GetEntityByIdAsync(id);
         }
 
-        public async Task<PagedResultDto<OrderDto>> GetAllOrderWithFood(PagedOrderResultRequestDto input)
+        public async Task<PagedResultDto<OrderDto>> GetAllOrderWithFoodStatusNotComplete(PagedOrderResultRequestDto input)
         {
             var userId = AbpSession.UserId;
             var query = await _repository.GetAllIncluding(x => x.Food)
@@ -107,13 +108,30 @@ namespace OrderingSystemVA.Orders
             return new PagedResultDto<OrderDto>(query.Count(), query);
         }
 
-        public async Task<OrderDto> GetOrderById(int id)
+        public async Task<PagedResultDto<OrderDto>> GetAllOrderWithFoodWithAllStatus(PagedOrderResultRequestDto input)
         {
+            var userId = AbpSession.UserId;
             var query = await _repository.GetAll()
-                .Where(x => x.Id == id)
-                .FirstOrDefaultAsync();
+                .Include(x => x.Food)
+                .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Food.Name.Contains(input.Keyword) || x.Size.Contains(input.Keyword) || x.Notes.Contains(input.Keyword))
+                .WhereIf(input.IsStatus.HasValue, x => x.Status == input.IsStatus)
+                .Select(x => ObjectMapper.Map<OrderDto>(x))
+                .ToListAsync();
 
-            return ObjectMapper.Map<OrderDto>(query);
+            return new PagedResultDto<OrderDto>(query.Count(), query);
+        }
+
+        public async Task<PagedResultDto<OrderDto>> GetAllOrderWithFoodBasedOnIdAndStatusComplete(PagedOrderResultRequestDto input)
+        {
+            var userId = AbpSession.UserId;
+            var query = await _repository.GetAll()
+                .Include(x => x.Food)
+                .Where(x => x.UserId == userId && x.Status == 1)
+                //.WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Food.Name.Contains(input.Keyword) || x.Size.Contains(input.Keyword) || x.Notes.Contains(input.Keyword))
+                .Select(x => ObjectMapper.Map<OrderDto>(x))
+                .ToListAsync();
+
+            return new PagedResultDto<OrderDto>(query.Count(), query);
         }
 
         public override Task<OrderDto> CreateAsync(CreateOrderDto input)
@@ -121,9 +139,5 @@ namespace OrderingSystemVA.Orders
             return base.CreateAsync(input);
         }
 
-        //public override Task<OrderDto> UpdateAsync(OrderDto input)
-        //{
-        //    return base.UpdateAsync(input);
-        //}
     }
 }

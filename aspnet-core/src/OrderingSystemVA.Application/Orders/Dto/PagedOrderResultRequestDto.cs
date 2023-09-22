@@ -12,5 +12,6 @@ namespace OrderingSystemVA.Orders.Dto
     {
         public string Keyword { get; set; }
         public bool? IsActive { get; set; }
+        public int? IsStatus { get; set; }
     }
 }

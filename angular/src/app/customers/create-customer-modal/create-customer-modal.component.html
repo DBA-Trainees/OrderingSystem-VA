@@ -1,57 +1,36 @@
-<style>
-* {
- box-sizing: border-box;   
-}
+<form class="form-horizontal" autocomplete="off" #createCustomerModal="ngForm" (ngSubmit)="save()">
 
-input, select {
-    width: 100%;
-    height: 100%;
-    padding: .5em 1em;
-    border: 1px solid black;
-    border-radius: 3px;
-}
-</style>
+    <!-- HEADER -->
+    <abp-modal-header [title]="'CreateNewCustomer' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
 
-<form class="form-horizontal"
-    autocomplete="off" 
-    #createCustomerModal="ngForm"
-    (ngSubmit)="save()">
+    <!-- BODY -->
+    <div class="modal-body">
+        <!-- NAME -->
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="customerName">{{ "Name" | localize }}</label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="customerName" id="customerName" required
+                    maxlength="32" [(ngModel)]="customer.name" #customerNameModel="ngModel" #customerNameEl/>            
+                <abp-validation-summary [control]="customerNameModel" [controlEl]="customerNameEl"></abp-validation-summary>
+            </div>
+        </div>
 
-<abp-modal-header 
-    [title]="'CreateNewCustomer' | localize"
-    (onCloseClick)="bsModalRef.hide()">
-</abp-modal-header>
-
-<div class="modal-body">
-    <!-- NAME -->
-    <div class="form-group row required">
-        <label class="col-md-3 col-form-label" for="customerName">{{ "Name" | localize }}</label>
-        <div class="col-md-9">
-            <input type="text" class="form-control" name="customerName" id="customerName" required
-                maxlength="32" [(ngModel)]="customer.name" #customerNameModel="ngModel" #customerNameEl/>            
-            <abp-validation-summary
-                [control]="customerNameModel"
-                [controlEl]="customerNameEl">
-            </abp-validation-summary>
+        <!-- DIVISION -->
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="divisionName">{{ "Division" | localize }}</label>
+            <div class="col-md-9">
+                <select name="divisionName" id="divisionName" required [ngModel]="selectDivisionId" 
+                (ngModelChange)="selectDivisionId=$event">
+                    <option *ngFor="let division of divisions" [ngValue]="division.id">
+                        {{ division.name }}
+                    </option>
+                </select>
+            </div>
         </div>
     </div>
-    <!-- DIVISION -->
-    <div class="form-group row required">
-        <label class="col-md-3 col-form-label" for="divisionName">{{ "Division" | localize }}</label>
-        <div class="col-md-9">
-            <select name="divisionName" id="divisionName" required [ngModel]="selectDivisionId" 
-            (ngModelChange)="selectDivisionId=$event">
-                <option *ngFor="let division of divisions" [ngValue]="division.id">
-                    {{ division.name }}
-                </option>
-            </select>
-        </div>
-    </div>
-</div>
-<abp-modal-footer
-    [cancelDisabled]="saving"
-    [saveDisabled]="!createCustomerModal.form.valid || saving"
-    (onCancelClick)="bsModalRef.hide()">
-</abp-modal-footer>
+
+    <!-- FOOTER -->
+    <abp-modal-footer [cancelDisabled]="saving" [saveDisabled]="!createCustomerModal.form.valid || saving" (onCancelClick)="bsModalRef.hide()"></abp-modal-footer>
+
 </form>
 

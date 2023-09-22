@@ -20,7 +20,8 @@ import { CategoriesComponent } from './categories/categories.component';
 import { TypeComponent } from './types/types.component';
 import { FoodComponent } from './foods/foods.component';
 import { OrderComponent } from './orders/orders.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { VendorDashboardComponent } from './vendor-dashboard/vendor-dashboard.component';
+import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
 // tenants
 import { TenantsComponent } from '@app/tenants/tenants.component';
 import { CreateTenantDialogComponent } from './tenants/create-tenant/create-tenant-dialog.component';
@@ -103,7 +104,8 @@ import { OrderDetailsComponent } from './orders/viewOrderDetails-dialog/viewOrde
         OrderComponent,
         AddToCartOrderDialogComponent,
         OrderDetailsComponent,
-        DashboardComponent
+        VendorDashboardComponent,
+        CustomerDashboardComponent
    ],
     imports: [
         CommonModule,

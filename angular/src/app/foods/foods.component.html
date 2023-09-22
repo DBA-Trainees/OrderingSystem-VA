@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-6">
-                    <h1>{{ "Foods" | localize }}</h1>
+                    <h1>{{ "Menu" | localize }}</h1>
                 </div>
                 <div class="col-6 text-right">
                     <a href="javascript:;" class="btn btn-create" (click)="createFood()">
@@ -18,29 +18,79 @@
     <section class="content px-2">
         <div class="container-fluid">
             <div class="card">
+
+                <!-- HEADER -->
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">&emsp;</div>
                         <div class="col-md-6">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <button type="button"
-                                        class="btn-search"
-                                        (click)="getDataPage(1)">
+                                    <button type="button" class="btn-search" (click)="getDataPage(1)">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
-                                <input type="text" 
-                                    class="form-control"
-                                    name="keyword"
-                                    [placeholder]="'SearchWithThreeDot' | localize"
-                                    [(ngModel)]="keyword"
-                                    (keyup.enter)="getDataPage(1)"
-                                />
+                                <input type="text" class="form-control" name="keyword" [placeholder]="'SearchWithThreeDot' | localize"
+                                    [(ngModel)]="keyword" (keyup.enter)="getDataPage(1)"/>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn-search-append btn-dropdown" (click)="advancedFiltersVisible = !advancedFiltersVisible">
+                                        <i class="fas" [class.fa-angle-up]="advancedFiltersVisible" [class.fa-angle-down]="!advancedFiltersVisible"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div *ngIf="advancedFiltersVisible" class="card mb-0 mt-1">
+                        <div class="card-body">
+                            <form class="form-horizontal">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row mb-0">
+                                            <label class="col-md-3 col-form-label">
+                                                {{ "IsAvailable" | localize }}
+                                            </label>
+                                            <div class="col-md-9 pt-2">
+                                                <div class="custom-control custom-radio d-inline">
+                                                    <input type="radio" class="custom-control-input" id="isAvailableAll" name="isAvailable"
+                                                        [(ngModel)]="isAvailability" [value]="undefined" checked/>
+                                                    <label class="custom-control-label" for="isAvailableAll">
+                                                        {{ "All" | localize }}
+                                                    </label>
+                                                </div>
+
+                                                <div class="custom-control custom-radio d-inline mx-3">
+                                                    <input type="radio" class="custom-control-input" id="isAvailableOnly" name="isOnlyAvailable"
+                                                        [(ngModel)]="isAvailability" [value]="true"/>
+                                                    <label class="custom-control-label" for="isAvailableOnly">
+                                                        {{ "Yes" | localize }}
+                                                    </label>
+                                                </div>
+
+                                                <div class="custom-control custom-radio d-inline">
+                                                    <input type="radio" class="custom-control-input" id="isNotAvailable" name="isOnlyNotAvailable"
+                                                        [(ngModel)]="isAvailability" [value]="false"/>
+                                                    <label class="custom-control-label" for="isNotAvailable">
+                                                        {{ "No" | localize }}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-search-footer" (click)="getDataPage(1)">
+                                {{ "Search" | localize }}
+                            </button>
+                            <button type="button" class="btn btn-clear-footer float-right" (click)="clearFilters()">
+                                {{ "Clear" | localize }}
+                            </button>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- BODY -->
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table" [busy]="isTableLoading">
@@ -66,14 +116,14 @@
                                         totalItems : totalItems
                                     }"> 
                                     <td>{{ food.name }}</td>
-                                    <td class="food-image"><img class="img" [src]="'data:' + food.imageFileType + ';base64,' + food.image"></td>                                    
-                                    <td class="food-availability">{{ food.availability ? 'Available' : 'Not Available' }}</td>
-                                    <td class="food-qty">{{ food.quantity }}</td>
-                                    <td class="food-category">{{ food.category?.name }}</td>
-                                    <td class="food-type">{{ food.type?.name }}</td>
-                                    <td class="food-size">{{ food.size }}</td>
-                                    <td class="food-price"><span class="currency-code">&#8369;</span>{{ food.price | number:'1.2-2' }}</td>
-                                    <td class="food-action">
+                                    <td class="td-image"><img class="img" [src]="'data:' + food.imageFileType + ';base64,' + food.image"></td>                                    
+                                    <td class="td-availability">{{ food.availability ? 'Available' : 'Not Available' }}</td>
+                                    <td class="td-qty">{{ food.quantity }}</td>
+                                    <td class="td-category">{{ food.category?.name }}</td>
+                                    <td class="td-type">{{ food.type?.name }}</td>
+                                    <td class="td-size">{{ food.size || 'N/A'}}</td>
+                                    <td class="td-price"><span class="currency-code">&#8369;</span>{{ food.price | number:'1.2-2' }}</td>
+                                    <td class="td-action">
                                         <!-- EDIT -->
                                         <button type="button" class="btn btn-edit btn-sm mx-2" (click)="editFood(food)">
                                             <i class="fas fa-pencil-alt"></i>
@@ -87,12 +137,14 @@
                             </tbody>
                             <tbody *ngIf="foods?.length == 0">
                                 <tr>
-                                    <td class="no-data-available" colspan="9">{{ 'NoRecordsFound' | localize}}
+                                    <td class="no-data-available" colspan="9">{{ 'NoRecordsFound' | localize}}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                
+                <!-- FOOTER -->
                 <div class="card-footer table-card-footer border-top">
                     <div class="row">
                         <div class="col-sm-4 col-12 text-sm-left text-center">
@@ -112,6 +164,7 @@
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </section>

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 class PagedOrderRequestDto extends PagedRequestDto {
     keyword: string;
     isActive: boolean | null;
+    isStatus : number | null;
 }
 
 @Component({
@@ -25,11 +26,12 @@ export class AddToCartOrderDialogComponent extends PagedListingComponentBase<Ord
     id : number;
     keyword = '';
     isActive : boolean | null;
+    isStatus : number | null;
     orders : OrderDto[] = [];
     order = new OrderDto;
     food = new FoodDto;
     priceTotal : number = 0;
-    priceValue : number;
+    //priceValue : number;
     dataValue : number;
     orderStatus : number = 1;
     orderQty : number;
@@ -53,11 +55,13 @@ export class AddToCartOrderDialogComponent extends PagedListingComponentBase<Ord
         ): void {
         request.keyword = this.keyword;
         request.isActive = this.isActive;
+        request.isStatus = this.isStatus;
 
         this._orderService
-            .getAllOrderWithFood(
+            .getAllOrderWithFoodStatusNotComplete(
                 request.keyword,
                 request.isActive,
+                request.isStatus,
                 request.skipCount,
                 request.maxResultCount
             )
@@ -90,13 +94,13 @@ export class AddToCartOrderDialogComponent extends PagedListingComponentBase<Ord
     }
 
     getTotalAmount(data) {
-        this.priceValue = 0;
+        this.dataValue = 0;
         this.priceTotal = 0;
         
-        this.priceValue = data;
-        console.log(this.priceValue);
+        this.dataValue = data;
+        //console.log(this.dataValue);
         for (let i = 0; i < data.length ; i++) {
-            this.priceTotal += this.priceValue[i].totalPrice
+            this.priceTotal += this.dataValue[i].foodPrice * this.dataValue[i].quantity
             console.log(this.priceTotal);
         }
     }
@@ -116,7 +120,7 @@ export class AddToCartOrderDialogComponent extends PagedListingComponentBase<Ord
                             newOrder.status = this.orderStatus;
                             newOrder.quantity = item.quantity;
                             newOrder.notes = item.notes;
-                            newOrder.totalPrice = item.totalPrice * item.quantity;
+                            newOrder.totalPrice = item.foodPrice * item.quantity;
                         
                             this._orderService.update(newOrder).subscribe(
                                 () => {
@@ -128,8 +132,6 @@ export class AddToCartOrderDialogComponent extends PagedListingComponentBase<Ord
                         })          
                     });
                     this.saving = false;
-                    
-                    //this.router.navigate(["./app/orders"]);
                 }
             }
         )

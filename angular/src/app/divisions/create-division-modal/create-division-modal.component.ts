@@ -1,16 +1,15 @@
 import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
-import {
-  DivisionServiceProxy,
-  CreateDivisionDto
-} from '@shared/service-proxies/service-proxies';
-import { result } from 'lodash-es';
+import { DivisionServiceProxy, CreateDivisionDto } from '@shared/service-proxies/service-proxies';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-  templateUrl: './create-division-modal.component.html'
+  templateUrl: './create-division-modal.component.html',
+  styleUrls: ['./create-division-modal.component.css']
 })
+
 export class CreateDivisionModalComponent extends AppComponentBase implements OnInit {
+  
   saving = false;
   division = new CreateDivisionDto();
   

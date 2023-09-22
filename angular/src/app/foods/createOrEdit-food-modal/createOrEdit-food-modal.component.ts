@@ -15,7 +15,8 @@ enum foodSize {
     styleUrls: ['./createOrEdit-food-modal.component.css']
 })
 export class CreateOrEditFoodModalComponent extends AppComponentBase implements OnInit {
-    
+
+    isDisabled : boolean = true;
     isEdit = false;
     saving = false;    
     foods = new FoodDto;
@@ -58,7 +59,6 @@ export class CreateOrEditFoodModalComponent extends AppComponentBase implements 
                 this.base64textString = result.image;
                 this.imgFileName = result.imageName;
                 this.imgFileType = result.imageFileType;
-                // this.amountCtrl = result.price;
             }))
         }       
         this._categoryService.getAllCategories().subscribe(

@@ -1,0 +1,83 @@
+/* CARD */
+.card {
+    background-color: #DFE0DF;
+}
+
+.card-dashboard-header {
+    background-color: #A0937D;
+    border: 1px solid #675D50;
+}
+/* END CARD */
+
+/* TABLE */
+.table-head {
+    color: #040D12;
+    font-weight: 700;
+    background: #C8AE7D;
+    white-space: nowrap;
+}
+
+.th-foodQty, .th-foodSize,
+.th-foodNotes, .td-foodQty,
+.td-foodSize, .td-foodNotes {
+    text-align: center;
+}
+
+.th-foodName {
+    width: 200px;
+}
+
+.th-foodNotes {
+    width: 200px;
+}
+
+.th-foodQty, .th-foodSize, 
+.th-foodTotalPrice {
+    width: 100px;
+}
+
+.td-foodTotalPrice, .th-foodTotalPrice {
+    text-align: right;
+}
+
+
+tr:nth-child(even) {
+    background-color: rgba(231, 231, 231, 0.3);;
+}
+
+tr:nth-child(odd) {
+    background-color: rgb(164, 144, 124, 0.3);
+}
+
+/* .table, tr, td, th   {
+    border: 1px solid #65451F;
+}
+
+td:hover {
+    border: 1px solid #C8AE7D;
+} */
+
+.no-data-available {
+    font-weight: bold;
+    font-family: Courier, monospace;
+    text-align: center;
+}
+/* END TABLE */
+
+
+/* OTHERS */
+.input-date {
+    background-color: #DFD3C3;
+    color: #3F2305;
+    border: 1px solid #433520;
+}
+
+.titleHeader {
+    font-family: Georgia, serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 200px;
+    text-align: center;
+}
+/* END OTHERS */
+

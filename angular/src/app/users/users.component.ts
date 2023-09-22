@@ -2,15 +2,8 @@ import { Component, Injector } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
-import {
-  PagedListingComponentBase,
-  PagedRequestDto
-} from 'shared/paged-listing-component-base';
-import {
-  UserServiceProxy,
-  UserDto,
-  UserDtoPagedResultDto
-} from '@shared/service-proxies/service-proxies';
+import { PagedListingComponentBase, PagedRequestDto } from 'shared/paged-listing-component-base';
+import { UserServiceProxy, UserDto, UserDtoPagedResultDto } from '@shared/service-proxies/service-proxies';
 import { CreateUserDialogComponent } from './create-user/create-user-dialog.component';
 import { EditUserDialogComponent } from './edit-user/edit-user-dialog.component';
 import { ResetPasswordDialogComponent } from './reset-password/reset-password.component';
@@ -25,7 +18,9 @@ class PagedUsersRequestDto extends PagedRequestDto {
   animations: [appModuleAnimation()],
   styleUrls: ['./users.component.css']
 })
+
 export class UsersComponent extends PagedListingComponentBase<UserDto> {
+  
   users: UserDto[] = [];
   keyword = '';
   isActive: boolean | null;

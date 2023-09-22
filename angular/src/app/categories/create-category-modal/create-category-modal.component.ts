@@ -4,7 +4,8 @@ import { CategoryServiceProxy, CreateCategoryDto } from "@shared/service-proxies
 import { BsModalRef } from "ngx-bootstrap/modal";
 
 @Component({
-    templateUrl: './create-category-modal.component.html'
+    templateUrl: './create-category-modal.component.html',
+    styleUrls: ['./create-category-modal.component.css']
 })
 export class CreateCategoryModalComponent extends AppComponentBase implements OnInit {
     saving = false;
@@ -21,7 +22,6 @@ export class CreateCategoryModalComponent extends AppComponentBase implements On
     }
 
     ngOnInit(): void {
-        
     }
 
     save() : void {

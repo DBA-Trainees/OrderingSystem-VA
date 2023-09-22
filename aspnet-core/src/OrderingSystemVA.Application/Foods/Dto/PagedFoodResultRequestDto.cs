@@ -12,5 +12,6 @@ namespace OrderingSystemVA.Foods.Dto
     {
         public string Keyword { get; set; }
         public bool? IsActive { get; set; }
+        public bool? IsAvailable { get; set; }
     }
 }

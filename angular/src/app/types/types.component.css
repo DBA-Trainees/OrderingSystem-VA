@@ -1,0 +1,154 @@
+/* CARD */
+.card {
+    background-color: #F0F0EF;
+}
+/* END CARD */
+
+
+/* SEARCH */
+.btn-search {
+    background-color: #765827;
+}
+
+.fa-search {
+    color: #F2E8C6;
+}
+/* END SEARCH */
+
+
+/* IMAGE */
+.img {
+    width:70px;
+    height:70px;
+}
+/* END IMAGE */
+
+
+/* TABLE */
+.table-head {
+    color: #040D12;
+    font-weight: 700;
+    background: #C8AE7D;
+    white-space: nowrap;
+}
+
+.th-name, .th-actions,
+.td-name {
+    text-align: center;
+}
+
+.th-actions {
+    width: 160px;
+}
+
+.td-actions {
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(231, 231, 231, 0.3);;
+}
+
+tr:nth-child(odd) {
+    background-color: rgb(164, 144, 124, 0.3);
+}
+
+.table, tr, td, th   {
+    border: 1px solid #65451F;
+}
+
+td:hover {
+    border: 1px solid #C8AE7D;
+}
+
+.no-data-available {
+    font-weight: bold;
+    font-family: Courier, monospace;
+    text-align: center;
+}
+/* END TABLE */
+
+
+/* BUTTONS */
+.btn-create {
+    appearance: button;
+    background-color: #3A3845;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;    
+    padding: 5px 10px;
+    text-align: center;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.btn-edit {
+    appearance: button;
+    background-color: #C08261;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;    
+    padding: 5px 10px;
+    text-align: center;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.btn-delete {
+    appearance: button;
+    background-color: #9A3B3B;
+    border: 1px solid #674747;
+    border-radius: 4px;
+    box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 5px 10px;    
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    text-decoration: none;
+}
+
+.btn:focus {
+    text-decoration: none;
+}
+
+.btn:active {
+    box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
+    outline: 0;
+}
+
+.btn:not([disabled]):active {
+    box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
+    transform: translate(2px, 2px);
+}
+
+i {
+    color: #F2F2F2;
+}
+/* END BUTTONS */
+
+
+/* OTHERS */
+h1 {
+    font-family: Georgia, serif;
+    text-transform: uppercase;
+}
+/* END OTHERS */

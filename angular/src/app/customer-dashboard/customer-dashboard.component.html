@@ -1,0 +1,55 @@
+<div [@routerTransition]>
+    <section class="content-header">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12 titleHeader">
+              <h1>{{ "OrderSummary" | localize }}</h1>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content px-2">
+        <div class="container-fluid">
+            <div class="card">
+                <!-- HEADER -->
+                <div class="card-header card-dashboard-header">
+                    <label class="col-md-2 col-form-label" for="isDate">{{ 'Date' | localize }}</label>
+                        <input type="date" id="isDate" name="date" class="form-control input-date" [(ngModel)]="setCurrentDate" (change)="filterDate()">
+                </div>
+
+                <!-- BODY -->
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table" [busy]="isTableLoading">
+                      <thead class="table-head">
+                        <tr>
+                          <th class="th-foodName">{{ "FoodName" | localize }}</th>                                    
+                          <th class="th-foodQty">{{ "Quantity" | localize }}</th>
+                          <th class="th-foodSize">{{ "Size" | localize }}</th>
+                          <th class="th-foodNotes">{{ "Notes" | localize }}</th>
+                          <th class="th-foodTotalPrice">{{ "TotalPrice" | localize }}</th>
+                        </tr>
+                      </thead>
+                      <tbody *ngIf="isNoRecordFound==false">
+                        <tr *ngFor="let order of array">
+                          <td class="td-foodName">{{ order.food?.name }}</td>
+                          <td class="td-foodQty">{{ order.quantity }}</td>
+                          <td class="td-foodSize">{{ order.size || 'N/A' }}</td>
+                          <td class="td-foodNotes">{{ order.notes || 'N/A'}}</td>
+                          <td class="td-foodTotalPrice"><span class="currency-code">&#8369;</span>{{order.totalPrice | number:'1.2-2'}}</td>
+                        </tr>
+                      </tbody>
+                      <tbody *ngIf="isNoRecordFound==true">
+                        <tr>
+                          <td class="no-data-available" colspan="9">{{ 'NoRecordsFound' | localize}}
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+      </section>
+</div>

@@ -11,6 +11,9 @@ namespace OrderingSystemVA.Orders
 {
     public interface IOrderAppService : IAsyncCrudAppService<OrderDto, int, PagedOrderResultRequestDto, CreateOrderDto, OrderDto>
     {
-        Task<PagedResultDto<OrderDto>> GetAllOrderWithFood(PagedOrderResultRequestDto input);
+        Task<PagedResultDto<OrderDto>> GetAllOrderWithFoodStatusNotComplete(PagedOrderResultRequestDto input);
+        Task<PagedResultDto<OrderDto>> GetAllOrderWithFoodWithAllStatus(PagedOrderResultRequestDto input);
+
+        Task<PagedResultDto<OrderDto>> GetAllOrderWithFoodBasedOnIdAndStatusComplete(PagedOrderResultRequestDto input);
     }
 }

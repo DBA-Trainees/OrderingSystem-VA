@@ -1,19 +1,10 @@
-import { 
-    Component, 
-    Injector } from '@angular/core';
-import { 
-    PagedListingComponentBase, 
-    PagedRequestDto } from '@shared/paged-listing-component-base';
-import { 
-    TypeDto, 
-    TypeDtoPagedResultDto, 
-    TypeServiceProxy } from '@shared/service-proxies/service-proxies';
-import { 
-    BsModalRef, 
-    BsModalService } from 'ngx-bootstrap/modal';
-import { finalize } from 'rxjs';
+import { Component, Injector } from '@angular/core';
+import { PagedListingComponentBase, PagedRequestDto } from '@shared/paged-listing-component-base';
+import { TypeDto, TypeDtoPagedResultDto, TypeServiceProxy } from '@shared/service-proxies/service-proxies';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CreateOrEditTypeModalComponent } from './createOrEdit-type-modal/createOrEdit-type-modal.component';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
+import { finalize } from 'rxjs/operators';
 
 class PagedTypeRequestDto extends PagedRequestDto {
     keyword: string;
@@ -22,7 +13,8 @@ class PagedTypeRequestDto extends PagedRequestDto {
 
 @Component({
     templateUrl: './types.component.html',
-    animations: [appModuleAnimation()]
+    animations: [appModuleAnimation()],
+    styleUrls: ['./types.component.css']
 })
 
 export class TypeComponent extends PagedListingComponentBase<TypeDto> {

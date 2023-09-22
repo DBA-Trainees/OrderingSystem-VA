@@ -24,7 +24,8 @@ class PagedCategoryRequestDto extends PagedRequestDto {
 
 @Component({
   templateUrl: './categories.component.html',
-  animations: [appModuleAnimation()]
+  animations: [appModuleAnimation()],
+  styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent extends PagedListingComponentBase<CategoryDto> {
   categories : CategoryDto[] = [];

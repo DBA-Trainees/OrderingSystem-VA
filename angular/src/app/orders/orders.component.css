@@ -1,60 +1,7 @@
+/* CARD */
 .card-header {
   background-color: #C8AE7D;
   border: 1px solid #65451F;
-}
-
-h1 {
-  color:black;
-  font-weight: bold;
-}
-
-/* -- */
-body{
-  margin-top:20px;
-  background: #eef5f9;
-}
-
-.card {
-  margin-bottom: 20px;
-}
-
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #fff;
-  background-clip: border-box;
-  border: 0 solid transparent;
-  border-radius: 0;
-}
-
-.el-element-overlay .white-box {
-   padding: 0
-}
-
-.el-element-overlay .el-card-item {
-   position: relative;
-   padding-bottom: 20px
-}
-
-.el-element-overlay .el-card-item .el-card-avatar {
-   margin-bottom: 20px
-}
-
-.el-element-overlay .el-card-item .el-card-content {
-   text-align: center
-}
-
-.el-card-item {
-   background-image: linear-gradient(120deg, #EAC696 60%, #765827 100%);
-   /* background-image: linear-gradient(to right, #EAC696, #765827); */
-}
-
-.span-price, .currency-code {
-   color: #65451F;
-   font-weight: bold;
 }
 
 .el-element-overlay .el-card-item .el-overlay-1 {
@@ -73,11 +20,6 @@ body{
    width: 100%;
    height: 300px;
 }
-
-/* .el-element-overlay .el-card-item .el-overlay-1:hover img {
-   -ms-transform: scale(1.2) translateZ(0);
-   -webkit-transform: scale(1.2) translateZ(0)
-} */
 
 .el-element-overlay .el-card-item .el-overlay-1 .el-info {
    text-decoration: none;
@@ -116,8 +58,7 @@ body{
    border-color: #2962FF
 }
 
-.gmaps-overlay_arrow.above,
-.gmaps-overlay_arrow.below {
+.gmaps-overlay_arrow.above, .gmaps-overlay_arrow.below {
    border-left: 16px solid transparent;
    border-right: 16px solid transparent
 }
@@ -161,6 +102,61 @@ body{
    height: 100%
 }
 
+.card {
+   margin-bottom: 20px;
+ }
+ 
+ .card {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   min-width: 0;
+   word-wrap: break-word;
+   background-color: #fff;
+   background-clip: border-box;
+   border: 0 solid transparent;
+   border-radius: 0;
+ }
+ 
+ .el-element-overlay .white-box {
+    padding: 0
+ }
+ 
+ .el-element-overlay .el-card-item {
+    position: relative;
+    padding-bottom: 20px
+ }
+ 
+ .el-element-overlay .el-card-item .el-card-avatar {
+    margin-bottom: 20px
+ }
+ 
+ .el-element-overlay .el-card-item .el-card-content {
+    text-align: center
+ }
+ 
+ .el-card-item {
+    background-image: linear-gradient(120deg, #EAC696 60%, #765827 100%);
+ }
+/* END CARD */
+
+
+/* OTHERS */
+h1 {
+  color:black;
+  font-weight: bold;
+}
+
+body{
+  margin-top:20px;
+  background: #eef5f9;
+}
+
+.span-price, .currency-code {
+   color: #65451F;
+   font-weight: bold;
+}
+
 h4 {
   font-size: 20px;
   font-weight: bold;
@@ -172,3 +168,4 @@ a.disabled {
    text-decoration: underline;
    font-size: 30px;
 }
+/* END OTHERS */

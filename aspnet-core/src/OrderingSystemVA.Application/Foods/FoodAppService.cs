@@ -65,6 +65,7 @@ namespace OrderingSystemVA.Foods
                 .Include(x => x.Category)
                 .Include(x => x.Type)
                 .WhereIf(!input.Keyword.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Keyword) || x.Category.Name.Contains(input.Keyword) || x.Type.Name.Contains(input.Keyword))
+                .WhereIf(input.IsAvailable.HasValue, x => x.Availability == input.IsAvailable)
                 .Select(x => ObjectMapper.Map<FoodDto>(x))
                 .ToListAsync();
 

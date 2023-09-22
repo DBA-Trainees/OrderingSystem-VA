@@ -1780,6 +1780,9 @@ namespace OrderingSystemVA.Migrations
                     b.Property<int?>("FoodId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("FoodPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -1791,9 +1794,6 @@ namespace OrderingSystemVA.Migrations
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -1807,15 +1807,17 @@ namespace OrderingSystemVA.Migrations
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<long?>("UserId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("dateTimeOrdered")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool?>("isChecked")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("FoodId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -2169,7 +2171,13 @@ namespace OrderingSystemVA.Migrations
                         .WithMany()
                         .HasForeignKey("FoodId");
 
+                    b.HasOne("OrderingSystemVA.Authorization.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Food");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("OrderingSystemVA.MultiTenancy.Tenant", b =>

@@ -5,46 +5,42 @@
         <div class="col-6">
           <h1>{{ "Roles" | localize }}</h1>
         </div>
-        <div class="col-6 text-right">
-          <a href="javascript:;"
-            class="btn-create"
-            (click)="createRole()">
-            <i class="fa fa-plus-square"></i>
-            {{ "Create" | localize }}
-          </a>
-        </div>
+          <div class="col-6 text-right">
+            <a href="javascript:;" class="btn-create" (click)="createRole()">
+              <i class="fa fa-plus-square"></i>
+                {{ "Create" | localize }}
+            </a>
+          </div>
       </div>
     </div>
   </section>
+
   <section class="content px-2">
     <div class="container-fluid">
       <div class="card">
+
+        <!-- HEADER -->
         <div class="card-header">
           <div class="row">
             <div class="col-md-6">&emsp;</div>
             <div class="col-md-6">
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <button type="button"
-                    class="btn-search"
-                    (click)="getDataPage(1)">
+                  <button type="button" class="btn-search" (click)="getDataPage(1)">
                     <i class="fas fa-search"></i>
                   </button>
                 </div>
-                <input type="text"
-                  class="form-control"
-                  name="keyword"
-                  [placeholder]="'SearchWithThreeDot' | localize"
-                  [(ngModel)]="keyword"
-                  (keyup.enter)="getDataPage(1)" />
+                <input type="text" class="form-control" name="keyword" [placeholder]="'SearchWithThreeDot' | localize"
+                      [(ngModel)]="keyword" (keyup.enter)="getDataPage(1)" />
               </div>
             </div>
           </div>
         </div>
+
+        <!-- BODY -->
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table"
-              [busy]="isTableLoading">
+            <table class="table" [busy]="isTableLoading">
               <thead class="table-head">
                 <tr>
                   <th class="th-roleName">{{ "RoleName" | localize }}</th>
@@ -53,9 +49,7 @@
                 </tr>
               </thead>
               <tbody *ngIf="roles?.length > 0">
-                <tr *ngFor="
-                  let role of roles
-                    | paginate
+                <tr *ngFor="let role of roles | paginate
                       : {
                           id: 'server',
                           itemsPerPage: pageSize,
@@ -63,29 +57,17 @@
                           totalItems: totalItems
                         }
                 ">
-                  <td>{{ role.name }}</td>
-                  <td>{{ role.displayName }}</td>
-                  <td>
-                    <!-- EDIT -->
-                    <button type="button" class="btn btn-edit btn-sm mx-2" (click)="editRole(role)">
-                      <i class="fas fa-pencil-alt"></i>
+                  <td class="td-roleName">{{ role.name }}</td>
+                  <td class="td-displayName">{{ role.displayName }}</td>
+                  <td class="td-actions">
+                  <!-- EDIT -->
+                  <button type="button" class="btn btn-edit btn-sm mx-2" (click)="editRole(role)">
+                    <i class="fas fa-pencil-alt"></i>
                   </button>
                   <!-- DELETE -->
                   <button type="button" class="btn btn-delete btn-sm" (click)="delete(role)">
                     <i class="fas fa-trash"></i>
                   </button>
-                    <!-- <button type="button"
-                      class="btn btn-sm bg-secondary"
-                      (click)="editRole(role)">
-                      <i class="fas fa-pencil-alt"></i>
-                      {{ "Edit" | localize }}
-                    </button> -->
-                    <!-- <button type="button"
-                      class="btn btn-sm bg-danger mx-2"
-                      (click)="delete(role)">
-                      <i class="fas fa-trash"></i>
-                      {{ "Delete" | localize }}
-                    </button> -->
                   </td>
                 </tr>
               </tbody>
@@ -93,15 +75,16 @@
                 <tr>
                     <td class="no-data-available" colspan="9">{{ 'NoRecordsFound' | localize}}
                 </tr>
-            </tbody>
+              </tbody>
             </table>
           </div>
         </div>
+
+        <!-- FOOTER -->
         <div class="card-footer table-card-footer bg-light border-top">
           <div class="row">
             <div class="col-sm-4 col-12 text-sm-left text-center">
-              <button class="btn btn-secondary"
-                (click)="refresh()">
+              <button class="btn btn-secondary" (click)="refresh()">
                 <i class="fas fa-redo-alt"></i>
               </button>
             </div>
@@ -112,13 +95,12 @@
             </div>
             <div class="col-sm-4 col-12">
               <div class="float-sm-right m-auto">
-                <abp-pagination-controls id="server"
-                  (pageChange)="getDataPage($event)">
-                </abp-pagination-controls>
+                <abp-pagination-controls id="server" (pageChange)="getDataPage($event)"></abp-pagination-controls>
               </div>
             </div>
           </div>
         </div>
+        
       </div>
     </div>
   </section>

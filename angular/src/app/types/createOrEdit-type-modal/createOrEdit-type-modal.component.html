@@ -1,46 +1,25 @@
-<style>
-* {
-    box-sizing: border-box;   
-}
-input {
-    width: 100%;
-    height: 100%;
-    padding: .5em 1em;
-    border: 1px solid black;
-    border-radius: 3px;
-}
-</style>
+<form class="form-horizontal" autocomplete="off" #createOrEditTypeModal="ngForm" (ngSubmit)="save()">
 
-<form class="form-horizontal"
-    autocomplete="off"
-    #createOrEditTypeModal="ngForm"
-    (ngSubmit)="save()">
+    <!-- HEADER -->
+    <abp-modal-header *ngIf="isEdit == false" [title]="'CreateType' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
+    <abp-modal-header *ngIf="isEdit == true" [title]="'EditType' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
 
-<abp-modal-header
-    [title]="'CreateOrEditType' | localize"
-    (onCloseClick)="bsModalRef.hide()">
-</abp-modal-header>
-
-<div class="modal-body">
-    <!-- NAME -->
-    <div class="form-group row required">
-        <label class="col-md-3 col-form-label" for="typeName">
-            {{ "Name" | localize }}
-        </label>
-        <div class="col-md-9">
-            <input type="text" class="form-control" name="typeName" id="typeName" required
-                maxlength="32" [(ngModel)]="type.name" #typeNameModel = "ngModel" #typeNameEl/>
-            <abp-validation-summary
-                [control]="typeNameModel"
-                [controlEl]="typeNameEl">
-            </abp-validation-summary>
+    <!-- BODY -->
+    <div class="modal-body">  
+        <!-- NAME -->  
+        <div class="form-group row required">
+            <label class="col-md-3 col-form-label" for="typeName">
+                {{ "Name" | localize }}
+            </label>
+            <div class="col-md-9">
+                <input type="text" class="form-control" name="typeName" id="typeName" required
+                    maxlength="32" [(ngModel)]="type.name" #typeNameModel = "ngModel" #typeNameEl/>
+                <abp-validation-summary [control]="typeNameModel" [controlEl]="typeNameEl"></abp-validation-summary>
+            </div>
         </div>
     </div>
-</div>
 
-<abp-modal-footer
-    [cancelDisabled]="saving"
-    [saveDisabled]="!createOrEditTypeModal.form.valid || saving"
-    (onCancelClick)="bsModalRef.hide()">
-</abp-modal-footer>
+    <!-- FOOTER -->
+    <abp-modal-footer [cancelDisabled]="saving" [saveDisabled]="!createOrEditTypeModal.form.valid || saving" (onCancelClick)="bsModalRef.hide()"></abp-modal-footer>
+
 </form>

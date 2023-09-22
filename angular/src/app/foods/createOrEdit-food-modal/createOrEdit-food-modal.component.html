@@ -1,12 +1,10 @@
-<form class="form-horizontal"
-    autocomplete="off"
-    #createOrEditFoodModal="ngForm"
-    (ngSubmit)="saveFood()">
-
+<form class="form-horizontal" autocomplete="off" #createOrEditFoodModal="ngForm" (ngSubmit)="saveFood()">
+    
+    <!-- HEADER -->
     <abp-modal-header *ngIf="isEdit == false" [title]="'CreateFood' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
     <abp-modal-header *ngIf="isEdit == true" [title]="'EditFood' | localize" (onCloseClick)="bsModalRef.hide()"></abp-modal-header>
 
-
+    <!-- BODY -->
     <div class="modal-body">
         <!-- NAME -->
         <div class="form-group row required">
@@ -25,15 +23,6 @@
                     id="chooseImageFile" (change)="onFileSelected($event)"/>
             </div>
         </div>
-
-        <!-- IMAGE NAME -->
-        <!-- <div class="form-group row required">
-            <label class="col-md-3 col-form-label" for="imageName"> {{ "ImageName" | localize }} </label>
-            <div class="col-md-9">
-                <input type="text" class="form-control" name="imageName" id="imageName" 
-                    [(ngModel)]="imgFileName" (click)="file.click()" disabled/>
-            </div>
-        </div> -->
 
         <!-- AVAILABILITY -->
         <div class="form-group row required">
@@ -71,7 +60,7 @@
 
         <!-- TYPE -->
         <div class="form-group row required">
-            <label class="col-md-3 col-form-label" for="foodType"> {{ "Type" | localize }} </label>
+            <label class="col-md-3 col-form-label" for="foodType"> {{ "Cuisine" | localize }} </label>
             <div class="col-md-9">
                 <select class="form-control" [ngModel]="selectedTypeId" (ngModelChange)="selectedTypeId=$event" 
                     name="foodType" id="foodType" required>
@@ -88,11 +77,14 @@
             <label class="col-md-3 col-form-label" for="foodSize"> {{ "Size" | localize }} </label>
             <div class="col-md-9">
                 <select class="form-control" [ngModel]="selectedSize" (ngModelChange)="selectedSize=$event"
-                    name="foodSize" id="foodSize" >
+                    name="foodSizeEnabled" id="foodSizeEnabled" *ngIf="selectedCategoryId != 4 && selectedCategoryId != 2" [disabled]="!isDisabled">
                     <option></option>
                         <option *ngFor="let food of foodLabels" [ngValue]="food">
                             {{food}}
                         </option>
+                </select>
+                <select class="form-control" name="foodSizeDisabled" id="foodSizeDisabled" *ngIf="selectedCategoryId == 2 || selectedCategoryId == 4" [disabled]="isDisabled">
+                    <option value="optionDisabled">No Sizes Available</option>
                 </select>
             </div>
         </div>
@@ -109,9 +101,8 @@
             </div>
         </div>
     </div>
-<abp-modal-footer
-    [cancelDisabled]="saving"
-    [saveDisabled]="!createOrEditFoodModal.form.valid || saving"
-    (onCancelClick)="bsModalRef.hide()">
-</abp-modal-footer>
+
+    <!-- FOOTER -->
+    <abp-modal-footer [cancelDisabled]="saving" [saveDisabled]="!createOrEditFoodModal.form.valid || saving" (onCancelClick)="bsModalRef.hide()"></abp-modal-footer>
+
 </form>

@@ -4,7 +4,8 @@ import { CategoryDto, CategoryServiceProxy } from '@shared/service-proxies/servi
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-    templateUrl: './edit-category-modal.component.html'
+    templateUrl: './edit-category-modal.component.html',
+    styleUrls: ['./edit-category-modal.component.css']
 })
 export class EditCategoryModalComponent extends AppComponentBase implements OnInit {
     saving = false;

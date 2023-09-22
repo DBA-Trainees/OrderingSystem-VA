@@ -1,31 +1,14 @@
-<style>
-* {
-    box-sizing: border-box;   
-}
+<form class="form-horizontal" autocomplete="off" #createCategoryModal="ngForm" (ngSubmit)="save()">
 
-input {
-    width: 100%;
-    height: 100%;
-    padding: .5em 1em;
-    border: 1px solid black;
-    border-radius: 3px;
-}  
-</style>
-
-<form class="form-horizontal"
-    autocomplete="off"
-    #createCategoryModal="ngForm"
-    (ngSubmit)="save()">
-
+<!-- HEADER -->
 <abp-modal-header
     [title]="'CreateNewCategory' | localize"
     (onCloseClick)="bsModalRef.hide()">
 </abp-modal-header>
-
+<!-- BODY -->
 <div class="modal-body">
-
-    <!-- NAME -->
     <div class="form-group row required">
+        <!-- NAME -->
         <label class="col-md-3 col-form-label" for="categoryName">
             {{ "Name" | localize }}
         </label>
@@ -38,11 +21,12 @@ input {
             </abp-validation-summary>
         </div>
     </div>
-
 </div>
+<!-- FOOTER -->
 <abp-modal-footer
     [cancelDisabled]="saving"
     [saveDisabled]="!createCategoryModal.form.valid || saving"
     (onCancelClick)="bsModalRef.hide()">
 </abp-modal-footer>
+
 </form>

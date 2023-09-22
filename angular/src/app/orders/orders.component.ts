@@ -14,6 +14,7 @@ enum foodSize {
 class PagedOrderRequestDto extends PagedRequestDto {
     keyword: string;
     isActive: boolean | null;
+    isAvailability : boolean | null;
 }
 
 @Component({
@@ -31,6 +32,7 @@ export class OrderComponent extends PagedListingComponentBase<OrderDto>{
     
     keyword = '';
     isActive : boolean | null;
+    isAvailability : boolean | null;
     saving = false;
     selectFoodId : number = null;
     defaultQty = 1;    
@@ -67,11 +69,13 @@ export class OrderComponent extends PagedListingComponentBase<OrderDto>{
         ): void {
         request.keyword = this.keyword;
         request.isActive = this.isActive;
+        request.isAvailability = this.isAvailability;
 
         this._foodService
             .getAllFoodWithCategoryAndType(
                 request.keyword,
                 request.isActive,
+                request.isAvailability,
                 request.skipCount,
                 request.maxResultCount
             )

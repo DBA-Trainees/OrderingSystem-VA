@@ -4,6 +4,7 @@
 }
 /* END CARD */
 
+
 /* SEARCH */
 .btn-search, .btn-search-append {
     background-color: #765827;
@@ -14,6 +15,7 @@
 }
 /* END SEARCH */
 
+
 /* TABLE */
 .table-head {
     color: #040D12;
@@ -23,8 +25,14 @@
 }
 
 .th-userName, .th-fullName, .th-emailAdd,
-.th-isActive, .th-actions {
+.th-isActive, .th-actions, .custom-control-input,
+.td-userName, .td-fullName, .td-emailAdd,
+.td-actions {
     text-align: center;
+}
+
+.th-fullName {
+    width: 500px;
 }
 
 .th-actions {
@@ -56,6 +64,40 @@ td:hover {
 
 
 /* BUTTONS */
+.btn-search-footer {
+    appearance: button;
+    background-color: #60463B;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;    
+    padding: 5px 10px;
+    text-align: center;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.btn-clear-footer {
+    appearance: button;
+    background-color: #2E3138;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;    
+    padding: 5px 10px;
+    text-align: center;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
 .btn-create {
     appearance: button;
     background-color: #3A3845;
@@ -146,3 +188,11 @@ i {
     color: #F2F2F2;
 }
 /* END BUTTONS */
+
+
+/* OTHERS */
+h1 {
+    font-family: Georgia, serif;
+    text-transform: uppercase;
+}
+/* END OTHERS */
