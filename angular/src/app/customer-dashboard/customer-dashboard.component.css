@@ -19,7 +19,8 @@
 
 .th-foodQty, .th-foodSize,
 .th-foodNotes, .td-foodQty,
-.td-foodSize, .td-foodNotes {
+.td-foodSize, .td-foodNotes,
+.td-foodDate, .th-foodDate {
     text-align: center;
 }
 
@@ -32,7 +33,7 @@
 }
 
 .th-foodQty, .th-foodSize, 
-.th-foodTotalPrice {
+.th-foodTotalPrice, .th-foodDate {
     width: 100px;
 }
 
@@ -66,7 +67,7 @@ td:hover {
 
 
 /* OTHERS */
-.input-date {
+.input-date-from, .input-date-to {
     background-color: #DFD3C3;
     color: #3F2305;
     border: 1px solid #433520;

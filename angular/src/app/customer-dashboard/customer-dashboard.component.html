@@ -14,8 +14,11 @@
             <div class="card">
                 <!-- HEADER -->
                 <div class="card-header card-dashboard-header">
-                    <label class="col-md-2 col-form-label" for="isDate">{{ 'Date' | localize }}</label>
-                        <input type="date" id="isDate" name="date" class="form-control input-date" [(ngModel)]="setCurrentDate" (change)="filterDate()">
+                    <label class="col-md-2 col-form-label" for="isDateFrom">{{ 'DateFrom' | localize }}</label>
+                    <input type="date" id="isDate" name="date" class="form-control input-date-from" [(ngModel)]="setCurrentDate" (change)="filterDate()">
+
+                    <label class="col-md-2 col-form-label" for="isDateTo">{{ 'DateTo' | localize }}</label>
+                    <input type="date" id="isDateTo" name="dateTo" class="form-control input-date-to" [(ngModel)]="setEndDate">                  
                 </div>
 
                 <!-- BODY -->
@@ -29,6 +32,7 @@
                           <th class="th-foodSize">{{ "Size" | localize }}</th>
                           <th class="th-foodNotes">{{ "Notes" | localize }}</th>
                           <th class="th-foodTotalPrice">{{ "TotalPrice" | localize }}</th>
+                          <th class="th-foodDate">{{ "Date" | localize }}</th>
                         </tr>
                       </thead>
                       <tbody *ngIf="isNoRecordFound==false">
@@ -38,6 +42,7 @@
                           <td class="td-foodSize">{{ order.size || 'N/A' }}</td>
                           <td class="td-foodNotes">{{ order.notes || 'N/A'}}</td>
                           <td class="td-foodTotalPrice"><span class="currency-code">&#8369;</span>{{order.totalPrice | number:'1.2-2'}}</td>
+                          <td class="td-foodDate">{{ order.dateTimeOrdered | date: 'MM-dd-yyyy' }}</td>
                         </tr>
                       </tbody>
                       <tbody *ngIf="isNoRecordFound==true">

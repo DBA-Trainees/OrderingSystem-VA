@@ -25,6 +25,7 @@ export class CustomerDashboardComponent extends PagedListingComponentBase<OrderD
     isActive : boolean | null;
     isStatus : number | null;
     setCurrentDate = moment().format('YYYY-MM-DD');
+    setEndDate = moment().endOf('month').format('YYYY-MM-DD');
     array = [];
     filteredRecords: any;
     isNoRecordFound : boolean = false;
@@ -84,7 +85,8 @@ export class CustomerDashboardComponent extends PagedListingComponentBase<OrderD
 
     filterDate() {
         const selectedMembers = this.orders.filter(m  => {
-            return this.reverseAndTimeStamp(m.dateTimeOrdered.format('YYYY-MM-DD')) == this.reverseAndTimeStamp(this.setCurrentDate)
+            return this.reverseAndTimeStamp(m.dateTimeOrdered.format('YYYY-MM-DD')) >= this.reverseAndTimeStamp(this.setCurrentDate)
+            && this.reverseAndTimeStamp(m.dateTimeOrdered.format('YYYY-MM-DD')) <= this.reverseAndTimeStamp(this.setEndDate)
         });
         this.array = selectedMembers;
 
@@ -93,6 +95,7 @@ export class CustomerDashboardComponent extends PagedListingComponentBase<OrderD
             this.isNoRecordFound = false;
         }
         else {
+            this.array = this.orders;
             this.isNoRecordFound = true;
         }
     }
